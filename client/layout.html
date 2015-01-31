@@ -1,0 +1,30 @@
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>CheatSheet Factory</title>
+</head>
+
+<body>
+    <div ng-app="cheatsheet">
+        <div ng-controller="MainController as main">
+            <div class="ui grid">
+                <div class="row">
+                    <ng-include src="'client/views/partials/menu.tpl'"></ng-include>
+                </div>
+
+                <div class="ui grid main">
+                    <div class="one column centered row">
+                        <div class="twelve wide column">
+                            <ng-include src="'client/views/partials/notification.tpl'"></ng-include>
+                        </div>
+                    </div>
+
+                    <div ui-view>
+                        <!-- don't put anything here - ui-router is in control -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
