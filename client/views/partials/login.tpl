@@ -1,5 +1,5 @@
-<div class="ui one column centered grid">
-    <div class="four wide column">
+<div class="ui one column centered page grid">
+    <div class="twelve wide column">
         <h3 class="ui top attached header">
             Cheatsheet Factory
         </h3>
