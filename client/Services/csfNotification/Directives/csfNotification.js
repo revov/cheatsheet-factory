@@ -19,11 +19,11 @@ angular.module('cheatsheet')
                             element.transition('fade down out', 0);
                         },
                         show = function() {
-                            element.transition('fade down in');
+                            element.transition('fade down in', 500);
                         },
                         hideAfter = function( miliseconds ) {
                             fadeOutPromise = $timeout( function() {
-                                element.transition('fade down out');
+                                element.transition('fade down out', 500);
                             }, miliseconds);
                         };
 

@@ -12,6 +12,7 @@ angular.module('cheatsheet')
                     function () {
                         me.state = 'success';
                         csfNotification.show(me.state, 'Welcome to the Cheatsheet Factory!', 'You have successfully logged in!');
+                        $state.go('cheatsheet');
                     },
                     function (err) {
                         me.user.password = '';
