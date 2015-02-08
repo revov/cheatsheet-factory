@@ -18,3 +18,11 @@ Meteor Privacy
 =============================================================
 meteor remove insecure
 meteor remove autopublish
+
+Git submodules
+=============================================================
+cd packages
+git submodule add https://github.com/ajaxorg/ace-builds.git
+#Once someone else pulls our repo they need to do:
+git submodule init
+git submodule update
