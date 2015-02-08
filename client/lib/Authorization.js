@@ -1,15 +1,25 @@
 angular.module('cheatsheet')
     .run([
-        '$rootScope',
-        function($rootScope) {
+        '$rootScope', '$state', 'Session',
+        function($rootScope, $state, Session) {
             /***************
              * Authorization
              **************/
             $rootScope.$on('$stateChangeStart',
                 function (event, toState, toParams, fromState, fromParams) {
-                    if( !CanI.viewPage(toState.name) ) {
+                    if( Meteor.loggingIn() ) {
+                        //Our Meteor.user() is loaded asynchronously so we need to wait till it is resolved to continue
                         event.preventDefault();
-                        $state.go('403');
+                        Session.currentUserPromise().then(
+                            function() {
+                                $state.go(toState, toParams);
+                            }
+                        );
+                    } else {
+                        if( !CanI.viewPage(toState.name) ) {
+                            event.preventDefault();
+                            $state.go('403');
+                        }
                     }
                 });
 
