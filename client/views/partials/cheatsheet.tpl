@@ -1,12 +1,21 @@
-<div id="editor">
-function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-}
-</div>
+<div class="ui one column centered page grid">
+    <div class="row">
+        <div class="sixtheen wide column">
+            <div class="ui segment" ng-class="{loading: !cheatsheet.ready}">
+                <div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
 
-<script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
-</script>
+                </div>
+                <div id="aceEditor">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
