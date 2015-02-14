@@ -3,6 +3,7 @@
     <a ui-sref="login" ui-sref-active="active" class="item">Login</a>
     <a ui-sref="cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">CheatSheet</a>
     <div class="right menu">
+        <csf-user-settings-menu-item ng-show="!!currentUser"></csf-user-settings-menu-item>
         <a class="item" ng-show="!!currentUser">
             <i class="user icon"></i> {{currentUser.username}}
         </a>

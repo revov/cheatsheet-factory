@@ -13,6 +13,7 @@ meteor add accounts-password
 
 meteor add mquandalle:bower
 meteor add arch:ace-editor
+meteor add aldeed:collection2
 
 
 Meteor Privacy
