@@ -1,0 +1,3 @@
+[submodule "packages/meteor-ace-editor/ace-builds"]
+	path = packages/meteor-ace-editor/ace-builds
+	url = https://github.com/ajaxorg/ace-builds.git

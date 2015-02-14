@@ -4,12 +4,8 @@ angular.module('cheatsheet')
         function($timeout) {
             function initSemantic(scope, element) {
                 // Themes
-                setTimeout(function() {
-                    scope.themelist = ace.require("ace/ext/themelist").themesByName;
-                    element.find('.ui.dropdown').dropdown();
-                }, 1000);
-
-
+                scope.themelist = ace.require("ace/ext/themelist").themesByName;
+                element.find('.ui.dropdown').dropdown();
             }
 
             return {
