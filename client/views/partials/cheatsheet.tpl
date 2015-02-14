@@ -1,7 +1,7 @@
 <div class="ui one column centered page grid">
     <div class="row">
         <div class="sixtheen wide column">
-            <div class="ui segment" ng-class="{loading: !cheatsheet.ready}">
+            <div class="ui segment">
                 <div>
                     <br/>
                     <br/>
