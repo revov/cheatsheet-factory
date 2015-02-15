@@ -1,6 +1,6 @@
 <div class="ui modal">
     <i class="close icon"></i>
-    <div class="header">
+    <div class="header" ng-click="debug()">
         User Settings
     </div>
     <div class="content">
@@ -16,15 +16,14 @@
 
             <!-- Editor Theme -->
             <div ng-show="activeItem == 'editorTheme'">
-                <div class="ui fluid search selection dropdown">
-                    <input name="editor-theme" type="hidden" ng-model="UserSettings.editorTheme">
+                <div class="ui fluid search selection dropdown" csf-bind-dropdown="UserSettings.editorTheme">
+                    <input name="editor-theme" type="hidden">
                     <i class="dropdown icon"></i>
                     <div class="default text">Select Ace Theme</div>
                     <div class="menu">
-                        <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">{{value.caption}}</div>
+                        <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">{{value.caption}} {{value.isDark ? '(dark)' : ''}}</div>
                     </div>
                 </div>
-                {{UserSettings.editorTheme}}
             </div>
 
             <!-- Editor Font Size -->

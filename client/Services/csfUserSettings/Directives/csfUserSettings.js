@@ -5,7 +5,6 @@ angular.module('cheatsheet')
             function initSemantic(scope, element) {
                 // Themes
                 scope.themelist = ace.require("ace/ext/themelist").themesByName;
-                element.find('.ui.dropdown').dropdown();
             }
 
             return {
@@ -15,7 +14,7 @@ angular.module('cheatsheet')
                 scope: {},
                 link: function(scope, element, attrs) {
                     scope.$on("openUserSettings", function (event, params) {
-                        element.modal('show');
+                        element.modal({duration: 150}).modal('show');
                     });
 
                     scope.activeItem = 'editorTheme';
@@ -33,13 +32,11 @@ angular.module('cheatsheet')
                     csfUserSettings.UserSettingsPromise
                         .then(function(value) {
                             scope.UserSettings = value;
-                            console.log(scope.$$phase);
                         });
 
-                    scope.$watch('UserSettings', function(newV, oldV) {
-                        console.log(oldV);
-                        console.log(newV);
-                    });
+                    scope.debug = function() {
+                        scope.UserSettings.editorTheme = 'ace/theme/monokai';
+                    };
                 }
             };
         }
