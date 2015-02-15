@@ -36,7 +36,7 @@ angular.module('cheatsheet')
                         scope.notification = notification;
 
                         show();
-                        hideAfter(5000);
+                        hideAfter(10000);
                     });
 
                     element.on('click', function() {

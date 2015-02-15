@@ -1,21 +1,44 @@
 angular.module('cheatsheet').controller('CheatsheetController', [
-    '$scope',
-    function($scope) {
-        var me = this;
+    '$scope', 'csfUserSettings',
+    function($scope, csfUserSettings) {
+        var me = this,
+            editor = null;
+        me.UserSettings = {};
 
-        var editor = ace.edit("aceEditor");
-        editor.setTheme("ace/theme/monokai");
-        editor.getSession().setMode("ace/mode/javascript");
-        editor.setFontSize(18);
-        editor.insert(
+        csfUserSettings.UserSettingsPromise
+            .then(
+                function(userSettings) {
+                    me.UserSettings = userSettings;
+
+                    editor = ace.edit("aceEditor");
+                    editor.getSession().setMode("ace/mode/javascript");
+                    editor.$blockScrolling = Infinity;
+                    editor.insert(
                         'function foo(items) {\n' +
                         '   var x = "All this is syntax highlighted";\n' +
                         '   return x;\n' +
                         '}\n'
-                );
+                    );
+                }
+            );
+
+        // Watches
+        $scope.$watch( 'cheatsheet.UserSettings.editorTheme', function(newValue, oldValue) {
+            if(editor) {
+                editor.setTheme(newValue);
+            }
+        });
+
+        $scope.$watch( 'cheatsheet.UserSettings.editorFontSize', function(newValue, oldValue) {
+            if(editor) {
+                editor.setFontSize( parseInt(newValue, 10) );
+            }
+        });
 
         $scope.$on('$destroy', function() {
-            editor.destroy();
+            if(typeof editor.destroy == 'function') {
+                editor.destroy();
+            }
         });
     }
 ]);

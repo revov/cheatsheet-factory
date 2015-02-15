@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfUserSettings', [
-        'csfUserSettings',
-        function(csfUserSettings) {
+        'csfUserSettings', 'csfNotification',
+        function(csfUserSettings, csfNotification) {
             function initSemantic(scope, element) {
                 // Themes
                 scope.themelist = ace.require("ace/ext/themelist").themesByName;
@@ -14,7 +14,27 @@ angular.module('cheatsheet')
                 scope: {},
                 link: function(scope, element, attrs) {
                     scope.$on("openUserSettings", function (event, params) {
-                        element.modal({duration: 150}).modal('show');
+                        element
+                            .modal(
+                                {
+                                    duration: 150,
+                                    onDeny: function() {
+                                        scope.UserSettings.reset();
+                                        scope.$apply();
+                                    },
+                                    onApprove: function() {
+                                        scope.UserSettings.save().then(
+                                            function(){
+                                                csfNotification.show('success', 'Success!', 'User Settings were successfully saved.');
+                                            },
+                                            function(error) {
+                                                csfNotification.show('error', 'There was an error saving User Settings:', error);
+                                            }
+                                        );
+                                    }
+                                }
+                            )
+                            .modal('show');
                     });
 
                     scope.activeItem = 'editorTheme';
@@ -33,10 +53,6 @@ angular.module('cheatsheet')
                         .then(function(value) {
                             scope.UserSettings = value;
                         });
-
-                    scope.debug = function() {
-                        scope.UserSettings.editorTheme = 'ace/theme/monokai';
-                    };
                 }
             };
         }

@@ -1,6 +1,6 @@
 <div class="ui modal">
     <i class="close icon"></i>
-    <div class="header" ng-click="debug()">
+    <div class="header">
         User Settings
     </div>
     <div class="content">
@@ -16,31 +16,38 @@
 
             <!-- Editor Theme -->
             <div ng-show="activeItem == 'editorTheme'">
+                <label>Ace Theme:</label>
                 <div class="ui fluid search selection dropdown" csf-bind-dropdown="UserSettings.editorTheme">
-                    <input name="editor-theme" type="hidden">
                     <i class="dropdown icon"></i>
                     <div class="default text">Select Ace Theme</div>
                     <div class="menu">
-                        <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">{{value.caption}} {{value.isDark ? '(dark)' : ''}}</div>
+                        <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">
+                            {{value.caption}}
+                            <span class="right floated description" ng-show="value.isDark">dark</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Editor Font Size -->
             <div ng-show="activeItem == 'editorFontSize'">
-                editorFontSize
+                <label>Font Size:</label>
+                <div class="ui input">
+                    <input placeholder="Font Size" ng-model="UserSettings.editorFontSize" type="text">
+                </div>
             </div>
 
 
         </div>
     </div>
     <div class="actions" >
-        <div class="ui black button">
-            Cancel
-        </div>
-        <div class="ui positive right labeled icon button">
-            Save
-            <i class="checkmark icon"></i>
+        <div class="ui buttons">
+            <div class="ui cancel button">Cancel</div>
+            <div class="or"></div>
+            <div class="ui positive right labeled icon button">
+                Save
+                <i class="checkmark icon"></i>
+            </div>
         </div>
     </div>
 </div>

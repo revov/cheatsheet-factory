@@ -12,6 +12,7 @@ angular.module('cheatsheet')
                     var suspendAngularHandler = false;
 
                     element.dropdown({
+                        allowTab: false,
                         onChange: function(value, text, $choice) {
                             if(suspendSemanticHandler) {
                                 suspendSemanticHandler = false;
