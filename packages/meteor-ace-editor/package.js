@@ -12,28 +12,28 @@ Package.describe({
 
 var fs = Npm.require("fs");
 var path = Npm.require("path");
-var base = path.resolve('.');
+var srcDir = 'ace-builds/src-noconflict/';
+var base = path.resolve('.') + '/packages/meteor-ace-editor/';
+
 
 Package.onUse(function(api) {
     api.versionsFrom('1.0.3.1');
 
-    var files = fs.readdirSync(base+'/packages/meteor-ace-editor/ace-builds/src-noconflict');
+    var files = fs.readdirSync(base + srcDir);
     files.forEach(function(file){
         if(file.substr(-3)===".js"){
-            switch (file) {
-                case 'worker-javascript.js':
-                  api.add_files('ace-builds/src-noconflict/'+file, 'client', {isAsset: true});
-                  break;
-                default:
-                  api.add_files('ace-builds/src-noconflict/'+file, 'client');
-            }
+            api.add_files(
+                srcDir + file,
+                'client',
+                {isAsset: file.substr(0, 7) === 'worker-'}
+            );
         }
     });
 
-    files = fs.readdirSync(base+'/packages/meteor-ace-editor/ace-builds/src-noconflict/snippets');
+    files = fs.readdirSync(base + srcDir + 'snippets');
     files.forEach(function(file){
         if(file.substr(-3)===".js"){
-            api.add_files('ace-builds/src-noconflict/snippets/'+file, 'client');
+            api.add_files(srcDir + 'snippets/'+file, 'client');
         }
     });
 

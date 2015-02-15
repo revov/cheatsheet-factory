@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfUserSettings', [
-        '$timeout',
-        function($timeout) {
+        'csfUserSettings',
+        function(csfUserSettings) {
             function initSemantic(scope, element) {
                 // Themes
                 scope.themelist = ace.require("ace/ext/themelist").themesByName;
@@ -24,17 +24,19 @@ angular.module('cheatsheet')
                     };
 
                     element.on('$destroy', function() {
-                        // TODO: User Settings onDestroy
+                        // TODO: maybe clean up something
                     });
 
                     initSemantic(scope, element);
 
-                    scope.UserSettings = {
-                        editor: {
-                            theme: 'dawn'
-                        }
-                    };
-                    scope.$watch('UserSettings', function(oldV, newV) {
+                    scope.UserSettings = {};
+                    csfUserSettings.UserSettingsPromise
+                        .then(function(value) {
+                            scope.UserSettings = value;
+                            console.log(scope.$$phase);
+                        });
+
+                    scope.$watch('UserSettings', function(newV, oldV) {
                         console.log(oldV);
                         console.log(newV);
                     });

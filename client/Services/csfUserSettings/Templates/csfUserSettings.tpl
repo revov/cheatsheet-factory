@@ -17,13 +17,14 @@
             <!-- Editor Theme -->
             <div ng-show="activeItem == 'editorTheme'">
                 <div class="ui fluid search selection dropdown">
-                    <input name="editor-theme" type="hidden" ng-model="UserSettings.editor.theme">
+                    <input name="editor-theme" type="hidden" ng-model="UserSettings.editorTheme">
                     <i class="dropdown icon"></i>
                     <div class="default text">Select Ace Theme</div>
                     <div class="menu">
                         <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">{{value.caption}}</div>
                     </div>
                 </div>
+                {{UserSettings.editorTheme}}
             </div>
 
             <!-- Editor Font Size -->
