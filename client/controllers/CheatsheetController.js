@@ -40,5 +40,11 @@ angular.module('cheatsheet').controller('CheatsheetController', [
                 editor.destroy();
             }
         });
+
+
+        this.data = 'function foo(items) {\n' +
+            '   var x = "All this is syntax highlighted";\n' +
+            '   return x;\n' +
+            '}\n';
     }
 ]);

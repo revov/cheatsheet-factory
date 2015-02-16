@@ -17,5 +17,7 @@
                 </div>
             </div>
         </div>
+
+        <csf-static-highlight text-to-highlight="{{cheatsheet.data}}" mode="ace/mode/javascript"></csf-static-highlight>
     </div>
 </div>
