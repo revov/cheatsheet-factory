@@ -4,6 +4,7 @@ angular.module('cheatsheet')
         function($meteorSubscribe, $meteorObject, $q) {
             var deferred = $q.defer();
 
+            console.log('WARN: Don\'t use $meteorSubscribe. $watch for UserSettings changes');
             subscription = $meteorSubscribe.subscribe('user-settings');
             subscription.then(
                 function() {
