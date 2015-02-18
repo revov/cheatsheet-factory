@@ -50,11 +50,8 @@ angular.module('cheatsheet')
                     if (!currentUserDefer || Meteor.loggingIn() ) {
                         currentUserDefer = $q.defer();
                     }
-
-                    var currentUser = Meteor.user();
-
                     if ( !Meteor.loggingIn() ) {
-                        currentUserDefer.resolve(currentUser);
+                        currentUserDefer.resolve(Meteor.user());
                     }
 
                 });
