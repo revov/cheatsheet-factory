@@ -6,7 +6,7 @@ angular.module('cheatsheet')
     .directive('csfFormError', function() {
         return {
             restrict : 'E',
-            templateUrl: 'client/Services/csfFormError/Templates/csfFormError.tpl',
+            templateUrl: 'client/Services/csfFormError/Templates/csfFormError.ng.html',
             replace: true,
             scope: {
                 errorMessage: '=',

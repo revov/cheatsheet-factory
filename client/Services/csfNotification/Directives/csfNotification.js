@@ -8,7 +8,7 @@ angular.module('cheatsheet')
         function($timeout) {
             return {
                 restrict : 'E',
-                templateUrl : 'client/Services/csfNotification/Templates/csfNotification.tpl',
+                templateUrl : 'client/Services/csfNotification/Templates/csfNotification.ng.html',
                 replace: true,
                 scope: {},
                 link: function(scope, element, attrs) {

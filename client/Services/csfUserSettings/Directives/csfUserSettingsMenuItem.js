@@ -4,7 +4,7 @@ angular.module('cheatsheet')
         function($rootScope) {
             return {
                 restrict : 'E',
-                templateUrl : 'client/Services/csfUserSettings/Templates/csfUserSettingsMenuItem.tpl',
+                templateUrl : 'client/Services/csfUserSettings/Templates/csfUserSettingsMenuItem.ng.html',
                 replace: true,
                 scope: {},
                 link: function(scope, element, attrs) {

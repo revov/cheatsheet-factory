@@ -5,9 +5,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-urigo:angular
 nooitaf:semantic-ui
-mquandalle:bower
 accounts-password
 aldeed:collection2
 meteor-ace-editor
+urigo:angular
+angularui:angular-ui-router

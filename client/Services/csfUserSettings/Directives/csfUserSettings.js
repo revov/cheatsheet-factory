@@ -9,7 +9,7 @@ angular.module('cheatsheet')
 
             return {
                 restrict : 'E',
-                templateUrl : 'client/Services/csfUserSettings/Templates/csfUserSettings.tpl',
+                templateUrl : 'client/Services/csfUserSettings/Templates/csfUserSettings.ng.html',
                 replace: true,
                 scope: {},
                 link: function(scope, element, attrs) {
