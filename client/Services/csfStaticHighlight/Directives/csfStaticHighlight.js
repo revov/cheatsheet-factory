@@ -23,7 +23,7 @@ angular.module('cheatsheet')
                                     'UserSettings.editorTheme'
                                 ],
                                 function(newValues, oldValues) {
-                                    scope.render()
+                                    scope.render();
                                 }
                             );
                         }

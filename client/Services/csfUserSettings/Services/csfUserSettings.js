@@ -1,9 +1,10 @@
 angular.module('cheatsheet')
     .service('csfUserSettings', [
-        '$meteorSubscribe', '$meteorObject', '$q',
-        function($meteorSubscribe, $meteorObject, $q) {
+        '$meteorSubscribe', '$meteorObject', '$q', '$timeout',
+        function($meteorSubscribe, $meteorObject, $q, $timeout) {
             var me = this;
             var deferred;
+            var currentUserSettings;
 
             subscription = Meteor.subscribe('user-settings');
             Tracker.autorun(function() {
@@ -13,7 +14,14 @@ angular.module('cheatsheet')
                 }
                 if( Meteor.userId() && subscription.ready() ) {
                     var userSettingsId = UserSettings.findOne({userId: Meteor.userId()}, {fields: {_id:true}})._id;
-                    deferred.resolve( $meteorObject(UserSettings, userSettingsId, false) ); //TODO: clean $meteorObject once we have an API for that
+                    // Wrap the following inside $timeout since it contains reactive sources which should not trigger this autorun
+                    $timeout(function() {
+                        if(currentUserSettings) {
+                            currentUserSettings.stop();
+                        }
+                        currentUserSettings = $meteorObject(UserSettings, userSettingsId, false);
+                        deferred.resolve( $meteorObject(UserSettings, userSettingsId, false) );
+                    });
                 }
             });
         }
