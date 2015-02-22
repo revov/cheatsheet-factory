@@ -15,7 +15,12 @@ angular.module('cheatsheet')
                     var highlighted = cache.highlighter.render(code.trim(), cache.highlightModes[mode], cache.themes[editorSettings.theme], 1, true);
                     highlighted.css = highlighted.css.replace('font-size: 12px', 'font-size: ' + parseInt(editorSettings.fontSize, 10) + 'px');
                     $('style#ace_highlight').remove();
-                    $('head').append($('<style id="ace_highlight">' + highlighted.css + '</style>'));
+                    $('head').append(
+                        $('<style>', {
+                            id: 'ace_highlight',
+                            text: highlighted.css
+                        })
+                    );
 
                     return highlighted.html;
                 }
