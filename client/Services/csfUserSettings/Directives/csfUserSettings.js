@@ -2,9 +2,14 @@ angular.module('cheatsheet')
     .directive('csfUserSettings', [
         'csfUserSettings', 'csfNotification',
         function(csfUserSettings, csfNotification) {
-            function initSemantic(scope, element) {
+            function init(scope, element) {
                 // Themes
                 scope.themelist = ace.require("ace/ext/themelist").themesByName;
+                scope.sample = 'function foo(items) {\n' +
+                                '   var x = "All this is syntax highlighted";\n' +
+                                '   return x;\n' +
+                                '}\n';
+                element.find('.tabular.menu .item').tab();
             }
 
             return {
@@ -37,16 +42,11 @@ angular.module('cheatsheet')
                             .modal('show');
                     });
 
-                    scope.activeItem = 'editorTheme';
-                    scope.setActiveItem = function(activeItem) {
-                        scope.activeItem = activeItem;
-                    };
-
                     element.on('$destroy', function() {
                         // TODO: maybe clean up something
                     });
 
-                    initSemantic(scope, element);
+                    init(scope, element);
 
                     scope.UserSettings = {};
                     csfUserSettings.UserSettingsPromise
