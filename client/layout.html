@@ -13,21 +13,14 @@
                     <csf-user-settings></csf-user-settings>
                 </div>
 
+                <div class="ui fixed row">
+                    <csf-notification></csf-notification>
+                </div>
+
                 <div class="row">
-                    <div class="ui padded stackable grid">
-
-                        <div class="two column centered row">
-                            <div id="main-viewport" class="thirteen wide column">
-                                <div ui-view>
-                                    <!-- don't put anything here - ui-router is in control -->
-                                </div>
-                            </div>
-
-                            <div class="three wide column">
-                                <div class="ui sticky">
-                                    <ng-include src="'client/views/partials/notification.ng.html'"></ng-include>
-                                </div>
-                            </div>
+                    <div id="main-viewport">
+                        <div ui-view>
+                            <!-- don't put anything here - ui-router is in control -->
                         </div>
                     </div>
                 </div>

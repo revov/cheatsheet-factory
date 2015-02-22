@@ -1,59 +1,7 @@
-<div class="ui one column centered grid">
+<div class="ui padded grid">
+
     <div class="row">
-        <div class="sixtheen wide column">
-            <table class="ui table">
-                <thead>
-                <tr>
-                    <th>Left Column</th>
-                    <th>Middle Column</th>
-                    <th>Right Column</th>
-                    <th>Right Column</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                    <td>
-                        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-
-            <csf-static-highlight text-to-highlight="{{cheatsheet.data}}" mode="ace/mode/javascript"></csf-static-highlight>
-            <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
-
+        <div class="sixteen wide column">
             <div class="ui segment">
                 <div>
                     <br/>
@@ -71,4 +19,41 @@
             </div>
         </div>
     </div>
+
+    <div class="doubling two column row">
+        <div class="column">
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+            <div class="ui vertical segment">
+                <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <csf-static-highlight text-to-highlight="{{cheatsheet.data}}" mode="ace/mode/javascript"></csf-static-highlight>
+        <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+    </div>
+
 </div>

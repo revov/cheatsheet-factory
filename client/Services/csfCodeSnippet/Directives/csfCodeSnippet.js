@@ -1,7 +1,6 @@
 angular.module('cheatsheet')
-    .directive('csfCodeSnippet', [
-        'csfUserSettings',
-        function(csfUserSettings) {
+    .directive('csfCodeSnippet',
+        function() {
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/csfCodeSnippet/Templates/csfCodeSnippet.ng.html',
@@ -16,10 +15,11 @@ angular.module('cheatsheet')
                         hoverable: true,
                         position : 'bottom left',
                         delay: {
+                            show: 800,
                             hide: 200
                         }
                     });
                 }
             };
         }
-    ]);
+    );
