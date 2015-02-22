@@ -1,6 +1,9 @@
 <div class="ui one column centered page grid">
     <div class="row">
         <div class="sixtheen wide column">
+            <csf-static-highlight text-to-highlight="{{cheatsheet.data}}" mode="ace/mode/javascript"></csf-static-highlight>
+            <csf-code-snippet code="{{cheatsheet.data}}" lang="javascript" header="Sample function"></csf-code-snippet>
+
             <div class="ui segment">
                 <div>
                     <br/>
@@ -17,7 +20,5 @@
                 </div>
             </div>
         </div>
-
-        <csf-static-highlight text-to-highlight="{{cheatsheet.data}}" mode="ace/mode/javascript"></csf-static-highlight>
     </div>
 </div>
