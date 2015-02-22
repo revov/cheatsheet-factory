@@ -12,19 +12,17 @@ angular.module('cheatsheet')
                 },
                 link: function(scope, element, attrs) {
                     scope.render = function() {
-                        element.html( csfStaticHighlight.render(scope.textToHighlight, scope.mode, scope.UserSettings) );
+                        element.html( csfStaticHighlight.render(scope.textToHighlight, scope.mode, scope.UserSettings.editor) );
                     };
                     csfUserSettings.UserSettingsPromise.then(
                         function(value) {
                             scope.UserSettings = value;
-                            scope.$watchGroup(
-                                [
-                                    'UserSettings.editorTheme',
-                                    'UserSettings.editorTheme'
-                                ],
+                            scope.$watch(
+                                'UserSettings.editor',
                                 function(newValues, oldValues) {
                                     scope.render();
-                                }
+                                },
+                                true
                             );
                         }
                     );

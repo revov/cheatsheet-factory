@@ -23,17 +23,18 @@ angular.module('cheatsheet').controller('CheatsheetController', [
             );
 
         // Watches
-        $scope.$watch( 'cheatsheet.UserSettings.editorTheme', function(newValue, oldValue) {
-            if(editor) {
-                editor.setTheme(newValue);
-            }
-        });
-
-        $scope.$watch( 'cheatsheet.UserSettings.editorFontSize', function(newValue, oldValue) {
-            if(editor) {
-                editor.setFontSize( parseInt(newValue, 10) );
-            }
-        });
+        $scope.$watch(
+            'cheatsheet.UserSettings.editor',
+            function(newValue, oldValue) {
+                if( newValue && newValue.theme ) {
+                    editor.setTheme(newValue.theme);
+                }
+                if( newValue && newValue.fontSize ) {
+                    editor.setFontSize( parseInt(newValue.fontSize, 10) )
+                }
+            },
+            true
+        );
 
         $scope.$on('$destroy', function() {
             if(typeof editor.destroy == 'function') {

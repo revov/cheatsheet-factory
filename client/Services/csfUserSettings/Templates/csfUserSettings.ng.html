@@ -5,36 +5,44 @@
     </div>
     <div class="content">
         <div class="ui vertical menu">
-            <a class="item" ng-class="{active: activeItem == 'editorTheme'}" ng-click="setActiveItem('editorTheme')">
-                Theme
+            <a class="item" ng-class="{active: activeItem == 'editor'}" ng-click="setActiveItem('editor')">
+                Editor
             </a>
-            <a class="item" ng-class="{active: activeItem == 'editorFontSize'}" ng-click="setActiveItem('editorFontSize')">
-                Font Size
+            <a class="item" ng-class="{active: activeItem == 'dummy'}" ng-click="setActiveItem('dummy')">
+                Dummy
             </a>
         </div>
         <div class="description">
 
-            <!-- Editor Theme -->
-            <div ng-show="activeItem == 'editorTheme'">
-                <label>Ace Theme:</label>
-                <div class="ui fluid search selection dropdown" csf-bind-dropdown="UserSettings.editorTheme">
-                    <i class="dropdown icon"></i>
-                    <div class="default text">Select Ace Theme</div>
-                    <div class="menu">
-                        <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">
-                            {{value.caption}}
-                            <span class="right floated description" ng-show="value.isDark">dark</span>
+            <!-- Editor -->
+            <div ng-show="activeItem == 'editor'">
+                <form class="ui form">
+                    <div class="field">
+                        <label>Ace Theme:</label>
+                        <div class="ui fluid search selection dropdown" csf-bind-dropdown="UserSettings.editor.theme">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Select Ace Theme</div>
+                            <div class="menu">
+                                <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">
+                                    {{value.caption}}
+                                    <span class="right floated description" ng-show="value.isDark">dark</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="field">
+                        <label>Font Size:</label>
+                        <div class="ui input">
+                            <input placeholder="Font Size" ng-model="UserSettings.editor.fontSize" type="text">
+                        </div>
+                    </div>
+                </form>
             </div>
 
-            <!-- Editor Font Size -->
-            <div ng-show="activeItem == 'editorFontSize'">
-                <label>Font Size:</label>
-                <div class="ui input">
-                    <input placeholder="Font Size" ng-model="UserSettings.editorFontSize" type="text">
-                </div>
+            <!-- dummy -->
+            <div ng-show="activeItem == 'dummy'">
+                dummy
             </div>
 
 
