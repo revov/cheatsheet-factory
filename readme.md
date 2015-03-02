@@ -8,7 +8,7 @@ meteor create cheatsheet-manager
 Meteor Packages
 =============================================================
 meteor add urigo:angular
-meteor add nooitaf:semantic-ui
+meteor add semantic:ui-css
 meteor add accounts-password
 
 meteor add mquandalle:bower

@@ -19,6 +19,14 @@ angular.module('cheatsheet')
                             hide: 200
                         }
                     });
+
+                    scope.$on('$destroy', function() {
+                        element.find('.csf-code-snippet-wrapper').popup('destroy');
+                    });
+
+                    element.on('$destroy', function() {
+                        scope.$destroy();
+                    });
                 }
             };
         }
