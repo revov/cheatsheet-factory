@@ -1,14 +1,14 @@
 angular.module('cheatsheet')
-    .directive('csfCodeSnippet',
+    .directive('csfCheatCodeSnippet',
         function() {
             return {
                 restrict : 'E',
-                templateUrl: 'client/Services/Cheatsheet/csfCodeSnippet/Templates/csfCodeSnippet.ng.html',
+                templateUrl: 'client/Services/Cheatsheet/csfCheatCodeSnippet/Templates/csfCheatCodeSnippet.ng.html',
                 scope: {
                     component: '='
                 },
                 link: function(scope, element, attrs) {
-                    element.find('.csf-code-snippet-wrapper').popup({
+                    element.find('.csf-cheat-code-snippet-wrapper').popup({
                         inline: true,
                         hoverable: true,
                         position : 'bottom left',
@@ -19,7 +19,7 @@ angular.module('cheatsheet')
                     });
 
                     scope.$on('$destroy', function() {
-                        element.find('.csf-code-snippet-wrapper').popup('destroy');
+                        element.find('.csf-cheat-code-snippet-wrapper').popup('destroy');
                     });
 
                     element.on('$destroy', function() {
