@@ -9,14 +9,6 @@ angular.module('cheatsheet')
                     component: '='
                 },
                 link: function(scope, element, attrs) {
-                    function replace (cloned, scope) {
-                        element.replaceWith(cloned);
-                    };
-
-                    function buildComponentHTML(directive) {
-                        return '<'+directive+' component="component"></'+directive+'>'
-                    }
-
                     switch(scope.component.type) {
                         case 'cheat.codeSnippet' :
                             $compile( buildComponentHTML('csf-cheat-code-snippet') )(scope, replace);
@@ -25,6 +17,16 @@ angular.module('cheatsheet')
                             $compile( buildComponentHTML('div') )(scope, replace);
                     }
 
+                    function replace (cloned, scope) {
+                        element.replaceWith(cloned);
+                        // Since 'element' is detached from the DOM we should drop the reference to it to prevent
+                        // memory leaks and make it point to the new node
+                        element = cloned;
+                    };
+
+                    function buildComponentHTML(directive) {
+                        return '<'+directive+' component="component"></'+directive+'>'
+                    }
 
                     scope.$on('$destroy', function() {
                     });

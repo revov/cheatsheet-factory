@@ -27,7 +27,12 @@ angular.module('cheatsheet')
                         }
                     );
 
+                    scope.$on('$destroy', function() {
+                    });
 
+                    element.on('$destroy', function() {
+                        scope.$destroy();
+                    });
                 }
             };
         }
