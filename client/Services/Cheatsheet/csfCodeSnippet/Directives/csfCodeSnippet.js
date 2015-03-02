@@ -3,11 +3,9 @@ angular.module('cheatsheet')
         function() {
             return {
                 restrict : 'E',
-                templateUrl: 'client/Services/csfCodeSnippet/Templates/csfCodeSnippet.ng.html',
+                templateUrl: 'client/Services/Cheatsheet/csfCodeSnippet/Templates/csfCodeSnippet.ng.html',
                 scope: {
-                    code: '@',
-                    lang: '@',
-                    header: '@'
+                    component: '='
                 },
                 link: function(scope, element, attrs) {
                     element.find('.csf-code-snippet-wrapper').popup({
