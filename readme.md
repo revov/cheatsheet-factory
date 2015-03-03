@@ -28,7 +28,10 @@ git submodule add https://github.com/ajaxorg/ace-builds.git
 #Once someone else pulls our repo they need to do:
 git submodule init
 git submodule update
+git submodule foreach git pull
 
+
+=============================================================
 git mv ./client/views/partials/home.tpl ./client/views/partials/home.ng.html
 git mv ./client/views/partials/menu.tpl ./client/views/partials/menu.ng.html
 git mv ./client/views/partials/403.tpl ./client/views/partials/403.ng.html
