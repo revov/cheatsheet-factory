@@ -2,6 +2,16 @@
     <div class="column" ng-repeat="column in component.meta.columns">
         <div class="ui vertical segment" ng-repeat="id in column track by $index">
             <csf-abstract-component component="component.content[id]"></csf-abstract-component>
+
+        </div>
+
+        <div class="ui vertical segment" ng-show="canI.edit">
+            <div class="ui buttons">
+                <div class="ui labeled icon button">
+                    <i class="plus icon"></i>
+                    Add
+                </div>
+            </div>
         </div>
     </div>
 </div>

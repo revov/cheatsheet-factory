@@ -11,3 +11,9 @@ span {
 div.ace_static_highlight .ace_line {
     min-height: 1.3em;
 }
+
+/* This overrides the awful selection styles from Semantic */
+.ace_static_highlight ::selection {
+    background-color: #BDD5FC;
+    color: inherit;
+}

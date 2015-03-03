@@ -6,7 +6,8 @@ angular.module('cheatsheet')
                 restrict : 'E',
                 replace: true,
                 scope: {
-                    component: '='
+                    component: '=',
+                    canI: '='
                 },
                 link: function(scope, element, attrs) {
                     switch(scope.component.type) {
@@ -28,7 +29,7 @@ angular.module('cheatsheet')
                     };
 
                     function buildComponentHTML(directive) {
-                        return '<'+directive+' component="component"></'+directive+'>'
+                        return '<'+directive+' component="component" can-i="canI"></'+directive+'>'
                     }
 
                     scope.$on('$destroy', function() {

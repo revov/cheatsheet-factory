@@ -74,7 +74,10 @@ angular.module('cheatsheet').controller('CheatsheetController', [
             type: 'cheatsheet',
             meta: {
                 userId: 'iivEF5M297g2hxrhf',
-                name: 'Sample Cheatsheet'
+                name: 'Sample Cheatsheet',
+                canI: {
+                    edit: true
+                }
             },
             content: {
                 type: 'container.newsletter',

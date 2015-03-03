@@ -6,21 +6,22 @@ angular.module('cheatsheet')
                 templateUrl: 'client/Services/Cheatsheet/csfContainerNewsletter/Templates/csfContainerNewsletter.ng.html',
                 replace: true,
                 scope: {
-                    component: '='
+                    component: '=',
+                    canI: '='
                 },
                 link: function(scope, element, attrs) {
                     scope.$watch('component.meta.columns', function( newValue, oldValue ) {
                         element.removeClass();
                         switch( Object.keys(newValue).length ) {
-                            case 1: element.addClass("doubling one column row");
+                            case 1: element.addClass("one column row");
                                 break;
-                            case 2: element.addClass("doubling two column row");
+                            case 2: element.addClass("two column row");
                                 break;
-                            case 3: element.addClass("doubling three column row");
+                            case 3: element.addClass("three column row");
                                 break;
-                            case 4: element.addClass("doubling four column row");
+                            case 4: element.addClass("four column row");
                                 break;
-                            default: element.addClass("doubling one column row");
+                            default: element.addClass("one column row");
                         }
                     });
 
