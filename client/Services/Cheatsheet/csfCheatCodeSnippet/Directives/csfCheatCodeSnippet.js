@@ -8,18 +8,18 @@ angular.module('cheatsheet')
                     component: '='
                 },
                 link: function(scope, element, attrs) {
-                    element.find('.csf-cheat-code-snippet-wrapper').popup({
-                        inline: true,
-                        hoverable: true,
-                        position : 'bottom left',
-                        delay: {
-                            show: 800,
-                            hide: 200
-                        }
-                    });
+                    //element.find('.csf-cheat-code-snippet-wrapper').popup({
+                    //    inline: true,
+                    //    hoverable: true,
+                    //    position : 'bottom left',
+                    //    delay: {
+                    //        show: 800,
+                    //        hide: 200
+                    //    }
+                    //});
 
                     scope.$on('$destroy', function() {
-                        element.find('.csf-cheat-code-snippet-wrapper').popup('destroy');
+                        //element.find('.csf-cheat-code-snippet-wrapper').popup('destroy');
                     });
 
                     element.on('$destroy', function() {

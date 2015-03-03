@@ -6,15 +6,9 @@ angular.module('cheatsheet')
                 restrict : 'E',
                 templateUrl: 'client/Services/Cheatsheet/csfCheatsheet/Templates/csfCheatsheet.ng.html',
                 scope: {
-                    cheatsheet: '='
+                    component: '='
                 },
                 link: function(scope, element, attrs) {
-                    if(cheatsheet.type !== 'cheatsheet') {
-                        throw 'Invalid Object. Expected "cheatsheet", got "' + cheatsheet.type + '".';
-                    }
-
-
-
                     scope.$on('$destroy', function() {
 
                     });

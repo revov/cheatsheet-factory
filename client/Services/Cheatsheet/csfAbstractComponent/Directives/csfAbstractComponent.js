@@ -10,6 +10,9 @@ angular.module('cheatsheet')
                 },
                 link: function(scope, element, attrs) {
                     switch(scope.component.type) {
+                        case 'container.newsletter' :
+                            $compile( buildComponentHTML('csf-container-newsletter') )(scope, replace);
+                            break;
                         case 'cheat.codeSnippet' :
                             $compile( buildComponentHTML('csf-cheat-code-snippet') )(scope, replace);
                             break;
