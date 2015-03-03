@@ -1,0 +1,13 @@
+/* This solves the problem of overflowing text from static highlighted code blocks */
+.ace_static_highlight {
+    overflow: auto;
+}
+span {
+    /* Uncomment to allow word-wrapping */
+    /*word-wrap:break-word;*/
+}
+
+/*This solves the problem of empty lines having 0 height*/
+div.ace_static_highlight .ace_line {
+    min-height: 1.3em;
+}

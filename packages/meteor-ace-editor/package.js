@@ -33,7 +33,7 @@ Package.onUse(function(api) {
     files = fs.readdirSync(base + srcDir + 'snippets');
     files.forEach(function(file){
         if(file.substr(-3)===".js"){
-            api.add_files(srcDir + 'snippets/'+file, 'client');
+            api.add_files(srcDir + 'snippets/'+file, 'client', {isAsset: true});
         }
     });
 
