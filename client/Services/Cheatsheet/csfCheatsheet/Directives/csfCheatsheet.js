@@ -1,16 +1,38 @@
 angular.module('cheatsheet')
     .directive('csfCheatsheet', [
-        'csfUserSettings', '$compile',
-        function(csfUserSettings, $compile) {
+        'csfUserSettings', '$compile', '$timeout',
+        function(csfUserSettings, $compile, $timeout) {
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/Cheatsheet/csfCheatsheet/Templates/csfCheatsheet.ng.html',
+                replace: true,
                 scope: {
                     component: '='
                 },
                 link: function(scope, element, attrs) {
-                    scope.$on('$destroy', function() {
+                    var dimmerElement = element.find('.dimmer');
 
+                    dimmerElement.dimmer({
+                            closable: false,
+                            duration: {
+                                show : 0,
+                                hide : 1000
+                            }
+                        })
+                        .dimmer('show');
+
+                    // We do this in a timeout to make the page feel more responsive
+                    // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
+                    var compilationPromise = $timeout(function() {
+                        var template = angular.element('<csf-abstract-component component="component.content" can-i="component.meta.canI">');
+                        element.append( template );
+                        $compile(template)(scope);
+                        dimmerElement.dimmer('hide');
+                    }, 0);
+
+                    scope.$on('$destroy', function() {
+                        $timeout.cancel(compilationPromise);
+                        dimmerElement.dimmer('destroy');
                     });
 
                     element.on('$destroy', function() {

@@ -1,12 +1,28 @@
-<div class="ui stackable padded grid">
+<div class="ui dimmable stackable padded grid">
     <div class="row">
         <h2 class="ui center aligned icon header">
             <i class="circular paste icon"></i>
             <div class="content">
                 {{component.meta.name}}
-                <div class="sub header">{{component.meta.userId}}</div>
+                <div class="ui sub header">{{component.meta.userId}}</div>
             </div>
         </h2>
     </div>
-    <csf-abstract-component component="component.content" can-i="component.meta.canI"></csf-abstract-component>
+
+    <div class="ui inverted page dimmer">
+        <div class="content">
+            <div class="center">
+                <h2 class="ui icon header">
+                    <i class="wait icon"></i>
+                    <div class="content">
+                        Initializing <em>{{component.meta.name}}</em>...
+                        <div class="sub header">Please wait</div>
+                    </div>
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!--This will be loaded in a timeout to make it more responsive-->
+    <!--<csf-abstract-component component="component.content" can-i="component.meta.canI"></csf-abstract-component>-->
 </div>

@@ -10,34 +10,30 @@ angular.module('cheatsheet')
                     canI: '='
                 },
                 link: function(scope, element, attrs) {
+                    var elementForCompilation;
+
+                    function buildElementForCompilation(directive) {
+                        return angular.element('<'+directive+' component="component" can-i="canI"></'+directive+'>');
+                    }
+
                     switch(scope.component.type) {
                         case 'container.newsletter' :
-                            $compile( buildComponentHTML('csf-container-newsletter') )(scope, replace);
+                            elementForCompilation = buildElementForCompilation('csf-container-newsletter');
                             break;
                         case 'cheat.codeSnippet' :
-                            $compile( buildComponentHTML('csf-cheat-code-snippet') )(scope, replace);
+                            elementForCompilation = buildElementForCompilation('csf-cheat-code-snippet');
                             break;
                         default:
-                            $compile( buildComponentHTML('div') )(scope, replace);
+                            elementForCompilation = buildElementForCompilation('div');
                     }
 
-                    function replace (cloned, scope) {
-                        element.replaceWith(cloned);
-                        // Since 'element' is detached from the DOM we should drop the reference to it to prevent
-                        // memory leaks and make it point to the new node
-                        element = cloned;
-                    };
+                    element.replaceWith(elementForCompilation);
+                    // Since 'element' is detached from the DOM we should drop the reference to it to prevent
+                    // memory leaks. Compile will make yet another replace so we will lose track to the compiled element.
+                    // But we don't really care for it anymore - the concrete directive has it and we are just a mediator.
+                    element = null;
+                    $compile(elementForCompilation)(scope);
 
-                    function buildComponentHTML(directive) {
-                        return '<'+directive+' component="component" can-i="canI"></'+directive+'>'
-                    }
-
-                    scope.$on('$destroy', function() {
-                    });
-
-                    element.on('$destroy', function() {
-                        scope.$destroy();
-                    });
                 }
             };
         }
