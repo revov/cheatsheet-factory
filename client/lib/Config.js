@@ -1,7 +1,9 @@
 angular.module('cheatsheet')
     .config([
-        '$urlRouterProvider', '$stateProvider', '$locationProvider',
-        function( $urlRouterProvider, $stateProvider, $locationProvider ){
+        '$compileProvider', '$urlRouterProvider', '$stateProvider', '$locationProvider',
+        function( $compileProvider, $urlRouterProvider, $stateProvider, $locationProvider ){
+            $compileProvider.debugInfoEnabled(false);
+
             $locationProvider.html5Mode(true);
 
             $stateProvider
