@@ -24,7 +24,7 @@ angular.module('cheatsheet').controller('CheatsheetController', [
 
         // Watches
         $scope.$watch(
-            'cheatsheet.UserSettings.editor',
+            'cheatsheet.UserSettings.instance.editor',
             function(newValue, oldValue) {
                 if( newValue && newValue.theme ) {
                     editor.setTheme(newValue.theme);

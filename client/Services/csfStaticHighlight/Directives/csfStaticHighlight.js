@@ -12,13 +12,13 @@ angular.module('cheatsheet')
                 },
                 link: function(scope, element, attrs) {
                     scope.render = function() {
-                        element.html( csfStaticHighlight.render(scope.textToHighlight, scope.mode, scope.UserSettings.editor) );
+                        element.html( csfStaticHighlight.render(scope.textToHighlight, scope.mode, scope.UserSettings.instance.editor) );
                     };
                     csfUserSettings.UserSettingsPromise.then(
                         function(value) {
                             scope.UserSettings = value;
                             scope.$watch(
-                                'UserSettings.editor',
+                                'UserSettings.instance.editor',
                                 function(newValues, oldValues) {
                                     scope.render();
                                 },

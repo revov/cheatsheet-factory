@@ -1,14 +1,16 @@
 angular.module('cheatsheet')
     .service('csfUserSettings', [
-        '$meteorSubscribe', '$meteorObject', '$q', '$timeout',
-        function($meteorSubscribe, $meteorObject, $q, $timeout) {
+        '$meteorSubscribe', '$meteorObject', '$q', '$timeout', '$rootScope',
+        function($meteorSubscribe, $meteorObject, $q, $timeout, $rootScope) {
             var me = this;
             var deferred;
-            var currentUserSettings;
+            var userSettings = {
+                instance: null
+            };
 
             subscription = Meteor.subscribe('user-settings');
             Tracker.autorun(function() {
-                if (!deferred || Meteor.loggingIn() ) {
+                if (!deferred && Meteor.loggingIn() ) {
                     deferred = $q.defer();
                     me.UserSettingsPromise = deferred.promise;
                 }
@@ -16,11 +18,13 @@ angular.module('cheatsheet')
                     var userSettingsId = UserSettings.findOne({userId: Meteor.userId()}, {fields: {_id:true}})._id;
                     // Wrap the following inside $timeout since it contains reactive sources which should not trigger this autorun
                     $timeout(function() {
-                        if(currentUserSettings) {
-                            currentUserSettings.stop();
+                        if(userSettings.instance) {
+                            userSettings.instance.stop();
                         }
-                        currentUserSettings = $meteorObject(UserSettings, userSettingsId, false);
-                        deferred.resolve( $meteorObject(UserSettings, userSettingsId, false) );
+                        $rootScope.$apply(function() {
+                            userSettings.instance = $meteorObject(UserSettings, userSettingsId, false);
+                            deferred.resolve( userSettings );
+                        });
                     });
                 }
             });

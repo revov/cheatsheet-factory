@@ -15,6 +15,7 @@ meteor add mquandalle:bower
 meteor add mandrill:ace
 meteor add aldeed:collection2
 
+meteor add alanning:roles
 
 Meteor Privacy
 =============================================================

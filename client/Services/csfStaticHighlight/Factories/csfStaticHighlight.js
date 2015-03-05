@@ -9,6 +9,9 @@ angular.module('cheatsheet')
 
             return {
                 render: function(code, mode, editorSettings) {
+                    if(!editorSettings) {
+                        return '<div>User settings not found</div>';
+                    }
                     cache.highlightModes[mode] = cache.highlightModes[mode] || new (ace.require(mode).Mode)();
                     cache.themes[editorSettings.theme] = cache.themes[editorSettings.theme] || ace.require(editorSettings.theme);
 

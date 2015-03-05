@@ -24,11 +24,11 @@ angular.module('cheatsheet')
                                 {
                                     duration: 150,
                                     onDeny: function() {
-                                        scope.UserSettings.reset();
+                                        scope.UserSettings.instance.reset();
                                         scope.$apply();
                                     },
                                     onApprove: function() {
-                                        scope.UserSettings.save().then(
+                                        scope.UserSettings.instance.save().then(
                                             function(){
                                                 csfNotification.show('success', 'Success!', 'User Settings were successfully saved.');
                                             },
