@@ -2,11 +2,11 @@
     <a ui-sref="home" ui-sref-active="active" class="brand item">CheatSheet Factory<i class="home icon"></i></a>
     <a ui-sref="login" ui-sref-active="active" class="item" ng-show="!currentUser">Login</a>
     <a ui-sref="cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">CheatSheet</a>
+    <a ui-sref="admin" ui-sref-active="active" class="item" ng-show="CanI.viewPage('admin')">
+        <i class="users icon"></i>
+        Administration
+    </a>
     <div class="right menu">
-        <a ui-sref="admin" ui-sref-active="active" class="item" ng-show="CanI.viewPage('admin')">
-            <i class="users icon"></i>
-            User Administration
-        </a>
         <csf-user-settings-menu-item ng-show="!!currentUser"></csf-user-settings-menu-item>
         <a class="ui dropdown item" ng-show="!!currentUser">
             <i class="user icon"></i> {{currentUser.username}} <i class="ui red label">1</i>

@@ -9,17 +9,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="user in admin.users track by $index">
+                <tr ng-repeat="user in admin.users track by $index" ng-class="{positive: user._id == currentUser._id}">
                     <td>
                         <i class="user icon"></i>
                         {{user.username}}
                     </td>
                     <td>
-                        <div class="ui divided list">
+                        <div class="ui horizontal list">
                             <div class="item" ng-repeat="role in user.roles track by $index">
-                                <div class="right floated compact ui button">Remove</div>
-                                <div class="content">
-                                    <div class="header">{{role}}</div>
+                                <div class="ui right labeled icon button" ng-class="{red: role == 'admin'}" ng-click="admin.removeUserFromRole(user, role)">
+                                    <i class="x icon"></i>
+                                    {{role}}
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="ui action input">
+                                    <input placeholder="Add role" type="text">
+                                    <div class="ui teal icon button" ng-click="admin.addUserToRole(user, $event)">
+                                        <i class="plus icon"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -27,6 +35,20 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div id="revoke-admin-rights" class="ui small modal">
+        <div class="header">Revoke admin rights</div>
+        <div class="content">
+            <p>Are you sure you want to revoke your admin rights? This action cannot be reverted!</p>
+        </div>
+        <div class="actions">
+            <div class="ui negative button"> No </div>
+            <div class="ui positive right labeled icon button">
+                Yes
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
     </div>
 
 </div>
