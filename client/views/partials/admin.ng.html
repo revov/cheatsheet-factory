@@ -1,0 +1,32 @@
+<div class="ui one column centered page grid">
+
+    <div class="sixtheen wide column">
+        <table class="ui table">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in admin.users track by $index">
+                    <td>
+                        <i class="user icon"></i>
+                        {{user.username}}
+                    </td>
+                    <td>
+                        <div class="ui divided list">
+                            <div class="item" ng-repeat="role in user.roles track by $index">
+                                <div class="right floated compact ui button">Remove</div>
+                                <div class="content">
+                                    <div class="header">{{role}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -23,11 +23,11 @@ angular.module('cheatsheet')
                     url: '/403',
                     templateUrl: 'client/views/partials/403.ng.html'
                 })
-                .state('users', {
-                    url: '/users',
-                    templateUrl: 'client/views/partials/users.ng.html',
-                    controller: 'UsersController',
-                    controllerAs: 'users'
+                .state('admin', {
+                    url: '/admin',
+                    templateUrl: 'client/views/partials/admin.ng.html',
+                    controller: 'AdminController',
+                    controllerAs: 'admin'
                 })
                 .state('cheatsheet', {
                     url: '/cheatsheet',
