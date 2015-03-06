@@ -21,18 +21,15 @@ angular.module('cheatsheet')
 
             this.createUser = function (user) {
                 var deferred = $q.defer();
-                Accounts.createUser({
-                    username: user.email,
-                    email: user.email,
-                    password: user.password,
-                    profile: user.profile
-                }, function (err) {
+
+                Meteor.call('createNewUser', user, function(err, userId) {
                     if (err) {
                         deferred.reject(err);
                         return;
                     }
 
-                    deferred.resolve();
+                    Meteor.loginWithPassword(user.email, user.password);
+                    deferred.resolve(userId);
                 });
                 return deferred.promise;
             };

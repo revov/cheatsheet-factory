@@ -19,6 +19,12 @@ angular.module('cheatsheet')
                     controller: 'LoginController',
                     controllerAs: 'login'
                 })
+                .state('register', {
+                    url: '/register',
+                    templateUrl: 'client/views/partials/register.ng.html',
+                    controller: 'RegisterController',
+                    controllerAs: 'register'
+                })
                 .state('403', {
                     url: '/403',
                     templateUrl: 'client/views/partials/403.ng.html'

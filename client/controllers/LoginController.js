@@ -22,31 +22,11 @@ angular.module('cheatsheet')
                 );
             };
 
-            this.createUser = function () {
-                if (!me.user) {
-                    return;
-                }
-
-                me.state = 'loading';
-
-                Session.createUser({
-                    username: String(me.user.email).split('@')[0],
-                    email: me.user.email,
-                    password: me.user.password
-                }).then(
-                    function () {
-                        me.state = 'success';
-                        csfNotification.show(me.state, 'Welcome to the Cheatsheet Factory!', 'You have successfully registered!');
-                    },
-                    function (err) {
-                        me.errorMsg = err.reason;
-                        me.user.email = '';
-                        me.user.password = '';
-                        me.state = 'error';
-                    });
+            this.register = function () {
+                $state.go('register');
             };
 
-            $('.ui.form').form({
+            $('#login-form').form({
                     email: {
                         identifier: 'email',
                         rules: [
@@ -74,5 +54,8 @@ angular.module('cheatsheet')
                     }
                 });
 
+            $scope.$on('$destroy', function() {
+                $('#login-form').form('destroy');
+            });
         }
     ]);
