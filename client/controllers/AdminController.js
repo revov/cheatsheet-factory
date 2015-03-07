@@ -47,7 +47,9 @@ angular.module('cheatsheet').controller('AdminController', [
             admin.roles.stop();
             usersSubscriptionHandle.stop();
             rolesSubscriptionHandle.stop();
-            $('#revoke-admin-rights').modal('destroy');
+            $('#revoke-admin-rights').modal('destroy'); // This is very leaky, so we need a workaround:
+                $scope = null;
+                $state = null;
         });
 
     }
