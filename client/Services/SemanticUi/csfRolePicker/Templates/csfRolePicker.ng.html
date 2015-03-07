@@ -1,0 +1,19 @@
+<div class="ui horizontal list">
+    <div class="item" ng-repeat="role in roles track by $index">
+        <div class="ui right labeled icon button" ng-class="{red: role == 'admin'}" ng-click="removeRole(role)">
+            <i class="x icon"></i>
+            {{role}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="ui floating dropdown right labeled teal search icon button">
+            <i class="plus icon"></i>
+            <span class="text">Add role</span>
+            <div class="menu">
+                <div class="item" data-value="{{role.name}}" ng-repeat="role in possibleRoles track by $index">
+                    {{role.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

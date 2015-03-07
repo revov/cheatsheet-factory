@@ -2,6 +2,7 @@
     <a ui-sref="home" ui-sref-active="active" class="brand item">CheatSheet Factory<i class="home icon"></i></a>
     <a ui-sref="login" ui-sref-active="active" class="item" ng-show="!currentUser">Login</a>
     <a ui-sref="cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">CheatSheet</a>
+    <a ui-sref="create-cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('create-cheatsheet')">Add</a>
     <a ui-sref="admin" ui-sref-active="active" class="item" ng-show="CanI.viewPage('admin')">
         <i class="users icon"></i>
         Administration

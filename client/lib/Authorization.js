@@ -7,6 +7,10 @@ angular.module('cheatsheet')
              **************/
             $rootScope.$on('$stateChangeStart',
                 function (event, toState, toParams, fromState, fromParams) {
+                    if( CanI.viewPage(toState.name) ) {
+                        return;
+                    }
+
                     if( Meteor.loggingIn() ) {
                         //Our Meteor.user() is loaded asynchronously so we need to wait till it is resolved to continue
                         event.preventDefault();
