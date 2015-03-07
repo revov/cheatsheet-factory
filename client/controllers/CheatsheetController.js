@@ -75,8 +75,9 @@ angular.module('cheatsheet').controller('CheatsheetController', [
             meta: {
                 userId: 'iivEF5M297g2hxrhf',
                 name: 'Sample Cheatsheet',
-                canI: {
-                    edit: true
+                permissions: {
+                    view: ['member'],
+                    edit: ['member']
                 }
             },
             content: {
@@ -140,7 +141,9 @@ angular.module('cheatsheet').controller('CheatsheetController', [
 
                 }
             }
-        }
+        };
+
+//-----------------------------------------------------------------------------------------
 
 
     }
