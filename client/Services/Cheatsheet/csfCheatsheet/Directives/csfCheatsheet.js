@@ -24,9 +24,6 @@ angular.module('cheatsheet')
                     scope.canI = {
                         edit: false
                     };
-                    Session.currentUserPromise().then(function(currentUser) {
-                        scope.canI.edit = CanI.edit.cheatsheet(scope.component);
-                    });
 
                     var compilationPromise;
                     function render() {
@@ -40,10 +37,14 @@ angular.module('cheatsheet')
                         }, 0);
                     }
 
+                    //Wait until we have a resolved value for the component and compile after that
                     var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
                         if(newV) {
-                            render();
                             unregisterWatch();
+                            Session.currentUserPromise().then(function(currentUser) {
+                                scope.canI.edit = CanI.edit.cheatsheet(scope.component);
+                            });
+                            render();
                         }
                     });
 
