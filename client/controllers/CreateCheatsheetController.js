@@ -1,6 +1,6 @@
 angular.module('cheatsheet').controller('CreateCheatsheetController', [
-    '$scope', 'Session', 'csfNotification',
-    function($scope, Session, csfNotification) {
+    '$scope', 'Session', 'csfNotification', '$timeout',
+    function($scope, Session, csfNotification, $timeout) {
         var createCheatsheet = this;
 
         createCheatsheet.cheatsheet = {
@@ -8,6 +8,7 @@ angular.module('cheatsheet').controller('CreateCheatsheetController', [
             meta: {
                 userId: null,
                 name: '',
+                description: '',
                 permissions: {
                     view: ['member'],
                     edit: []
@@ -23,7 +24,7 @@ angular.module('cheatsheet').controller('CreateCheatsheetController', [
         createCheatsheet.submit = function() {
             createCheatsheet.state = 'loading';
             Cheatsheets.insert(createCheatsheet.cheatsheet, function(err, id) {
-                $scope.$apply(function() {
+                $timeout(function() { $scope.$apply(function() {
                     if(err) {
                         createCheatsheet.errorMsg = err.message;
                         createCheatsheet.state = 'error';
@@ -31,7 +32,7 @@ angular.module('cheatsheet').controller('CreateCheatsheetController', [
                         createCheatsheet.state = 'success';
                         csfNotification.show(createCheatsheet.state, 'Success', 'You have successfully created a cheatsheet with ID: ' + id);
                     }
-                });
+                });});
             });
         };
 

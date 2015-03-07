@@ -16,7 +16,7 @@ angular.module('cheatsheet')
                             closable: false,
                             duration: {
                                 show : 0,
-                                hide : 1000
+                                hide : 200
                             }
                         })
                         .dimmer('show');

@@ -18,6 +18,12 @@
                 </div>
 
                 <div class="field">
+                    <label>Description:</label>
+                    <textarea placeholder="Add a brief description to let other users know what this cheatsheet is about"
+                              ng-model="createCheatsheet.cheatsheet.meta.description"></textarea>
+                </div>
+
+                <div class="field">
                     <label>Who else can view:</label>
                     <csf-role-picker roles="createCheatsheet.cheatsheet.meta.permissions.view"></csf-role-picker>
                 </div>

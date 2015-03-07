@@ -1,13 +1,18 @@
 <nav ng-controller="MenuController as menu" class="ui fixed inverted purple main menu">
     <a ui-sref="home" ui-sref-active="active" class="brand item">CheatSheet Factory<i class="home icon"></i></a>
     <a ui-sref="login" ui-sref-active="active" class="item" ng-show="!currentUser">Login</a>
-    <a ui-sref="cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">CheatSheet</a>
-    <a ui-sref="create-cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('create-cheatsheet')">Add</a>
+    <a ui-sref="cheatsheet" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">
+        <i class="paste icon"></i>
+        CheatSheet
+    </a>
     <a ui-sref="admin" ui-sref-active="active" class="item" ng-show="CanI.viewPage('admin')">
         <i class="users icon"></i>
         Administration
     </a>
-    <a ui-sref="dev" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">Dev</a>
+    <a ui-sref="dev" ui-sref-active="active" class="item" ng-show="CanI.viewPage('dev')">
+        <i class="linux icon"></i>
+        Dev
+    </a>
     <div class="right menu">
         <csf-user-settings-menu-item ng-show="!!currentUser"></csf-user-settings-menu-item>
         <a class="ui dropdown item" ng-show="!!currentUser">

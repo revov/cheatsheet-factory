@@ -1,23 +1,38 @@
-<csf-cheatsheet component="cheatsheet.sample"></csf-cheatsheet>
-<div class="ui padded grid">
+<div class="ui stackable padded grid">
 
     <div class="row">
         <div class="sixteen wide column">
-            <div class="ui segment">
-                <div>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
-                    <br/>
+            <button class="ui labeled icon teal button" ui-sref="create-cheatsheet" ng-show="CanI.viewPage('create-cheatsheet')">
+                <i class="plus icon"></i>
+                Create New
+            </button>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="sixteen wide column">
+
+            <div class="ui cards">
+
+                <div class="ui link card" ng-repeat="card in cheatsheet.cheatsheets track by $index">
+                    <div class="content">
+                        <div class="header">{{card.meta.name}}</div>
+                        <div class="meta">
+                            <span class="category"></span>
+                        </div>
+                        <div class="description">
+                            <p>{{card.meta.description}}</p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="right floated author">
+                            <i class="user icon"></i> {{cheatsheet.getUserProfile(card.meta.userId).firstName}} {{cheatsheet.getUserProfile(card.meta.userId).lastName}}
+                        </div>
+                    </div>
                 </div>
-                <div id="aceEditor">
-                </div>
+
             </div>
+
         </div>
     </div>
 
