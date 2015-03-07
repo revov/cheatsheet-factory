@@ -46,6 +46,12 @@ angular.module('cheatsheet')
                     templateUrl: 'client/views/partials/create-cheatsheet.ng.html',
                     controller: 'CreateCheatsheetController',
                     controllerAs: 'createCheatsheet'
+                })
+                .state('dev', {
+                    url: '/dev',
+                    templateUrl: 'client/views/partials/dev.ng.html',
+                    controller: 'DevController',
+                    controllerAs: 'dev'
                 });
 
             $urlRouterProvider.otherwise("/");

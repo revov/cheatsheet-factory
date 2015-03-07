@@ -7,6 +7,7 @@
         <i class="users icon"></i>
         Administration
     </a>
+    <a ui-sref="dev" ui-sref-active="active" class="item" ng-show="CanI.viewPage('cheatsheet')">Dev</a>
     <div class="right menu">
         <csf-user-settings-menu-item ng-show="!!currentUser"></csf-user-settings-menu-item>
         <a class="ui dropdown item" ng-show="!!currentUser">
