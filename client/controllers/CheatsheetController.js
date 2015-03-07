@@ -32,12 +32,10 @@ angular.module('cheatsheet').controller('CheatsheetController', [
 
         $scope.$on('$destroy', function() {
             cheatsheetsPromise.then(function() {
-                console.log('Stopping cheatsheet subscription');
                 cheatsheet.cheatsheets.stop();
                 cheatsheetsSubscriptionHandle.stop();
             });
             userNamesPromise.then(function() {
-                console.log('Stopping userNames subscription');
                 cheatsheet.userNames.stop();
                 userNamesSubscriptionHandle.stop();
             });

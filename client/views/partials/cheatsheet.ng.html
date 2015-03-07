@@ -14,7 +14,7 @@
 
             <div class="ui cards">
 
-                <div class="ui link card" ng-repeat="card in cheatsheet.cheatsheets track by $index">
+                <div class="ui link card" ng-repeat="card in cheatsheet.cheatsheets track by $index" ui-sref="view-cheatsheet({id: card._id })">
                     <div class="content">
                         <div class="header">{{card.meta.name}}</div>
                         <div class="meta">

@@ -28,15 +28,24 @@ angular.module('cheatsheet')
                         scope.canI.edit = CanI.edit.cheatsheet(scope.component);
                     });
 
+                    var compilationPromise;
+                    function render() {
+                        // We do this in a timeout to make the page feel more responsive
+                        // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
+                        compilationPromise = $timeout(function() {
+                            var template = angular.element('<csf-abstract-component component="component.content" can-i="canI">');
+                            element.append( template );
+                            $compile(template)(scope);
+                            dimmerElement.dimmer('hide');
+                        }, 0);
+                    }
 
-                    // We do this in a timeout to make the page feel more responsive
-                    // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
-                    var compilationPromise = $timeout(function() {
-                        var template = angular.element('<csf-abstract-component component="component.content" can-i="canI">');
-                        element.append( template );
-                        $compile(template)(scope);
-                        dimmerElement.dimmer('hide');
-                    }, 0);
+                    var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
+                        if(newV) {
+                            render();
+                            unregisterWatch();
+                        }
+                    });
 
                     scope.$on('$destroy', function() {
                         $timeout.cancel(compilationPromise);
