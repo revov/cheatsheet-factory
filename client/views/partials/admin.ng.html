@@ -17,8 +17,8 @@
                     <td>
                         <div class="ui horizontal list">
                             <div class="item" ng-repeat="role in user.roles track by $index">
-                                <div class="ui right labeled icon button" ng-class="{red: role == 'admin'}" ng-click="admin.removeUserFromRole(user, role)">
-                                    <i class="x icon"></i>
+                                <div class="ui right labeled icon button" ng-class="{red: role == 'admin'}">
+                                    <i class="x icon" ng-click="admin.removeUserFromRole(user, role)"></i>
                                     {{role}}
                                 </div>
                             </div>

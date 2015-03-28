@@ -18,7 +18,7 @@ angular.module('cheatsheet').controller('AdminController', [
         });
 
         admin.addUserToRole = function(user, event) {
-            var input = event.currentTarget.previousSibling;
+            var input = event.currentTarget.previousElementSibling;
             Roles.addUsersToRoles(user._id, [input.value]);
             input.value = '';
         };
