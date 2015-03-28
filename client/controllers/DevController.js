@@ -75,6 +75,7 @@ angular.module('cheatsheet').controller('DevController', [
             meta: {
                 userId: 'iivEF5M297g2hxrhf',
                 name: 'Sample Cheatsheet',
+                description: 'This is an example description.\nIt should be multiline',
                 permissions: {
                     view: ['member'],
                     edit: ['member']

@@ -1,0 +1,4 @@
+<pre ng-dblclick="enableEditing()" ng-hide="isEditing" title="Double click to edit">{{text}}</pre>
+<form ng-show="isEditing">
+    <textarea placeholder="Edit field" ng-model="text"></textarea>
+</form>

@@ -1,12 +1,37 @@
 <div class="ui dimmable stackable padded grid">
-    <div class="row">
-        <h2 class="ui center aligned icon header">
-            <i class="circular paste icon"></i>
-            <div class="content">
-                <csf-editable-text text="component.meta.name" ng-class="{'csf-editable': canI.edit}"></csf-editable-text>
-                <div class="ui sub header">{{component.meta.userId}}</div>
+    <div class="three column doubling row">
+        <div class="column">
+            <h2 class="ui center aligned icon header">
+                <i class="circular paste icon"></i>
+                <div class="content">
+                    <csf-editable-text text="component.meta.name" ng-class="{'csf-editable': canI.edit}"></csf-editable-text>
+                    <div class="ui sub header">{{component.meta.userId}}</div>
+                </div>
+            </h2>
+        </div>
+
+        <div class="column">
+            <div class="ui form">
+                <div class="field">
+                    <label>Description:</label>
+                        <csf-editable-multiline-text text="component.meta.description" ng-class="{'csf-editable': canI.edit}"></csf-editable-multiline-text>
+                </div>
             </div>
-        </h2>
+        </div>
+
+        <div class="column">
+            <div class="ui form">
+                <div class="field">
+                    <label>Who can view:</label>
+                    <csf-role-picker roles="component.meta.permissions.view"></csf-role-picker>
+                </div>
+
+                <div class="field">
+                    <label>Who can edit:</label>
+                    <csf-role-picker roles="component.meta.permissions.edit"></csf-role-picker>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="ui inverted page dimmer">
