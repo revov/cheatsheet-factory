@@ -36,6 +36,7 @@ angular.module('cheatsheet').controller('AdminController', [
          ***************/
         $('#revoke-admin-rights').modal({
             closable: false,
+            detachable: false, // memory leak otherwise
             onApprove: function() {
                 Roles.removeUsersFromRoles($scope.currentUser._id, ['admin']);
                 $state.go('home');
