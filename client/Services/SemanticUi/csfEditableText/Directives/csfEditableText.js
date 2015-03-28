@@ -21,7 +21,12 @@ angular.module('cheatsheet')
                         scope.isEditing = false;
                     };
 
+                    element.find('input').on('blur', function() {
+                        scope.$apply(scope.disableEditing);
+                    });
+
                     scope.$on('$destroy', function() {
+                        element.find('input').off('blur');
                     });
 
                     element.on('$destroy', function() {

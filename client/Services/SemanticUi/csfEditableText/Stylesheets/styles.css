@@ -1,3 +1,7 @@
 csf-editable-text.csf-editable span:hover {
     border-bottom: 3px dashed orange;
 }
+
+csf-editable-text.csf-editable button {
+    display: none;
+}
