@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfCheatsheet', [
-        'csfUserSettings', '$compile', '$timeout', 'Session',
-        function(csfUserSettings, $compile, $timeout, Session) {
+        'csfUserSettings', '$compile', '$timeout', '$meteor',
+        function(csfUserSettings, $compile, $timeout, $meteor) {
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/Cheatsheet/csfCheatsheet/Templates/csfCheatsheet.ng.html',
@@ -41,13 +41,32 @@ angular.module('cheatsheet')
                     var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
                         if(newV) {
                             unregisterWatch();
-                            Session.currentUserPromise().then(function(currentUser) {
+                            $meteor.waitForUser().then(function(currentUser) {
                                 scope.canI.edit = CanI.edit.cheatsheet(scope.component);
                             });
                             render();
                         }
                     });
 
+                    /**
+                     * Role picker fancy logic
+                     */
+                    scope.onEditPermissionAdded = function(role) {
+                        if( !_.contains(scope.component.meta.permissions.view, role) ) {
+                            scope.component.meta.permissions.view.push(role);
+                        }
+                    };
+
+                    scope.onViewPermissionRemoved = function(role) {
+                        if( _.contains(scope.component.meta.permissions.edit, role) ) {
+                            var index = scope.component.meta.permissions.edit.indexOf(role);
+                            scope.component.meta.permissions.edit.splice(index, 1);
+                        }
+                    };
+
+                    /**
+                     * Cleanup
+                     */
                     scope.$on('$destroy', function() {
                         $timeout.cancel(compilationPromise);
                         dimmerElement.dimmer('destroy');

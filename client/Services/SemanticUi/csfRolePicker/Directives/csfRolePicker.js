@@ -7,7 +7,9 @@ angular.module('cheatsheet')
                 replace: true,
                 templateUrl: 'client/Services/SemanticUi/csfRolePicker/Templates/csfRolePicker.ng.html',
                 scope: {
-                    roles: '='
+                    roles: '=',
+                    onAdded: '&',
+                    onRemoved: '&'
                 },
                 link: function(scope, element, attrs) {
                     var rolesPromise = $meteor.subscribe('user-roles');
@@ -22,6 +24,7 @@ angular.module('cheatsheet')
                                 if( !_.contains(scope.roles, value) ) {
                                     scope.$apply(function() {
                                         scope.roles.push(value);
+                                        scope.onAdded({role: value});
                                     });
                                 }
                                 dropdownElement.dropdown('hide');
@@ -32,6 +35,7 @@ angular.module('cheatsheet')
                     scope.removeRole = function(role) {
                         var index = scope.roles.indexOf(role);
                         scope.roles.splice(index, 1);
+                        scope.onRemoved({role: role});
                     };
 
                     scope.$on('$destroy', function() {
