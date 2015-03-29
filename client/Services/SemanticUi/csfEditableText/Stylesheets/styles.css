@@ -1,4 +1,4 @@
-csf-editable-text.csf-editable span:hover {
-    border: 3px dashed orange;
+csf-editable-text.csf-editable .csf-editable-container:hover {
+    border: 2px dashed orange;
     border-radius: 5px;
 }

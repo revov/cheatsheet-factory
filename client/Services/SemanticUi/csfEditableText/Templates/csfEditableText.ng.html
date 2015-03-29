@@ -1,6 +1,7 @@
-<span ng-dblclick="enableEditing()" ng-hide="isEditing" title="Double click to edit">
+<div class="csf-editable-container" ng-dblclick="enableEditing()" ng-hide="isEditing" title="Double click to edit">
     {{text}}
-</span>
+    <div class="ui yellow message" ng-show="text.trim() == ''">Field is empty</div>
+</div>
 <form ng-show="isEditing">
     <div class="ui action input">
         <input placeholder="Edit field" type="text" ng-model="text">

@@ -5,7 +5,8 @@ angular.module('cheatsheet')
                 restrict : 'E',
                 templateUrl: 'client/Services/SemanticUi/csfEditableText/Templates/csfEditableText.ng.html',
                 scope: {
-                    text: '='
+                    text: '=',
+                    canEdit: '='
                 },
                 link: function(scope, element, attrs) {
                     scope.enableEditing = function() {
@@ -25,6 +26,20 @@ angular.module('cheatsheet')
                         scope.$apply(scope.disableEditing);
                     });
 
+                    /**
+                     * Watches
+                     */
+                    scope.$watch('canEdit', function(newV, oldV) {
+                        if(newV) {
+                            element.addClass('csf-editable');
+                        } else {
+                            element.removeClass('csf-editable');
+                        }
+                    });
+
+                    /**
+                     * Cleanup
+                     */
                     scope.$on('$destroy', function() {
                         element.find('input').off('blur');
                     });

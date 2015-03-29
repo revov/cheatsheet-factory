@@ -4,6 +4,7 @@ angular.module('cheatsheet')
         function(csfStaticHighlightBaseStyles) {
             var cache = {
                 highlighter: ace.require("ace/ext/static_highlight"),
+                modelist: ace.require("ace/ext/modelist"),
                 highlightModes: {},
                 themes: {},
                 currentEditorSettings: {},
@@ -55,7 +56,11 @@ angular.module('cheatsheet')
                         return '<div>User settings not found</div>';
                     }
 
-                    cache.highlightModes[mode] = cache.highlightModes[mode] || new (ace.require(mode).Mode)();
+                    if(!cache.modelist.modesByName.hasOwnProperty(mode)) {
+                        mode = 'text';
+                    }
+
+                    cache.highlightModes[mode] = cache.highlightModes[mode] || new (ace.require('ace/mode/'+mode).Mode)();
                     cache.themes[editorSettings.theme] = cache.themes[editorSettings.theme] || ace.require(editorSettings.theme);
 
                     this.updateStyles(editorSettings);

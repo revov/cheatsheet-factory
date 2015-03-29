@@ -75,7 +75,22 @@ angular.module('cheatsheet').controller('DevController', [
             meta: {
                 userId: 'iivEF5M297g2hxrhf',
                 name: 'Sample Cheatsheet',
-                description: 'This is an example description.\nIt should be multiline',
+                description: '# (GitHub-Flavored) Markdown\n' +
+                    '\n' +
+                    'A list:\n' +
+                    '* foo\n' +
+                    '* bar\n' +
+                    '* baz\n' +
+                    '\n' +
+                    'And here\'s some code! :\n' +
+                    '\n' +
+                    '```javascript\n' +
+                    '$(function(){\n' +
+                    '  $(\'div\').html(\'I am a div.\');\n' +
+                    '});\n' +
+                    '```' +
+                    '\n' +
+                    'See [docs](https://help.github.com/articles/github-flavored-markdown/) for more info',
                 permissions: {
                     view: ['member'],
                     edit: ['member']
