@@ -12,7 +12,7 @@ angular.module('cheatsheet').controller('CheatsheetController', [
                 cheatsheetsSubscriptionHandle = value;
                 cheatsheet.cheatsheets = $meteor.collection(Cheatsheets, false);
 
-                var userIds = _.uniq(_.map(cheatsheet.cheatsheets, function (element) { return element.meta.userId; }));
+                var userIds = _.uniq(_.map(cheatsheet.cheatsheets, function (element) { return element.meta.userId; })); //TODO: make this reactive
                 userNamesPromise = $meteor.subscribe('user-names', userIds);
 
                 return userNamesPromise;

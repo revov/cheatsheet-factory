@@ -16,7 +16,7 @@ angular.module('cheatsheet')
                     var markdownContainer = element.find('.csf-markdown-container');
 
                     function render() {
-                        if( typeof scope.text == 'string' && scope.text.trim() == '' ) {
+                        if( typeof scope.text !== 'string' || scope.text.trim() == '' ) {
                             markdownContainer.html('<div class="ui yellow message">Field is empty</div>');
                             return;
                         }

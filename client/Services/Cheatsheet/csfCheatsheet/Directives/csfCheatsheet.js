@@ -35,6 +35,18 @@ angular.module('cheatsheet')
                             $compile(template)(scope);
                             dimmerElement.dimmer('hide');
                         }, 0);
+
+                        // Get the name of the Author. TODO: Make this reactive
+                        $meteor.subscribe('user-names', [scope.component.meta.userId])
+                            .then(function(value) {
+                                var authorSubscriptionHandle = value;
+
+                                var author = Meteor.users.findOne(scope.component.meta.userId);
+                                if(author) {
+                                    scope.authorName = author.profile.firstName + ' ' + author.profile.lastName;
+                                }
+                                authorSubscriptionHandle.stop();
+                            });
                     }
 
                     //Wait until we have a resolved value for the component and compile after that
