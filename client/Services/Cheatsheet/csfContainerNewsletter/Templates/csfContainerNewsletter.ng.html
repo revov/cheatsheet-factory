@@ -1,7 +1,7 @@
 <div>
     <div class="column" ng-repeat="column in component.meta.columns">
         <div class="ui vertical segment" ng-repeat="id in column track by $index">
-            <csf-abstract-component component="component.content[id]"></csf-abstract-component>
+            <csf-abstract-component component="component.content[id]" can-i="canI"></csf-abstract-component>
 
         </div>
 

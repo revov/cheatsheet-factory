@@ -1,0 +1,4 @@
+csf-static-highlight.csf-editable > div:hover {
+    border: 2px dashed orange;
+    border-radius: 5px;
+}

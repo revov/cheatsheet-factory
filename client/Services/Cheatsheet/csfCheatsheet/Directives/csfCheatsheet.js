@@ -53,12 +53,16 @@ angular.module('cheatsheet')
                     var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
                         if(newV) {
                             unregisterWatch();
-                            $meteor.waitForUser().then(function(currentUser) {
-                                scope.canI.edit = CanI.edit.cheatsheet(scope.component);
-                            });
                             render();
                         }
                     });
+
+                    scope.$watch(
+                        'component.meta.permissions.edit',
+                        function() {
+                            scope.canI.edit = CanI.edit.cheatsheet(scope.component);
+                        }
+                    );
 
                     /**
                      * Role picker fancy logic

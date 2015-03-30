@@ -28,6 +28,9 @@ angular.module('cheatsheet')
                         scope.$watchGroup( ['textToHighlight', 'mode'], render);
                     });
 
+                    /**
+                     * Cleanup
+                     */
                     scope.$on('$destroy', function() {
                     });
 

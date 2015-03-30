@@ -5,44 +5,6 @@ angular.module('cheatsheet').controller('DevController', [
             editor = null;
         dev.UserSettings = {};
 
-        csfUserSettings.UserSettingsPromise
-            .then(
-                function(userSettings) {
-                    dev.UserSettings = userSettings;
-
-                    editor = ace.edit("aceEditor");
-                    editor.getSession().setMode("ace/mode/javascript");
-                    editor.$blockScrolling = Infinity;
-                    editor.insert(
-                        'function foo(items) {\n' +
-                        '   var x = "All this is syntax highlighted";\n' +
-                        '   return x;\n' +
-                        '}\n'
-                    );
-                }
-            );
-
-        // Watches
-        $scope.$watch(
-            'dev.UserSettings.instance.editor',
-            function(newValue, oldValue) {
-                if( newValue && newValue.theme ) {
-                    editor.setTheme(newValue.theme);
-                }
-                if( newValue && newValue.fontSize ) {
-                    editor.setFontSize( parseInt(newValue.fontSize, 10) )
-                }
-            },
-            true
-        );
-
-        $scope.$on('$destroy', function() {
-            if(typeof editor.destroy == 'function') {
-                editor.destroy();
-            }
-        });
-
-
         dev.data = 'function foo(items) {\n' +
             '   var x = "All this is syntax highlighted";\n' +
             '   return x;\n' +
