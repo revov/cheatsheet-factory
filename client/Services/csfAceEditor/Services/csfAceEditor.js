@@ -45,6 +45,8 @@ angular.module('cheatsheet')
                     init();
                 }
 
+                aceEditor.setValue('', 0);
+                aceEditor.getSession().getUndoManager().reset();
                 $aceEditorElement.appendTo( $container );
                 aceEditor.resize();
 
@@ -56,8 +58,6 @@ angular.module('cheatsheet')
                     return;
                 }
 
-                aceEditor.setValue('');
-                aceEditor.getSession().getUndoManager().reset();
                 $aceEditorElement.appendTo( $('#aceEditorDock') );
             };
 
