@@ -2,3 +2,7 @@ csf-editable-markdown.csf-editable .csf-markdown-container:hover {
     border: 2px dashed orange;
     border-radius: 5px;
 }
+
+csf-editable-markdown .csf-markdown-container{
+    border: 2px solid transparent;
+}
