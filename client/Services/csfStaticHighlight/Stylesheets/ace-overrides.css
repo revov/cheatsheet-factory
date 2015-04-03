@@ -7,9 +7,11 @@ span {
     /*word-wrap:break-word;*/
 }
 
-/*This solves the problem of empty lines having 0 height*/
 div.ace_static_highlight .ace_line {
+    /* This solves the problem of empty lines having 0 height*/
     min-height: 1.3em;
+    /* This solves the problem with long lines getting wrapped */
+    white-space: nowrap;
 }
 
 /* This overrides the awful selection styles from Semantic */
