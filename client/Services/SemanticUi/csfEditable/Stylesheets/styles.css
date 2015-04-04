@@ -1,0 +1,17 @@
+.csf-editable.csf-editable-active:not(csf-static-highlight):hover {
+    border: 2px dashed orange;
+    border-radius: 5px;
+}
+
+.csf-editable:not(csf-static-highlight) {
+    border: 2px solid transparent;
+}
+
+csf-static-highlight.csf-editable.csf-editable-active >*:hover {
+    border: 2px dashed orange;
+    border-radius: 5px;
+}
+
+csf-static-highlight.csf-editable >* {
+    border: 2px solid transparent;
+}

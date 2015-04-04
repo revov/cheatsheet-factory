@@ -65,7 +65,7 @@ angular.module('cheatsheet')
 
                     this.updateStyles(editorSettings);
 
-                    var highlighted = cache.highlighter.render(code.trim(), cache.highlightModes[mode], cache.themes[editorSettings.theme], 1, true);
+                    var highlighted = cache.highlighter.render(code, cache.highlightModes[mode], cache.themes[editorSettings.theme], 1, true);
                     highlighted.session.destroy();
 
                     return highlighted.html;

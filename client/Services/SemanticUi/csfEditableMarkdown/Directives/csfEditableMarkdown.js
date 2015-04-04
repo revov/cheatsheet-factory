@@ -49,13 +49,6 @@ angular.module('cheatsheet')
                     /**
                      * Watches
                      */
-                    scope.$watch('canEdit', function(newV, oldV) {
-                        if(newV) {
-                            element.addClass('csf-editable');
-                        } else {
-                            element.removeClass('csf-editable');
-                        }
-                    });
                     csfUserSettings.UserSettingsPromise.then(function(value) {
                         scope.UserSettings = value;
                         scope.$watch('UserSettings.instance.editor', render, true);

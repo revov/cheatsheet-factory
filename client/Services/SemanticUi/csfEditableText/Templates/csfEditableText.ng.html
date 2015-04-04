@@ -1,4 +1,4 @@
-<div class="csf-editable-container" ng-dblclick="enableEditing()" ng-hide="isEditing" title="Double click to edit">
+<div class="csf-editable-container" ng-dblclick="enableEditing()" ng-hide="isEditing" csf-editable="canEdit">
     {{text}}
     <div class="ui yellow message" ng-show="text.trim() == ''">Field is empty</div>
 </div>

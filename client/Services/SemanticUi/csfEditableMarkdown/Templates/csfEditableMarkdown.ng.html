@@ -1,4 +1,4 @@
-<div class="csf-markdown-container" ng-dblclick="enableEditing()" ng-hide="isEditing" title="Double click to edit"></div>
+<div class="csf-markdown-container" ng-dblclick="enableEditing()" ng-hide="isEditing" csf-editable="canEdit"></div>
 <form ng-show="isEditing">
     <textarea placeholder="Edit field" ng-model="text"></textarea>
 </form>

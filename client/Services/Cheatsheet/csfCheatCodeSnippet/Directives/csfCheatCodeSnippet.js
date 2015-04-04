@@ -36,16 +36,8 @@ angular.module('cheatsheet')
                     };
 
                     /**
-                     * Watches
+                     * Cleanup
                      */
-                    scope.$watch('canI.edit', function(newV, oldV) {
-                        if(newV) {
-                            $staticHighlightElement.addClass('csf-editable');
-                        } else {
-                            $staticHighlightElement.removeClass('csf-editable');
-                        }
-                    });
-
                     scope.$on('$destroy', function() {
                         if(isEditing) {
                             csfAceEditor.release();

@@ -10,7 +10,7 @@ angular.module('cheatsheet')
                 },
                 link: function(scope, element, attrs) {
                     scope.enableEditing = function() {
-                        if(element.hasClass('csf-editable')) {
+                        if(scope.canEdit) {
                             scope.isEditing = true;
                             setTimeout(function() {
                                 element.find('input').focus();
@@ -24,17 +24,6 @@ angular.module('cheatsheet')
 
                     element.find('input').on('blur', function() {
                         scope.$apply(scope.disableEditing);
-                    });
-
-                    /**
-                     * Watches
-                     */
-                    scope.$watch('canEdit', function(newV, oldV) {
-                        if(newV) {
-                            element.addClass('csf-editable');
-                        } else {
-                            element.removeClass('csf-editable');
-                        }
                     });
 
                     /**
