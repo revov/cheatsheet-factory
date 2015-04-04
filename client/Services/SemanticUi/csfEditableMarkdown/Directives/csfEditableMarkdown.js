@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfEditableMarkdown', [
-        'csfMarkdown', 'csfUserSettings',
-        function(csfMarkdown, csfUserSettings) {
+        'csfMarkdown', 'csfUserSettings', 'csfAceEditor',
+        function(csfMarkdown, csfUserSettings, csfAceEditor) {
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/SemanticUi/csfEditableMarkdown/Templates/csfEditableMarkdown.ng.html',
@@ -29,22 +29,27 @@ angular.module('cheatsheet')
                      * Actions
                      */
                     scope.enableEditing = function() {
-                        if(scope.canEdit) {
-                            scope.isEditing = true;
-                            setTimeout(function() {
-                                element.find('textarea').focus();
-                            }, 0);
-                        }
-                    };
+                        if(!scope.canEdit) { return; }
+                        if(scope.isEditing) { return; }
 
-                    scope.disableEditing = function() {
-                        scope.isEditing = false;
-                        render();
-                    };
+                        scope.isEditing = true;
 
-                    element.find('textarea').on('blur', function() {
-                        scope.$apply(scope.disableEditing);
-                    });
+                        var editor = csfAceEditor.acquire( element.find('.csf-markdown-wrapper') );
+                        var session = editor.getSession();
+                        session.setMode("ace/mode/markdown");
+                        editor.setValue(scope.text);
+                        editor.selection.clearSelection();
+
+                        editor.once('blur', function() {
+                            scope.text = editor.getValue();
+                            csfAceEditor.release();
+                            scope.isEditing = false;
+                            render();
+                            scope.$apply();
+                        });
+
+                        setTimeout(function() {editor.focus();}, 0);
+                    };
 
                     /**
                      * Watches
@@ -65,7 +70,6 @@ angular.module('cheatsheet')
                      * Cleanup
                      */
                     scope.$on('$destroy', function() {
-                        element.find('textarea').off('blur');
                     });
 
                     element.on('$destroy', function() {
