@@ -25,6 +25,43 @@ angular.module('cheatsheet')
                         }
                     });
 
+                    scope.onAdded = function(cheatType, column) {
+                        var newIndex = scope.limit(column-1);
+                        ++scope.component.meta.columns[column];
+
+                        scope.component.content.splice(
+                            newIndex,
+                            0,
+                            {
+                                type: cheatType,
+                                meta: {
+                                    code: '\n\n\n\n\n',
+                                    lang: 'javascript',
+                                    header: 'New Cheat'
+                                }
+                            }
+                        );
+                    };
+
+                    /**
+                     * Utils
+                     */
+                    scope.limit = function(index) {
+                        var sum = 0;
+                        for( var i = 0; i<=index; i++ ) {
+                            sum += scope.component.meta.columns[i+1];
+                        }
+
+                        return sum;
+                    };
+
+                    scope.offset = function(index) {
+                        return scope.component.meta.columns[index+1];
+                    };
+
+                    /**
+                     * Cleanup
+                     */
                     scope.$on('$destroy', function() {
 
                     });

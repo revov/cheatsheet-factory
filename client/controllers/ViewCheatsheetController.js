@@ -25,7 +25,7 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
                         csfNotification.show('success', 'Cheatsheet successfully saved.');
                     },
                     function(error) {
-                        csfNotification.show('error', 'There was an error saving the cheatsheet.', error.reason);
+                        csfNotification.show('error', 'There was an error saving the cheatsheet.', error);
                     }
                 );
         };

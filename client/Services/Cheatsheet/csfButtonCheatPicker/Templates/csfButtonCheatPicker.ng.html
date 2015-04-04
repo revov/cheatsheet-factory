@@ -1,0 +1,9 @@
+<div class="ui floating dropdown right labeled search small icon button">
+    <i class="plus icon"></i>
+    <span class="text">Add cheat</span>
+    <div class="menu">
+        <div class="item" data-value="{{cheat.value}}" ng-repeat="cheat in possibleCheats track by $index">
+            {{cheat.name}}
+        </div>
+    </div>
+</div>

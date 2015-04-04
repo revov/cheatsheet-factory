@@ -1,17 +1,11 @@
 <div>
-    <div class="column" ng-repeat="column in component.meta.columns">
-        <div class="ui vertical segment" ng-repeat="id in column track by $index">
-            <csf-abstract-component component="component.content[id]" can-i="canI"></csf-abstract-component>
-
+    <div class="column" ng-repeat="column in component.meta.columns" ng-init="columnIndex = $index">
+        <div class="ui vertical segment" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex)">
+            <csf-abstract-component component="item" can-i="canI"></csf-abstract-component>
         </div>
 
         <div class="ui vertical segment" ng-show="canI.edit">
-            <div class="ui buttons">
-                <div class="ui labeled icon button">
-                    <i class="plus icon"></i>
-                    Add
-                </div>
-            </div>
+            <csf-button-cheat-picker on-added="onAdded(type, $index+1)"></csf-button-cheat-picker>
         </div>
     </div>
 </div>

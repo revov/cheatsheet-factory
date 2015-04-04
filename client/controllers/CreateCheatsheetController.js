@@ -14,7 +14,7 @@ angular.module('cheatsheet').controller('CreateCheatsheetController', [
                     edit: []
                 }
             },
-            content: {}
+            content: []
         };
 
         Session.currentUserPromise().then(function(currentUser) {

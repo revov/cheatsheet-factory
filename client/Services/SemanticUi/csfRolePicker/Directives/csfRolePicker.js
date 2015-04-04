@@ -28,6 +28,7 @@ angular.module('cheatsheet')
                                     });
                                 }
                                 dropdownElement.dropdown('hide');
+                                dropdownElement.dropdown('set text', 'Add role');
                             }
                         });
                     });

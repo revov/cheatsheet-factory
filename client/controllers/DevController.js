@@ -62,13 +62,13 @@ angular.module('cheatsheet').controller('DevController', [
                 type: 'container.newsletter',
                 meta: {
                     columns: {
-                        1: ['1', '2', '3'],
-                        2: ['4', '5'],
-                        3: ['6']
+                        1: 3,
+                        2: 2,
+                        3: 1
                     }
                 },
-                content: {
-                    1: {
+                content: [
+                    {
                         type: 'cheat.codeSnippet',
                         meta: {
                             code: dev.data,
@@ -76,7 +76,7 @@ angular.module('cheatsheet').controller('DevController', [
                             header: 'Sample'
                         }
                     },
-                    2: {
+                    {
                         type: 'cheat.codeSnippet',
                         meta: {
                             code: dev.data,
@@ -84,7 +84,7 @@ angular.module('cheatsheet').controller('DevController', [
                             header: 'Another Sample'
                         }
                     },
-                    3: {
+                    {
                         type: 'cheat.codeSnippet',
                         meta: {
                             code: dev.data,
@@ -92,7 +92,7 @@ angular.module('cheatsheet').controller('DevController', [
                             header: 'Yet another Sample'
                         }
                     },
-                    4: {
+                    {
                         type: 'cheat.codeSnippet',
                         meta: {
                             code: dev.php,
@@ -100,7 +100,7 @@ angular.module('cheatsheet').controller('DevController', [
                             header: 'PHP code'
                         }
                     },
-                    5: {
+                    {
                         type: 'cheat.codeSnippet',
                         meta: {
                             code: dev.data,
@@ -108,7 +108,7 @@ angular.module('cheatsheet').controller('DevController', [
                             header: 'Header'
                         }
                     },
-                    6: {
+                    {
                         type: 'cheat.codeSnippet',
                         meta: {
                             code: dev.data,
@@ -116,8 +116,7 @@ angular.module('cheatsheet').controller('DevController', [
                             header: 'I am codeSnippet'
                         }
                     }
-
-                }
+                ]
             }
         };
 

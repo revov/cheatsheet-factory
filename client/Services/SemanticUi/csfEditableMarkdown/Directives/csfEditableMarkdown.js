@@ -70,6 +70,9 @@ angular.module('cheatsheet')
                      * Cleanup
                      */
                     scope.$on('$destroy', function() {
+                        if(scope.isEditing) {
+                            csfAceEditor.release();
+                        }
                     });
 
                     element.on('$destroy', function() {
