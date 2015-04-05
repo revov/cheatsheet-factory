@@ -1,6 +1,6 @@
 angular.module('cheatsheet').controller('ViewCheatsheetController', [
-    '$scope', '$meteor', '$stateParams', 'csfNotification',
-    function($scope, $meteor, $stateParams, csfNotification) {
+    '$scope', '$meteor', '$stateParams', '$state', 'csfNotification',
+    function($scope, $meteor, $stateParams, $state, csfNotification) {
         var viewCheatsheet = this;
         viewCheatsheet.id = $stateParams.id;
 
@@ -37,6 +37,21 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
 
             viewCheatsheet.cheatsheet.reset();
             csfNotification.show('info', 'Changes discarded.');
+        };
+
+        viewCheatsheet.delete = function() {
+            if( !viewCheatsheet.cheatsheet ) {
+                return;
+            }
+
+            viewCheatsheet.cheatsheet.$$collection.remove(viewCheatsheet.cheatsheet._id, function(err) {
+                if(err) {
+                    csfNotification.show('error', 'There was an error deleting the cheatsheet.', err.message);
+                } else {
+                    csfNotification.show('success', 'Successfully deleted cheatsheet.');
+                    $state.go('cheatsheet');
+                }
+            });
         };
 
         $scope.$on('$destroy', function() {

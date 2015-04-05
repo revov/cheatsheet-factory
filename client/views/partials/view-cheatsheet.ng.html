@@ -1,7 +1,7 @@
 <div class="ui icon buttons" ng-show="CanI.edit.cheatsheet(viewCheatsheet.cheatsheet)" style="position: fixed; top: 40px; left: 10px; z-index: 5000;">
-    <div class="ui button" ng-click="viewCheatsheet.save()"><i class="blue save icon" title="Save"></i></div>
-    <div class="ui button" ng-click="viewCheatsheet.reset()"><i class="history icon" title="Discard changes"></i></div>
-    <div class="ui button"><i class="red delete icon" title="Delete"></i></div>
+    <div class="ui button" ng-click="viewCheatsheet.save()" title="Save"><i class="blue save icon"></i></div>
+    <div class="ui button" ng-click="viewCheatsheet.reset()" title="Discard changes"><i class="history icon"></i></div>
+    <div class="ui button" ng-click="viewCheatsheet.delete()" title="Delete"><i class="red delete icon"></i></div>
 </div>
 
 <csf-cheatsheet component="viewCheatsheet.cheatsheet"></csf-cheatsheet>
