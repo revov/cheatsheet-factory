@@ -4,7 +4,7 @@
             <div class="column" ng-repeat="column in component.meta.columns track by $index" ng-init="columnIndex = $index">
                 <div class="ui vertical segment csf-container-item" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex) track by $index">
                     <csf-abstract-component component="item" can-i="canI"></csf-abstract-component>
-                    <div class="csf-container-controls ui icon tiny buttons">
+                    <div class="csf-container-controls ui icon tiny buttons" ng-show="canI.edit">
                         <div class="ui button" ng-click="moveDown(columnIndex + 1, $index)"><i class="blue down arrow icon"></i></div>
                         <div class="ui button" ng-click="moveUp(columnIndex + 1, $index)"><i class="blue up arrow icon"></i></div>
                         <div class="ui button" ng-click="remove(columnIndex + 1, $index)"><i class="red close icon"></i></div>
