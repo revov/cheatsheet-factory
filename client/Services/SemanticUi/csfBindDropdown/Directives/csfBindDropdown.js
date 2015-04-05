@@ -3,7 +3,6 @@ angular.module('cheatsheet')
         function() {
             return {
                 restrict : 'A',
-                replace: true,
                 scope: {
                     selected: '=csfBindDropdown'
                 },
@@ -26,16 +25,29 @@ angular.module('cheatsheet')
                     });
 
                     scope.$watch('selected', function (newValue, oldValue) {
-                        if(suspendAngularHandler) {
-                            suspendAngularHandler = false;
-                            return;
-                        }
+                        // Wrapping the following logic in $applyAsync as a way to prevent setting a value
+                        // before items have been generated with ngRepeat
+                        scope.$applyAsync(function() {
+                            if(suspendAngularHandler) {
+                                suspendAngularHandler = false;
+                                return;
+                            }
 
-                        suspendSemanticHandler = true;
-                        element.dropdown('set selected', newValue);
+                            suspendSemanticHandler = true;
+                            element.dropdown('set selected', newValue);
+                        });
                     });
 
+                    /**
+                     * Cleanup
+                     */
+                    scope.$on('$destroy', function() {
+                        element.dropdown('destroy');
+                    });
 
+                    element.on('$destroy', function() {
+                        scope.$destroy();
+                    });
                 }
             };
         }

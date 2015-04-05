@@ -1,6 +1,7 @@
 <div class="csf-cheat-code-snippet-wrapper">
     <h5 class="ui top attached header">
         {{component.meta.header}}
+        <csf-highlight-mode-picker selected-mode="component.meta.lang" can-edit="canI.edit"></csf-highlight-mode-picker>
     </h5>
     <div class="ui bottom attached fitted segment">
         <csf-static-highlight text-to-highlight="{{component.meta.code}}" mode="{{component.meta.lang}}" ng-dblclick="edit()" csf-editable="canI.edit"></csf-static-highlight>

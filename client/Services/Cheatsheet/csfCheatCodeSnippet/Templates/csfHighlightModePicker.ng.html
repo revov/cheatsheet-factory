@@ -1,0 +1,9 @@
+<div class="ui floating dropdown right labeled right floated mini compact search icon button" ng-class="{disabled: !canEdit}" csf-bind-dropdown="selectedMode">
+    <i class="keyboard icon"></i>
+    <div class="default text">Language</div>
+    <div class="menu">
+        <div class="item" data-value="{{::mode.name}}" ng-repeat="mode in ::possibleModes">
+            {{::mode.caption}}
+        </div>
+    </div>
+</div>
