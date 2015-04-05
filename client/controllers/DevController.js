@@ -58,66 +58,68 @@ angular.module('cheatsheet').controller('DevController', [
                     edit: ['member']
                 }
             },
-            content: {
-                type: 'container.newsletter',
-                meta: {
-                    columns: {
-                        1: 3,
-                        2: 2,
-                        3: 1
-                    }
-                },
-                content: [
-                    {
-                        type: 'cheat.codeSnippet',
-                        meta: {
-                            code: dev.data,
-                            lang: 'javascript',
-                            header: 'Sample'
+            content: [
+                {
+                    type: 'container.newsletter',
+                    meta: {
+                        columns: {
+                            1: 3,
+                            2: 2,
+                            3: 1
                         }
                     },
-                    {
-                        type: 'cheat.codeSnippet',
-                        meta: {
-                            code: dev.data,
-                            lang: 'javascript',
-                            header: 'Another Sample'
+                    content: [
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.data,
+                                lang: 'javascript',
+                                header: 'Sample'
+                            }
+                        },
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.data,
+                                lang: 'javascript',
+                                header: 'Another Sample'
+                            }
+                        },
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.data,
+                                lang: 'javascript',
+                                header: 'Yet another Sample'
+                            }
+                        },
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.php,
+                                lang: 'php',
+                                header: 'PHP code'
+                            }
+                        },
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.data,
+                                lang: 'javascript',
+                                header: 'Header'
+                            }
+                        },
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.data,
+                                lang: 'javascript',
+                                header: 'I am codeSnippet'
+                            }
                         }
-                    },
-                    {
-                        type: 'cheat.codeSnippet',
-                        meta: {
-                            code: dev.data,
-                            lang: 'javascript',
-                            header: 'Yet another Sample'
-                        }
-                    },
-                    {
-                        type: 'cheat.codeSnippet',
-                        meta: {
-                            code: dev.php,
-                            lang: 'php',
-                            header: 'PHP code'
-                        }
-                    },
-                    {
-                        type: 'cheat.codeSnippet',
-                        meta: {
-                            code: dev.data,
-                            lang: 'javascript',
-                            header: 'Header'
-                        }
-                    },
-                    {
-                        type: 'cheat.codeSnippet',
-                        meta: {
-                            code: dev.data,
-                            lang: 'javascript',
-                            header: 'I am codeSnippet'
-                        }
-                    }
-                ]
-            }
+                    ]
+                }
+            ]
         };
 
 //-----------------------------------------------------------------------------------------

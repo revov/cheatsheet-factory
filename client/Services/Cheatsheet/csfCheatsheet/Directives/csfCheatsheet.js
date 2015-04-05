@@ -5,7 +5,6 @@ angular.module('cheatsheet')
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/Cheatsheet/csfCheatsheet/Templates/csfCheatsheet.ng.html',
-                replace: true,
                 scope: {
                     component: '='
                 },
@@ -30,7 +29,7 @@ angular.module('cheatsheet')
                         // We do this in a timeout to make the page feel more responsive
                         // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
                         compilationPromise = $timeout(function() {
-                            var template = angular.element('<csf-abstract-component component="component.content" can-i="canI">');
+                            var template = angular.element('<div ng-repeat="item in component.content"><csf-abstract-component component="item" can-i="canI"></div>');
                             element.append( template );
                             $compile(template)(scope);
                             dimmerElement.dimmer('hide');

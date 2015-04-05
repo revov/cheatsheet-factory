@@ -4,28 +4,26 @@ angular.module('cheatsheet')
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/Cheatsheet/csfContainerNewsletter/Templates/csfContainerNewsletter.ng.html',
-                replace: true,
                 scope: {
                     component: '=',
                     canI: '='
                 },
                 link: function(scope, element, attrs) {
                     scope.$watch('component.meta.columns', function( newValue, oldValue ) {
-                        element.removeClass();
                         switch( Object.keys(newValue).length ) {
-                            case 1: element.addClass("one column row");
+                            case 1: scope.columnCount = 'one column row';
                                 break;
-                            case 2: element.addClass("two column row");
+                            case 2: scope.columnCount = 'two column row';
                                 break;
-                            case 3: element.addClass("three column row");
+                            case 3: scope.columnCount = 'three column row';
                                 break;
-                            case 4: element.addClass("four column row");
+                            case 4: scope.columnCount = 'four column row';
                                 break;
-                            default: element.addClass("one column row");
+                            default: scope.columnCount = 'one column row';
                         }
                     });
 
-                    scope.onAdded = function(cheatType, column) {
+                    scope.add = function(cheatType, column) {
                         var newIndex = scope.limit(column-1);
                         ++scope.component.meta.columns[column];
 
@@ -43,12 +41,55 @@ angular.module('cheatsheet')
                         );
                     };
 
+                    scope.remove = function(column, indexInColumn) {
+                        var generalIndex = scope.limit(column-2) + indexInColumn;
+                        --scope.component.meta.columns[column];
+                        scope.component.content.splice(generalIndex, 1);
+                    };
+
+                    scope.moveUp = function(column, indexInColumn) {
+                        var isInFirstColumn = (column == 1);
+                        var isFirstInColumn = (indexInColumn == 0);
+                        var generalIndex = scope.limit(column-2) + indexInColumn;
+
+                        // If we are the last item, forbid moving up
+                        if( isInFirstColumn && isFirstInColumn ) {
+                            return;
+                        }
+
+                        if( isFirstInColumn ) {
+                            ++scope.component.meta.columns[column - 1];
+                            --scope.component.meta.columns[column];
+                            return;
+                        }
+                        scope.component.content[generalIndex-1] = scope.component.content.splice(generalIndex, 1, scope.component.content[generalIndex-1])[0];
+                    };
+
+                    scope.moveDown = function(column, indexInColumn) {
+                        var isInLastColumn = (column == Object.keys(scope.component.meta.columns).length && indexInColumn);
+                        var isLastInColumn = (indexInColumn == scope.component.meta.columns[column] - 1);
+                        var generalIndex = scope.limit(column-2) + indexInColumn;
+
+                        // If we are the last item, forbid moving down
+                        if( isInLastColumn && isLastInColumn ) {
+                            return;
+                        }
+
+                        if( isLastInColumn ) {
+                            ++scope.component.meta.columns[column + 1];
+                            --scope.component.meta.columns[column];
+                            return;
+                        }
+
+                        scope.component.content[generalIndex] = scope.component.content.splice(generalIndex + 1, 1, scope.component.content[generalIndex])[0];
+                    };
+
                     /**
                      * Utils
                      */
-                    scope.limit = function(index) {
+                    scope.limit = function(columnIndex) {
                         var sum = 0;
-                        for( var i = 0; i<=index; i++ ) {
+                        for( var i = 0; i<=columnIndex; i++ ) {
                             sum += scope.component.meta.columns[i+1];
                         }
 

@@ -1,11 +1,20 @@
-<div>
-    <div class="column" ng-repeat="column in component.meta.columns" ng-init="columnIndex = $index">
-        <div class="ui vertical segment" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex)">
-            <csf-abstract-component component="item" can-i="canI"></csf-abstract-component>
-        </div>
+<div class="csf-container">
+    <div class="ui stackable padded grid">
+        <div ng-class="columnCount">
+            <div class="column" ng-repeat="column in component.meta.columns track by $index" ng-init="columnIndex = $index">
+                <div class="ui vertical segment csf-container-item" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex) track by $index">
+                    <csf-abstract-component component="item" can-i="canI"></csf-abstract-component>
+                    <div class="csf-container-controls ui icon tiny buttons">
+                        <div class="ui button" ng-click="moveDown(columnIndex + 1, $index)"><i class="blue down arrow icon"></i></div>
+                        <div class="ui button" ng-click="moveUp(columnIndex + 1, $index)"><i class="blue up arrow icon"></i></div>
+                        <div class="ui button" ng-click="remove(columnIndex + 1, $index)"><i class="red close icon"></i></div>
+                    </div>
+                </div>
 
-        <div class="ui vertical segment" ng-show="canI.edit">
-            <csf-button-cheat-picker on-added="onAdded(type, $index+1)"></csf-button-cheat-picker>
+                <div class="ui vertical segment" ng-show="canI.edit">
+                    <csf-button-cheat-picker on-added="add(type, $index+1)"></csf-button-cheat-picker>
+                </div>
+            </div>
         </div>
     </div>
 </div>

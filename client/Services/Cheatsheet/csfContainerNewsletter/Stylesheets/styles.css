@@ -1,0 +1,9 @@
+.csf-container .csf-container-controls {
+    display: none;
+    position: absolute;
+    z-index: 100;
+}
+
+.csf-container .csf-container-item:hover .csf-container-controls {
+    display: block;
+}
