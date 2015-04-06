@@ -2,7 +2,7 @@
     display: none;
     position: absolute;
     right: 0px;
-    z-index: 100;
+    z-index: 10;
 }
 
 .csf-container .csf-container-item:hover .csf-container-controls {
