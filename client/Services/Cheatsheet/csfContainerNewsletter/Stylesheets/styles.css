@@ -5,6 +5,6 @@
     z-index: 10;
 }
 
-.csf-container .csf-container-item:hover .csf-container-controls {
+.csf-container .csf-container-item:hover > .csf-container-controls {
     display: block;
 }

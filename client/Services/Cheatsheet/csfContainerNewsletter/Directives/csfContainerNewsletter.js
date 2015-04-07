@@ -23,21 +23,14 @@ angular.module('cheatsheet')
                         }
                     });
 
-                    scope.add = function(cheatType, column) {
+                    scope.add = function(component, column) {
                         var newIndex = scope.limit(column-1);
                         ++scope.component.meta.columns[column];
 
                         scope.component.content.splice(
                             newIndex,
                             0,
-                            {
-                                type: cheatType,
-                                meta: {
-                                    code: '',
-                                    lang: 'javascript',
-                                    header: 'New Cheat'
-                                }
-                            }
+                            component
                         );
                     };
 
@@ -66,7 +59,7 @@ angular.module('cheatsheet')
                     };
 
                     scope.moveDown = function(column, indexInColumn) {
-                        var isInLastColumn = (column == Object.keys(scope.component.meta.columns).length && indexInColumn);
+                        var isInLastColumn = (column == Object.keys(scope.component.meta.columns).length);
                         var isLastInColumn = (indexInColumn == scope.component.meta.columns[column] - 1);
                         var generalIndex = scope.limit(column-2) + indexInColumn;
 

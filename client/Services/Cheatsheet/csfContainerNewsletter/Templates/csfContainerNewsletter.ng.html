@@ -2,7 +2,7 @@
     <div class="ui stackable padded grid">
         <div ng-class="columnCount">
             <div class="column" ng-repeat="column in component.meta.columns track by $index" ng-init="columnIndex = $index">
-                <div class="ui vertical segment csf-container-item" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex) track by $index">
+                <div class="ui vertical segment csf-container-item" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex)">
                     <csf-abstract-component component="item" can-i="canI"></csf-abstract-component>
                     <div class="csf-container-controls ui icon tiny buttons" ng-show="canI.edit">
                         <div class="ui button" ng-click="moveDown(columnIndex + 1, $index)"><i class="blue down arrow icon"></i></div>
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="ui vertical segment" ng-show="canI.edit">
-                    <csf-button-cheat-picker on-added="add(type, $index+1)"></csf-button-cheat-picker>
+                    <csf-button-component-picker on-added="add(chosenComponent, $index+1)"></csf-button-component-picker>
                 </div>
             </div>
         </div>
