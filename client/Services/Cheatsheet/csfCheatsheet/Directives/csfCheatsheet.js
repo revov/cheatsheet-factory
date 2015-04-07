@@ -30,7 +30,7 @@ angular.module('cheatsheet')
                         // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
                         compilationPromise = $timeout(function() {
                             var template = angular.element('<div ng-repeat="item in component.content"><csf-abstract-component component="item" can-i="canI"></div>');
-                            element.append( template );
+                            element.find('.csf-cheatsheet-header:first').append( template );
                             $compile(template)(scope);
                             dimmerElement.dimmer('hide');
                         }, 0);
@@ -77,6 +77,13 @@ angular.module('cheatsheet')
                             var index = scope.component.meta.permissions.edit.indexOf(role);
                             scope.component.meta.permissions.edit.splice(index, 1);
                         }
+                    };
+
+                    /**
+                     * Add new elements to the cheatsheet (will most often be just one container)
+                     */
+                    scope.add = function(component) {
+                        scope.component.content.push(component);
                     };
 
                     /**

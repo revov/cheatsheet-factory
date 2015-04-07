@@ -1,4 +1,4 @@
-<div class="ui dimmable stackable padded grid">
+<div class="ui dimmable stackable padded grid csf-cheatsheet-header">
     <div class="two column doubling row">
         <div class="six wide column">
             <h2 class="ui center aligned icon header">
@@ -49,4 +49,7 @@
 
 </div>
 <!--This will be loaded in a timeout to make it more responsive-->
-<!--<csf-abstract-component component="component.content" can-i="component.meta.canI"></csf-abstract-component>-->
+<!--<div ng-repeat="item in component.content">-->
+    <!--<csf-abstract-component component="item" can-i="canI">-->
+<!--</div>-->
+<csf-button-component-picker on-added="add(chosenComponent)" ng-show="canI.edit"></csf-button-component-picker>
