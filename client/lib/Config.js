@@ -6,6 +6,9 @@ angular.module('cheatsheet')
 
             $locationProvider.html5Mode(true);
 
+            // Underscore.js is deprecated since Meteor 1.1 (on a side note, lodash is better)
+            _ = lodash;
+
             $stateProvider
                 .state('home', {
                     url: '/',
