@@ -1,0 +1,9 @@
+/* Using this trick to fix poor layout of Mode Picker when it needs to be wrapped on the next line */
+/* Learned how to do this from Semantic's menu component */
+csf-cheat-code-snippet .ui.top.attached.header:after {
+    content: '';
+    display: block;
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}

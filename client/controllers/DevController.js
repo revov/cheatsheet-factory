@@ -102,12 +102,64 @@ angular.module('cheatsheet').controller('DevController', [
                             }
                         },
                         {
-                            type: 'cheat.codeSnippet',
+                            type: 'container.newsletter',
                             meta: {
-                                code: dev.data,
-                                lang: 'javascript',
-                                header: 'Header'
-                            }
+                                columns: {
+                                    1: 3,
+                                    2: 2,
+                                    3: 1
+                                }
+                            },
+                            content: [
+                                {
+                                    type: 'cheat.codeSnippet',
+                                    meta: {
+                                        code: dev.data,
+                                        lang: 'javascript',
+                                        header: 'Sample'
+                                    }
+                                },
+                                {
+                                    type: 'cheat.codeSnippet',
+                                    meta: {
+                                        code: dev.data,
+                                        lang: 'javascript',
+                                        header: 'Another Sample'
+                                    }
+                                },
+                                {
+                                    type: 'cheat.codeSnippet',
+                                    meta: {
+                                        code: dev.data,
+                                        lang: 'javascript',
+                                        header: 'Yet another Sample'
+                                    }
+                                },
+                                {
+                                    type: 'cheat.codeSnippet',
+                                    meta: {
+                                        code: dev.php,
+                                        lang: 'php',
+                                        header: 'PHP code'
+                                    }
+                                },
+                                {
+                                    type: 'cheat.codeSnippet',
+                                    meta: {
+                                        code: dev.data,
+                                        lang: 'javascript',
+                                        header: 'Header'
+                                    }
+                                },
+                                {
+                                    type: 'cheat.codeSnippet',
+                                    meta: {
+                                        code: dev.data,
+                                        lang: 'javascript',
+                                        header: 'I am codeSnippet'
+                                    }
+                                }
+                            ]
                         },
                         {
                             type: 'cheat.codeSnippet',
