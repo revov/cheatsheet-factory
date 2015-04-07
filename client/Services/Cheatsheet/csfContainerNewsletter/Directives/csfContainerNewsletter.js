@@ -33,7 +33,7 @@ angular.module('cheatsheet')
                             {
                                 type: cheatType,
                                 meta: {
-                                    code: '\n\n\n\n\n',
+                                    code: '',
                                     lang: 'javascript',
                                     header: 'New Cheat'
                                 }

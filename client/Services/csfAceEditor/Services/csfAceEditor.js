@@ -48,6 +48,7 @@ angular.module('cheatsheet')
                 aceEditor.setValue('', 0);
                 aceEditor.getSession().getUndoManager().reset();
                 $aceEditorElement.appendTo( $container );
+                $aceEditorElement.prev().css('minHeight', '13em');
                 aceEditor.resize();
 
                 return aceEditor;
@@ -58,6 +59,7 @@ angular.module('cheatsheet')
                     return;
                 }
 
+                $aceEditorElement.prev().css('minHeight', '');
                 $aceEditorElement.appendTo( $('#aceEditorDock') );
             };
 
