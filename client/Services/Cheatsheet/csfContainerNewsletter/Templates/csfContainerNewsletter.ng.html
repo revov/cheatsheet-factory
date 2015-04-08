@@ -1,5 +1,5 @@
 <div class="csf-container">
-    <div class="ui stackable padded grid">
+    <div class="ui stackable grid">
         <div ng-class="columnCount">
             <div class="column" ng-repeat="column in component.meta.columns track by $index" ng-init="columnIndex = $index">
                 <div class="ui vertical segment csf-container-item" ng-repeat="item in component.content | limitTo: limit(columnIndex) | limitTo: -offset(columnIndex)">
