@@ -44,7 +44,7 @@ angular.module('cheatsheet')
                     dropdownElement.dropdown({
                         action: function(text, value) {
                             scope.$apply(function() {
-                                scope.onAdded({chosenComponent: value});
+                                scope.onAdded({chosenComponent: angular.copy(value)});
                             });
                             dropdownElement.dropdown('hide');
                             dropdownElement.dropdown('set text', 'Add component');
