@@ -23,6 +23,9 @@ angular.module('cheatsheet')
                         case 'cheat.codeSnippet' :
                             elementForCompilation = buildElementForCompilation('csf-cheat-code-snippet');
                             break;
+                        case 'cheat.markdown' :
+                            elementForCompilation = buildElementForCompilation('csf-cheat-markdown');
+                            break;
                         default:
                             elementForCompilation = buildElementForCompilation('div');
                     }

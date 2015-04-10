@@ -15,6 +15,16 @@ angular.module('cheatsheet')
                     }
                 },
                 {
+                    name: 'Markdown',
+                    // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
+                    value: {
+                        type: 'cheat.markdown',
+                        meta: {
+                            text: ''
+                        }
+                    }
+                },
+                {
                     name: 'Newsletter',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
                     value: {
