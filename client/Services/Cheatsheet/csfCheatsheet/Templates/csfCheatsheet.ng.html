@@ -9,6 +9,18 @@
                 </div>
             </h2>
 
+            <!--List of actions all can see (download, clone, add to favourites, etc)-->
+            <div class="ui horizontal list">
+                <div class="item">
+                    <a class="csf-download-button" download="{{component._id}}.json">
+                        <div class="ui left labeled small blue icon button">
+                            <i class="download icon"></i>
+                            <span class="text">Download</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
             <div class="ui form" ng-show="canI.edit">
                 <div class="field">
                     <label>Who can view:</label>

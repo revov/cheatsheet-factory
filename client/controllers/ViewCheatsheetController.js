@@ -13,6 +13,9 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
                 viewCheatsheet.cheatsheet = $meteor.object(Cheatsheets, viewCheatsheet.id, false);
             });
 
+        /**
+         * Save button
+         */
         viewCheatsheet.save = function() {
             if( !viewCheatsheet.cheatsheet ) {
                 return;
@@ -30,6 +33,9 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
                 );
         };
 
+        /**
+         * Reset button
+         */
         viewCheatsheet.reset = function() {
             if( !viewCheatsheet.cheatsheet ) {
                 return;
@@ -39,6 +45,9 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
             csfNotification.show('info', 'Changes discarded.');
         };
 
+        /**
+         * Delete button
+         */
         viewCheatsheet.delete = function() {
             if( !viewCheatsheet.cheatsheet ) {
                 return;

@@ -98,6 +98,17 @@ angular.module('cheatsheet')
                     };
 
                     /**
+                     * Download button
+                     */
+                    var downloadButton = element.find('.csf-download-button');
+                    downloadButton.on('mousedown', function() {
+                        if(!scope.component) {return;}
+
+                        var cheatsheetJson = JSON.stringify( Cheatsheets.findOne(scope.component._id) );
+                        downloadButton.attr( 'href', 'data:application/json;charset=utf-8,' + encodeURIComponent(cheatsheetJson) );
+                    });
+
+                    /**
                      * Cleanup
                      */
                     scope.$on('$destroy', function() {
