@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfCheatsheet', [
-        'csfUserSettings', '$compile', '$timeout', '$meteor',
-        function(csfUserSettings, $compile, $timeout, $meteor) {
+        'csfUserSettings', '$meteor',
+        function(csfUserSettings, $meteor) {
             function pageDimmerHandler(scope, element, attrs) {
                 var dimmerElement = element.find('.dimmer');
 
@@ -81,6 +81,16 @@ angular.module('cheatsheet')
                 });
             }
 
+            function containerHandler(scope, element, attrs) {
+                scope.insert = function(component, index) {
+                    scope.component.content.splice(index, 0, component);
+                };
+
+                scope.remove = function(index) {
+                    scope.component.content.splice(index, 1);
+                };
+            }
+
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/Cheatsheet/csfCheatsheet/Templates/csfCheatsheet.ng.html',
@@ -94,36 +104,11 @@ angular.module('cheatsheet')
                         edit: false
                     };
 
-                    var compilationPromise;
-                    function render() {
-                        // We do this in a timeout to make the page feel more responsive
-                        // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
-                        compilationPromise = $timeout(function() {
-                            var template = angular.element(
-                                '<div class="ui stackable padded grid">' +
-                                    '<div class="column">' +
-                                        '<div class="ui vertical segment" ng-repeat="item in component.content">' +
-                                            '<csf-abstract-component component="item" can-i="canI">' +
-                                        '</div>' +
-                                        '<div class="ui vertical segment" ng-show="canI.edit" ng-show="canI.edit">' +
-                                            '<csf-button-component-picker on-added="add(chosenComponent)"></csf-button-component-picker>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>'
-                            );
-                            element.append( template );
-                            $compile(template)(scope);
-                            element.find('.dimmer').dimmer('hide');
-                        }, 0);
-
-                        userNamesSubscriptionHandler(scope, element, attrs);
-                    }
-
-                    //Wait until we have a resolved value for the component and compile after that
                     var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
                         if(newV) {
                             unregisterWatch();
-                            render();
+                            userNamesSubscriptionHandler(scope, element, attrs);
+                            element.find('.dimmer').dimmer('hide');
                         }
                     });
 
@@ -131,12 +116,7 @@ angular.module('cheatsheet')
 
                     rolePickerHandler(scope, element, attrs);
 
-                    /**
-                     * Add new elements to the cheatsheet (will most often be just one container)
-                     */
-                    scope.add = function(component) {
-                        scope.component.content.push(component);
-                    };
+                    containerHandler(scope, element, attrs);
 
                     downloadButtonHandler(scope, element, attrs);
 
@@ -144,7 +124,6 @@ angular.module('cheatsheet')
                      * Cleanup
                      */
                     scope.$on('$destroy', function() {
-                        $timeout.cancel(compilationPromise);
                     });
 
                     element.on('$destroy', function() {
