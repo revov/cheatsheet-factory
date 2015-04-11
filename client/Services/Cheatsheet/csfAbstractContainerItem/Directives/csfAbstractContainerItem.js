@@ -22,7 +22,13 @@ angular.module('cheatsheet')
                         opacity: 0.35,
                         revert: true,
                         revertDuration: 100,
+                        start: function(event, ui) {
+                            $('.csf-container [csf-droppable-container-item]')
+                                .css('display', 'block');
+                        },
                         stop: function(event, ui) {
+                            $('.csf-container [csf-droppable-container-item]')
+                                .css('display', '');
                             element.draggable( "option", "disabled", true );
                             // If a droppable has accepted the component it is removed from the element
                             // So we should make sure to inform our container to remove it from its old location

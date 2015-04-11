@@ -7,6 +7,7 @@ angular.module('cheatsheet')
                 link: function(scope, element, attrs) {
                     element.droppable({
                         accept: 'csf-abstract-container-item',
+                        greedy: true,
                         hoverClass: 'csf-drag-hover',
                         tolerance: 'pointer',
                         drop: function(event, ui) {
