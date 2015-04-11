@@ -40,43 +40,6 @@ angular.module('cheatsheet')
                         scope.component.content.splice(generalIndex, 1);
                     };
 
-                    scope.moveUp = function(column, indexInColumn) {
-                        var isInFirstColumn = (column == 1);
-                        var isFirstInColumn = (indexInColumn == 0);
-                        var generalIndex = scope.limit(column-2) + indexInColumn;
-
-                        // If we are the last item, forbid moving up
-                        if( isInFirstColumn && isFirstInColumn ) {
-                            return;
-                        }
-
-                        if( isFirstInColumn ) {
-                            ++scope.component.meta.columns[column - 1];
-                            --scope.component.meta.columns[column];
-                            return;
-                        }
-                        scope.component.content[generalIndex-1] = scope.component.content.splice(generalIndex, 1, scope.component.content[generalIndex-1])[0];
-                    };
-
-                    scope.moveDown = function(column, indexInColumn) {
-                        var isInLastColumn = (column == Object.keys(scope.component.meta.columns).length);
-                        var isLastInColumn = (indexInColumn == scope.component.meta.columns[column] - 1);
-                        var generalIndex = scope.limit(column-2) + indexInColumn;
-
-                        // If we are the last item, forbid moving down
-                        if( isInLastColumn && isLastInColumn ) {
-                            return;
-                        }
-
-                        if( isLastInColumn ) {
-                            ++scope.component.meta.columns[column + 1];
-                            --scope.component.meta.columns[column];
-                            return;
-                        }
-
-                        scope.component.content[generalIndex] = scope.component.content.splice(generalIndex + 1, 1, scope.component.content[generalIndex])[0];
-                    };
-
                     scope.insert = function(component, column, indexInColumn) {
                         var generalIndex = scope.limit(column-2) + indexInColumn;
 
