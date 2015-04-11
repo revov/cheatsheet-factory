@@ -1,6 +1,6 @@
 angular.module('cheatsheet').controller('CheatsheetController', [
-    '$scope', '$meteor',
-    function($scope, $meteor) {
+    '$scope', '$meteor', 'csfNotification', '$state',
+    function($scope, $meteor, csfNotification, $state) {
         var cheatsheet = this;
         var cheatsheetsPromise = $meteor.subscribe('cheatsheets');
         var cheatsheetsSubscriptionHandle;
@@ -28,6 +28,30 @@ angular.module('cheatsheet').controller('CheatsheetController', [
             }
 
             return _.where(cheatsheet.userNames, {_id: userId})[0].profile;
+        };
+
+        cheatsheet.createNew = function() {
+            var sampleCheatsheet = {
+                type: 'cheatsheet',
+                meta: {
+                    userId: Meteor.userId(),
+                    name: 'Unknown name',
+                    description: 'Github flavoured markdown',
+                    permissions: {
+                        view: [],
+                        edit: []
+                    }
+                },
+                content: []
+            };
+            Cheatsheets.insert(sampleCheatsheet, function(err, id) {
+                if(err) {
+                    csfNotification.show('error', 'There was an error creating a cheatsheet:', err.message);
+                } else {
+                    csfNotification.show('success', 'Success', 'You have successfully created a cheatsheet with ID: ' + id);
+                    $state.go('view-cheatsheet', {id: id });
+                }
+            });
         };
 
         $scope.$on('$destroy', function() {

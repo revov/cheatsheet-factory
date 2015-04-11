@@ -44,12 +44,6 @@ angular.module('cheatsheet')
                     controller: 'CheatsheetController',
                     controllerAs: 'cheatsheet'
                 })
-                .state('create-cheatsheet', {
-                    url: '/cheatsheet/create',
-                    templateUrl: 'client/views/partials/create-cheatsheet.ng.html',
-                    controller: 'CreateCheatsheetController',
-                    controllerAs: 'createCheatsheet'
-                })
                 .state('view-cheatsheet', {
                     url: '/cheatsheet/view/:id',
                     templateUrl: 'client/views/partials/view-cheatsheet.ng.html',
