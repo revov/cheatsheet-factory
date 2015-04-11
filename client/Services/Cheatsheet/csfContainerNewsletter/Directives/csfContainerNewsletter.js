@@ -77,6 +77,13 @@ angular.module('cheatsheet')
                         scope.component.content[generalIndex] = scope.component.content.splice(generalIndex + 1, 1, scope.component.content[generalIndex])[0];
                     };
 
+                    scope.insert = function(component, column, indexInColumn) {
+                        var generalIndex = scope.limit(column-2) + indexInColumn;
+
+                        ++scope.component.meta.columns[column];
+                        scope.component.content.splice(generalIndex, 0, component);
+                    };
+
                     /**
                      * Utils
                      */

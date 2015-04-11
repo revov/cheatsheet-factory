@@ -1,3 +1,7 @@
+csf-abstract-container-item {
+    display: block;
+}
+
 .csf-container .csf-container-controls {
     display: none;
     position: absolute;

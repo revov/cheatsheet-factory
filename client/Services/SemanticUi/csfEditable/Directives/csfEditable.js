@@ -15,16 +15,6 @@ angular.module('cheatsheet')
                             element.attr('title', null);
                         }
                     });
-
-                    /**
-                     * Cleanup
-                     */
-                    scope.$on('$destroy', function() {
-                    });
-
-                    element.on('$destroy', function() {
-                        scope.$destroy();
-                    });
                 }
             };
         }
