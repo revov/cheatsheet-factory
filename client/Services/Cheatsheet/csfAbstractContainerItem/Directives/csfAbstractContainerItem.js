@@ -23,11 +23,13 @@ angular.module('cheatsheet')
                         revert: true,
                         revertDuration: 100,
                         start: function(event, ui) {
-                            $('.csf-container [csf-droppable-container-item]')
+                            element.parents('.csf-container:last')
+                                .find('[csf-droppable-container-item]')
                                 .css('display', 'block');
                         },
                         stop: function(event, ui) {
-                            $('.csf-container [csf-droppable-container-item]')
+                            element.parents('.csf-container:last')
+                                .find('[csf-droppable-container-item]')
                                 .css('display', '');
                             element.draggable( "option", "disabled", true );
                             // If a droppable has accepted the component it is removed from the element
