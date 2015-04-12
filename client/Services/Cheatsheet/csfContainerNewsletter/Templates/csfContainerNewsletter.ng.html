@@ -21,6 +21,14 @@
 
                 <div class="ui vertical segment" ng-show="canI.edit">
                     <csf-button-component-picker on-added="add(chosenComponent, $index+1)"></csf-button-component-picker>
+                    <div class="right floated ui small icon buttons">
+                        <div class="ui button" ng-show="$index > 0 || !$last" ng-click="deleteColumn($index + 1)" title="Delete column">
+                            <i class="red outline trash icon"></i>
+                        </div>
+                        <div class="ui button" ng-show="$last && $index<3" ng-click="addColumn()" title="Add column">
+                            <i class="green right chevron icon"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

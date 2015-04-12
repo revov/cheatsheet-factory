@@ -9,18 +9,18 @@ angular.module('cheatsheet')
                     canI: '='
                 },
                 link: function(scope, element, attrs) {
-                    scope.$watch('component.meta.columns', function( newValue, oldValue ) {
-                        switch( Object.keys(newValue).length ) {
-                            case 1: scope.columnCount = 'one column row';
-                                break;
-                            case 2: scope.columnCount = 'two column row';
-                                break;
-                            case 3: scope.columnCount = 'three column row';
-                                break;
-                            case 4: scope.columnCount = 'four column row';
-                                break;
-                            default: scope.columnCount = 'one column row';
-                        }
+                    scope.$watchCollection('component.meta.columns', function( newValue, oldValue ) {
+                        var classMap = {
+                            0: 'one',
+                            1: 'one',
+                            2: 'two',
+                            3: 'three',
+                            4: 'four'
+                        };
+                        var $rowElement = element.find('.ui.stackable.grid:first >div:first');
+                        // We add classes manually because Semantic relies on class order and Angular messes it up
+                        $rowElement.removeClass();
+                        $rowElement.addClass( classMap[Object.keys(newValue).length] + ' column row' );
                     });
 
                     scope.add = function(component, column) {
@@ -45,6 +45,26 @@ angular.module('cheatsheet')
 
                         ++scope.component.meta.columns[column];
                         scope.component.content.splice(generalIndex, 0, component);
+                    };
+
+                    scope.deleteColumn = function(column) {
+                        var startIndex = scope.limit(column-2);
+
+                        scope.component.content.splice(startIndex, scope.component.meta.columns[column]);
+
+                        var numberOfColumns = Object.keys(scope.component.meta.columns).length;
+                        for(var i = column; i<=numberOfColumns; i++) {
+                            if( i == numberOfColumns ) {
+                                delete scope.component.meta.columns[i];
+                                break;
+                            }
+                            scope.component.meta.columns[i] = scope.component.meta.columns[i+1];
+                        }
+                    };
+
+                    scope.addColumn = function() {
+                        var numberOfColumns = Object.keys(scope.component.meta.columns).length;
+                        scope.component.meta.columns[numberOfColumns + 1] = 0;
                     };
 
                     /**
