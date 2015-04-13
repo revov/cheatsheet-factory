@@ -1,8 +1,8 @@
 <div class="csf-container">
     <div class="ui stackable grid">
         <div>
-            <div class="column" ng-repeat="column in component.meta.columns track by $index" ng-init="columnIndex = $index">
-                <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex + 1, 0)">
+            <div class="column" ng-repeat="column in component.meta.columnsSize track by $index" ng-init="columnIndex = $index">
+                <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex, 0)">
                     Drop here...
                 </div>
 
@@ -10,19 +10,19 @@
                     <csf-abstract-container-item
                             component="item"
                             can-i="canI"
-                            on-removed="remove(columnIndex + 1, $index)"
+                            on-removed="remove(columnIndex, $index)"
                             class="ui vertical segment">
                     </csf-abstract-container-item>
 
-                    <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex + 1, $index + 1)">
+                    <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex, $index + 1)">
                         Drop here...
                     </div>
                 </div>
 
                 <div class="ui vertical segment" ng-show="canI.edit">
-                    <csf-button-component-picker on-added="add(chosenComponent, $index+1)"></csf-button-component-picker>
+                    <csf-button-component-picker on-added="insert(chosenComponent, columnIndex, component.meta.columnsSize[columnIndex])"></csf-button-component-picker>
                     <div class="right floated ui small icon buttons">
-                        <div class="ui button" ng-show="$index > 0 || !$last" ng-click="deleteColumn($index + 1)" title="Delete column">
+                        <div class="ui button" ng-show="$index > 0 || !$last" ng-click="removeColumn($index)" title="Delete column">
                             <i class="red outline trash icon"></i>
                         </div>
                         <div class="ui button" ng-show="$last && $index<3" ng-click="addColumn()" title="Add column">

@@ -9,7 +9,7 @@ angular.module('cheatsheet')
                     canI: '='
                 },
                 link: function(scope, element, attrs) {
-                    scope.$watchCollection('component.meta.columns', function( newValue, oldValue ) {
+                    scope.$watchCollection('component.meta.columnsSize', function( newValue, oldValue ) {
                         var classMap = {
                             0: 'one',
                             1: 'one',
@@ -20,51 +20,31 @@ angular.module('cheatsheet')
                         var $rowElement = element.find('.ui.stackable.grid:first >div:first');
                         // We add classes manually because Semantic relies on class order and Angular messes it up
                         $rowElement.removeClass();
-                        $rowElement.addClass( classMap[Object.keys(newValue).length] + ' column row' );
+                        $rowElement.addClass( classMap[_.size(newValue)] + ' column row' );
                     });
 
-                    scope.add = function(component, column) {
-                        var newIndex = scope.limit(column-1);
-                        ++scope.component.meta.columns[column];
-
-                        scope.component.content.splice(
-                            newIndex,
-                            0,
-                            component
-                        );
-                    };
-
-                    scope.remove = function(column, indexInColumn) {
-                        var generalIndex = scope.limit(column-2) + indexInColumn;
-                        --scope.component.meta.columns[column];
+                    scope.remove = function(columnIndex, indexInColumn) {
+                        var generalIndex = scope.limit(columnIndex-1) + indexInColumn;
+                        --scope.component.meta.columnsSize[columnIndex];
                         scope.component.content.splice(generalIndex, 1);
                     };
 
-                    scope.insert = function(component, column, indexInColumn) {
-                        var generalIndex = scope.limit(column-2) + indexInColumn;
+                    scope.insert = function(component, columnIndex, indexInColumn) {
+                        var generalIndex = scope.limit(columnIndex-1) + indexInColumn;
 
-                        ++scope.component.meta.columns[column];
+                        ++scope.component.meta.columnsSize[columnIndex];
                         scope.component.content.splice(generalIndex, 0, component);
                     };
 
-                    scope.deleteColumn = function(column) {
-                        var startIndex = scope.limit(column-2);
+                    scope.removeColumn = function(columnIndex) {
+                        var startIndex = scope.limit(columnIndex-1);
 
-                        scope.component.content.splice(startIndex, scope.component.meta.columns[column]);
-
-                        var numberOfColumns = Object.keys(scope.component.meta.columns).length;
-                        for(var i = column; i<=numberOfColumns; i++) {
-                            if( i == numberOfColumns ) {
-                                delete scope.component.meta.columns[i];
-                                break;
-                            }
-                            scope.component.meta.columns[i] = scope.component.meta.columns[i+1];
-                        }
+                        scope.component.content.splice(startIndex, scope.component.meta.columnsSize[columnIndex]);
+                        scope.component.meta.columnsSize.splice(columnIndex, 1);
                     };
 
                     scope.addColumn = function() {
-                        var numberOfColumns = Object.keys(scope.component.meta.columns).length;
-                        scope.component.meta.columns[numberOfColumns + 1] = 0;
+                        scope.component.meta.columnsSize.push(0);
                     };
 
                     /**
@@ -73,14 +53,14 @@ angular.module('cheatsheet')
                     scope.limit = function(columnIndex) {
                         var sum = 0;
                         for( var i = 0; i<=columnIndex; i++ ) {
-                            sum += scope.component.meta.columns[i+1];
+                            sum += scope.component.meta.columnsSize[i];
                         }
 
                         return sum;
                     };
 
                     scope.offset = function(index) {
-                        return scope.component.meta.columns[index+1];
+                        return scope.component.meta.columnsSize[index];
                     };
 
                     /**

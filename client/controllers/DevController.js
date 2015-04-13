@@ -62,11 +62,7 @@ angular.module('cheatsheet').controller('DevController', [
                 {
                     type: 'container.newsletter',
                     meta: {
-                        columns: {
-                            1: 3,
-                            2: 2,
-                            3: 1
-                        }
+                        columnsSize: [3, 2, 1]
                     },
                     content: [
                         {
@@ -104,11 +100,7 @@ angular.module('cheatsheet').controller('DevController', [
                         {
                             type: 'container.newsletter',
                             meta: {
-                                columns: {
-                                    1: 3,
-                                    2: 2,
-                                    3: 1
-                                }
+                                columnsSize: [3, 2, 1]
                             },
                             content: [
                                 {
