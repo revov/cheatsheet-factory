@@ -1,6 +1,6 @@
 <div class="csf-container">
     <div class="ui stackable grid">
-        <div ng-class="columnCount">
+        <div>
             <div class="column" ng-repeat="column in component.meta.columns track by $index" ng-init="columnIndex = $index">
                 <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex + 1, 0)">
                     Drop here...
