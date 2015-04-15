@@ -1,10 +1,12 @@
 [csf-droppable-container-item] {
-    background-color: yellow !important;
-    display: none;
-    opacity: 0.35;
+    position: absolute !important;
+    width: 100%;
+    visibility: hidden !important;
 }
 
 [csf-droppable-container-item].csf-drag-hover {
-    opacity: 0.6;
-    background-color: green !important;
+    visibility: inherit !important;
+    position: inherit !important;
+    opacity: 0.8;
+    background-color: #CAE8BD;
 }

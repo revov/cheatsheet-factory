@@ -15,6 +15,7 @@ angular.module('cheatsheet')
                         handle: '.csf-container-controls .csf-drag-handle:first',
                         //helper: 'clone',
                         opacity: 0.35,
+                        refreshPositions: true,
                         revert: true,
                         revertDuration: 100,
                         start: function(event, ui) {
