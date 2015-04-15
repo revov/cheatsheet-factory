@@ -10,19 +10,15 @@ angular.module('cheatsheet')
                     onRemoved: '&'
                 },
                 link: function(scope, element, attrs) {
-                    element.find('.csf-drag-handle').on('mousedown', function() {
-                        element.data('csfComponent', scope.component);
-                        element.draggable( "option", "disabled", false );
-                    });
-
                     element.draggable({
                         cursor: 'move',
-                        disabled: true,
+                        handle: '.csf-container-controls .csf-drag-handle:first',
                         //helper: 'clone',
                         opacity: 0.35,
                         revert: true,
                         revertDuration: 100,
                         start: function(event, ui) {
+                            element.data('csfComponent', scope.component);
                             element.parents('.csf-container:last')
                                 .find('[csf-droppable-container-item]')
                                 .css('display', 'block');
@@ -31,7 +27,6 @@ angular.module('cheatsheet')
                             element.parents('.csf-container:last')
                                 .find('[csf-droppable-container-item]')
                                 .css('display', '');
-                            element.draggable( "option", "disabled", true );
                             // If a droppable has accepted the component it is removed from the element
                             // So we should make sure to inform our container to remove it from its old location
                             if( element.data('csfComponent') ) {
