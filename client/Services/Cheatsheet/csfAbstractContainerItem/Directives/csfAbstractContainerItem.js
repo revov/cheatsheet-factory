@@ -12,7 +12,7 @@ angular.module('cheatsheet')
                 link: function(scope, element, attrs) {
                     element.draggable({
                         cursor: 'move',
-                        handle: '.csf-container-controls .csf-drag-handle:first',
+                        handle: '.csf-container-controls >.csf-drag-handle',
                         //helper: 'clone',
                         opacity: 0.35,
                         refreshPositions: true,
@@ -20,14 +20,8 @@ angular.module('cheatsheet')
                         revertDuration: 100,
                         start: function(event, ui) {
                             element.data('csfComponent', scope.component);
-                            element.parents('.csf-container:last')
-                                .find('[csf-droppable-container-item]')
-                                .css('display', 'block');
                         },
                         stop: function(event, ui) {
-                            element.parents('.csf-container:last')
-                                .find('[csf-droppable-container-item]')
-                                .css('display', '');
                             // If a droppable has accepted the component it is removed from the element
                             // So we should make sure to inform our container to remove it from its old location
                             if( element.data('csfComponent') ) {
