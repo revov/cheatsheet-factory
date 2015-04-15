@@ -30,10 +30,7 @@ angular.module('cheatsheet')
                     value: {
                         type: 'container.newsletter',
                         meta: {
-                            columns: {
-                                1: 0,
-                                2: 0
-                            }
+                            columnsSize: [0, 0]
                         },
                         content: []
                     }
