@@ -1,26 +1,16 @@
 angular.module('cheatsheet').controller('ViewCheatsheetController', [
-    '$scope', '$meteor', '$stateParams', '$state', 'csfNotification',
-    function($scope, $meteor, $stateParams, $state, csfNotification) {
+    '$scope', '$stateParams', '$state', 'csfNotification', 'csfMeteor',
+    function($scope, $stateParams, $state, csfNotification, csfMeteor) {
         var viewCheatsheet = this;
         viewCheatsheet.id = $stateParams.id;
 
-        var cheatsheetPromise = $meteor.subscribe('view-cheatsheet', viewCheatsheet.id);
-        var cheatsheetSubscriptionHandle;
-
-        cheatsheetPromise
-            .then(function(value) {
-                cheatsheetSubscriptionHandle = value;
-                viewCheatsheet.cheatsheet = $meteor.object(Cheatsheets, viewCheatsheet.id, false);
-            });
+        csfMeteor.subscribe( $scope, 'view-cheatsheet', viewCheatsheet.id );
+        viewCheatsheet.cheatsheet = csfMeteor.object( $scope, Cheatsheets, viewCheatsheet.id, false );
 
         /**
          * Save button
          */
         viewCheatsheet.save = function() {
-            if( !viewCheatsheet.cheatsheet ) {
-                return;
-            }
-
             csfNotification.show('info', 'Saving cheatsheet.', 'Please wait...');
             viewCheatsheet.cheatsheet.save()
                 .then(
@@ -37,10 +27,6 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
          * Reset button
          */
         viewCheatsheet.reset = function() {
-            if( !viewCheatsheet.cheatsheet ) {
-                return;
-            }
-
             viewCheatsheet.cheatsheet.reset();
             csfNotification.show('info', 'Changes discarded.');
         };
@@ -49,10 +35,6 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
          * Delete button
          */
         viewCheatsheet.delete = function() {
-            if( !viewCheatsheet.cheatsheet ) {
-                return;
-            }
-
             viewCheatsheet.cheatsheet.$$collection.remove(viewCheatsheet.cheatsheet._id, function(err) {
                 if(err) {
                     csfNotification.show('error', 'There was an error deleting the cheatsheet.', err.message);
@@ -62,13 +44,5 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
                 }
             });
         };
-
-        $scope.$on('$destroy', function() {
-            cheatsheetPromise.then(function() {
-                viewCheatsheet.cheatsheet.stop();
-                cheatsheetSubscriptionHandle.stop();
-            });
-        });
-
     }
 ]);

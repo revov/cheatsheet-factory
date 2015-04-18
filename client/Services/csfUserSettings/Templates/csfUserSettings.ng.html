@@ -17,7 +17,14 @@
 
         <!-- Profile -->
         <div class="ui bottom attached active tab segment" data-tab="profile">
-            Profile
+            <form class="ui form">
+                <div class="field">
+                    <label>First Name:</label>
+                    <div class="ui input">
+                        <input placeholder="Font Size" ng-model="UserSettings.instance.editor.fontSize" type="text">
+                    </div>
+                </div>
+            </form>
         </div>
 
         <!-- Editor -->

@@ -1,25 +1,13 @@
 angular.module('cheatsheet').controller('CheatsheetController', [
-    '$scope', '$meteor', 'csfNotification', '$state',
-    function($scope, $meteor, csfNotification, $state) {
+    '$scope', 'csfNotification', '$state', 'csfMeteor',
+    function($scope, csfNotification, $state, csfMeteor) {
         var cheatsheet = this;
-        var cheatsheetsPromise = $meteor.subscribe('cheatsheets');
-        var cheatsheetsSubscriptionHandle;
-        var userNamesPromise;
-        var userNamesSubscriptionHandle;
 
-        cheatsheetsPromise
-            .then(function(value) {
-                cheatsheetsSubscriptionHandle = value;
-                cheatsheet.cheatsheets = $meteor.collection(Cheatsheets, false);
-
-                var userIds = _.uniq(_.map(cheatsheet.cheatsheets, function (element) { return element.meta.userId; })); //TODO: make this reactive
-                userNamesPromise = $meteor.subscribe('user-names', userIds);
-
-                return userNamesPromise;
-            })
-            .then(function(value) {
-                userNamesSubscriptionHandle = value;
-                cheatsheet.userNames = $meteor.collection(Meteor.users, false);
+        var cheatsheetsSubscription = csfMeteor.subscribe( $scope, 'cheatsheets' );
+        cheatsheetsSubscription
+            .then(function() {
+                cheatsheet.cheatsheets = csfMeteor.collection( $scope, Cheatsheets, false );
+                cheatsheet.userNames = csfMeteor.collection( $scope, Meteor.users, false );
             });
 
         cheatsheet.getUserProfile = function(userId) {
@@ -53,17 +41,5 @@ angular.module('cheatsheet').controller('CheatsheetController', [
                 }
             });
         };
-
-        $scope.$on('$destroy', function() {
-            cheatsheetsPromise.then(function() {
-                cheatsheet.cheatsheets.stop();
-                cheatsheetsSubscriptionHandle.stop();
-            });
-            userNamesPromise.then(function() {
-                cheatsheet.userNames.stop();
-                userNamesSubscriptionHandle.stop();
-            });
-        });
-
     }
 ]);
