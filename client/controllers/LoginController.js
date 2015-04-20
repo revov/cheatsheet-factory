@@ -47,7 +47,7 @@ angular.module('cheatsheet')
                     }
                 },
                 {
-                    on: 'blur',
+                    on: 'submit',
                     inline: 'true',
                     onSuccess: function() {
                         $scope.$apply(me.login);

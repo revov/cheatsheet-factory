@@ -16,7 +16,7 @@
     <div class="right menu">
         <csf-user-settings-menu-item ng-show="!!currentUser"></csf-user-settings-menu-item>
         <a class="ui dropdown item" ng-show="!!currentUser">
-            <i class="user icon"></i> {{currentUser.profile.firstName}} {{currentUser.profile.lastName}} <i class="ui red label">1</i>
+            <i class="user icon"></i> {{currentUser.profile.firstName}} {{currentUser.profile.lastName}}
         </a>
         <a class="ui item" ng-hide="!currentUser" ng-click="menu.logout()">
             Exit
