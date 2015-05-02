@@ -1,6 +1,6 @@
 angular.module('cheatsheet').controller('AdminController', [
-    '$state', '$meteor', '$scope',
-    function($state, $meteor, $scope) {
+    '$state', '$meteor', '$scope', 'Session', 'csfNotification',
+    function($state, $meteor, $scope, Session, csfNotification) {
         var admin = this;
         var usersPromise = $meteor.subscribe('all-users');
         var rolesPromise = $meteor.subscribe('user-roles');
@@ -29,6 +29,18 @@ angular.module('cheatsheet').controller('AdminController', [
             } else {
                 Roles.removeUsersFromRoles(user._id, [role]);
             }
+        };
+
+        admin.deleteUser = function(user) {
+            Session.deleteUser(user._id)
+                .then(
+                    function() {
+                        csfNotification.show('success', 'Success', 'You have successfully deleted user.');
+                    },
+                    function(err) {
+                        csfNotification.show('error', 'Error deleting user:', err.reason);
+                    }
+                );
         };
 
         /***************

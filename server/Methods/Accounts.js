@@ -13,5 +13,20 @@ Meteor.methods({
         UserSettings.insert({ userId: userId });
 
         return userId;
+    },
+    deleteUser: function(userId) {
+        // First check the client's permissions:
+        if( !CanI.edit.user() ) {
+            throw new Meteor.Error('403', 'Forbidden. You do not have permissions to delete User.');
+        }
+
+        // Remove user from all their Roles
+        Roles.setUserRoles( [userId], [] );
+
+        // Delete the user's settings
+        UserSettings.remove( {userId: userId} );
+
+        // Delete the user
+        Meteor.users.remove( {_id: userId} );
     }
 });

@@ -6,6 +6,7 @@
                 <tr>
                     <th>User</th>
                     <th>Roles</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,13 @@
                                         <i class="plus icon"></i>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="ui icon buttons">
+                            <div class="ui button" ng-show="user._id != currentUser._id">
+                                <i class="red outline trash icon" title="Delete user" ng-click="admin.deleteUser(user)"></i>
                             </div>
                         </div>
                     </td>

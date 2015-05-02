@@ -34,6 +34,20 @@ angular.module('cheatsheet')
                 return deferred.promise;
             };
 
+            this.deleteUser = function(userId) {
+                var deferred = $q.defer();
+
+                Meteor.call('deleteUser', userId, function(err) {
+                    if (err) {
+                        deferred.reject(err);
+                        return;
+                    }
+
+                    deferred.resolve();
+                });
+                return deferred.promise;
+            };
+
             /**
              * Returns a promise that is resolved with the currentUser - object when we have a user or null when we don't
              * @returns {Promise}
