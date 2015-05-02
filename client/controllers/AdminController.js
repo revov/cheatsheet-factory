@@ -1,21 +1,12 @@
 angular.module('cheatsheet').controller('AdminController', [
-    '$state', '$meteor', '$scope', 'Session', 'csfNotification',
-    function($state, $meteor, $scope, Session, csfNotification) {
+    '$state', '$meteor', '$scope', 'Session', 'csfNotification', 'csfMeteor',
+    function($state, $meteor, $scope, Session, csfNotification, csfMeteor) {
         var admin = this;
-        var usersPromise = $meteor.subscribe('all-users');
-        var rolesPromise = $meteor.subscribe('user-roles');
-        var usersSubscriptionHandle;
-        var rolesSubscriptionHandle;
+        csfMeteor.subscribe( $scope, 'all-users');
+        csfMeteor.subscribe( $scope, 'user-roles');
 
-        usersPromise.then(function(value) {
-            usersSubscriptionHandle = value;
-            admin.users = $meteor.collection(Meteor.users, false);
-        });
-
-        rolesPromise.then(function(value) {
-            rolesSubscriptionHandle = value;
-            admin.roles = $meteor.collection(Meteor.roles, false);
-        });
+        admin.users = $meteor.collection(Meteor.users, false);
+        admin.roles = $meteor.collection(Meteor.roles, false);
 
         admin.addUserToRole = function(user, event) {
             var input = event.currentTarget.previousElementSibling;
@@ -56,10 +47,6 @@ angular.module('cheatsheet').controller('AdminController', [
         });
 
         $scope.$on('$destroy', function() {
-            admin.users.stop();
-            admin.roles.stop();
-            usersSubscriptionHandle.stop();
-            rolesSubscriptionHandle.stop();
             $('#revoke-admin-rights').modal('destroy'); // This is very leaky, so we need a workaround:
                 $scope = null;
                 $state = null;
