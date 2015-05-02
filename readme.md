@@ -16,6 +16,7 @@ meteor add mandrill:ace
 meteor add aldeed:collection2
 
 meteor add alanning:roles
+meteor add email
 
 Meteor Privacy
 =============================================================

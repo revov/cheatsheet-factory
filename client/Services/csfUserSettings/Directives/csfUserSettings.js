@@ -9,7 +9,6 @@ angular.module('cheatsheet')
                                 '   var x = "All this is syntax highlighted";\n' +
                                 '   return x;\n' +
                                 '}\n';
-                element.find('.tabular.menu .item').tab();
             }
 
             return {

@@ -1,0 +1,35 @@
+<h4 class="ui horizontal header divider">
+    <i class="mail icon"></i>
+    Email
+</h4>
+<form class="ui form">
+    smtp://
+    <span class="inline field">
+        <div class="ui input">
+            <input placeholder="Username" ng-model="admin.configuration.mail.username" type="text">
+        </div>
+    </span>
+    :
+    <span class="inline field">
+        <div class="ui input">
+            <input placeholder="Password (******)" ng-model="admin.configuration.mail.password" type="password">
+        </div>
+    </span>
+    @
+    <span class="inline field">
+        <div class="ui input">
+            <input placeholder="Host" ng-model="admin.configuration.mail.host" type="text">
+        </div>
+    </span>
+    :
+    <span class="inline field">
+        <div class="ui input">
+            <input placeholder="Port" ng-model="admin.configuration.mail.port" type="text">
+        </div>
+    </span>
+
+    <button class="ui labeled icon right floated primary submit button" ng-click="admin.setMailUrl()">
+        <i class="save icon"></i>
+        Set MAIL_URL
+    </button>
+</form>

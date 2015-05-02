@@ -1,12 +1,12 @@
 angular.module('cheatsheet').controller('AdminController', [
-    '$state', '$meteor', '$scope', 'Session', 'csfNotification', 'csfMeteor',
-    function($state, $meteor, $scope, Session, csfNotification, csfMeteor) {
+    '$state', '$scope', 'Session', 'csfNotification', 'csfMeteor',
+    function($state, $scope, Session, csfNotification, csfMeteor) {
         var admin = this;
         csfMeteor.subscribe( $scope, 'all-users');
         csfMeteor.subscribe( $scope, 'user-roles');
 
-        admin.users = $meteor.collection(Meteor.users, false);
-        admin.roles = $meteor.collection(Meteor.roles, false);
+        admin.users = csfMeteor.collection($scope, Meteor.users, false);
+        admin.roles = csfMeteor.collection($scope, Meteor.roles, false);
 
         admin.addUserToRole = function(user, event) {
             var input = event.currentTarget.previousElementSibling;
@@ -46,6 +46,26 @@ angular.module('cheatsheet').controller('AdminController', [
             }
         });
 
+        /***************
+         * Configuration
+         ***************/
+        csfMeteor.subscribe( $scope, 'configuration');
+        admin.configuration = csfMeteor.object($scope, Configuration, {}, false);
+        admin.setMailUrl = function() {
+            admin.configuration.save( {mail: admin.configuration.mail} )
+                .then(
+                    function() {
+                        csfNotification.show('success', 'Success', 'You have successfully set MAIL_URL.');
+                    },
+                    function(err) {
+                        csfNotification.show('error', 'Error setting MAIL_URL:', err.message);
+                    }
+                );
+        };
+
+        /***************
+         * Cleanup
+         ***************/
         $scope.$on('$destroy', function() {
             $('#revoke-admin-rights').modal('destroy'); // This is very leaky, so we need a workaround:
                 $scope = null;

@@ -1,48 +1,26 @@
 <div class="ui one column centered page grid">
 
     <div class="sixtheen wide column">
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Roles</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in admin.users track by $index" ng-class="{positive: user._id == currentUser._id}">
-                    <td>
-                        <i class="user icon"></i>
-                        {{user.username}}
-                    </td>
-                    <td>
-                        <div class="ui horizontal list">
-                            <div class="item" ng-repeat="role in user.roles track by $index">
-                                <div class="ui right labeled icon button" ng-class="{red: role == 'admin'}">
-                                    <i class="x icon" ng-click="admin.removeUserFromRole(user, role)"></i>
-                                    {{role}}
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="ui action input">
-                                    <input placeholder="Add role" type="text">
-                                    <div class="ui teal icon button" ng-click="admin.addUserToRole(user, $event)">
-                                        <i class="plus icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ui icon buttons">
-                            <div class="ui button" ng-show="user._id != currentUser._id">
-                                <i class="red outline trash icon" title="Delete user" ng-click="admin.deleteUser(user)"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="ui top attached tabular menu">
+            <a class="active item" data-tab="users" csf-semantic-tab>
+                <i class="users icon"></i>
+                Manage users
+            </a>
+            <a class="item" data-tab="config" csf-semantic-tab>
+                <i class="wrench icon"></i>
+                Configuration
+            </a>
+        </div>
+
+        <!-- users -->
+        <div class="ui bottom attached active tab segment" data-tab="users">
+            <ng-include src="'client/views/partials/admin/users.ng.html'"></ng-include>
+        </div>
+
+        <!-- config -->
+        <div class="ui bottom attached tab segment" data-tab="config">
+            <ng-include src="'client/views/partials/admin/config.ng.html'"></ng-include>
+        </div>
     </div>
 
     <div class="container">

@@ -1,0 +1,42 @@
+<table class="ui celled table">
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Roles</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="user in admin.users track by $index" ng-class="{positive: user._id == currentUser._id}">
+        <td>
+            <i class="user icon"></i>
+            {{user.username}}
+        </td>
+        <td>
+            <div class="ui horizontal list">
+                <div class="item" ng-repeat="role in user.roles track by $index">
+                    <div class="ui right labeled icon button" ng-class="{red: role == 'admin'}">
+                        <i class="x icon" ng-click="admin.removeUserFromRole(user, role)"></i>
+                        {{role}}
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="ui action input">
+                        <input placeholder="Add role" type="text">
+                        <div class="ui teal icon button" ng-click="admin.addUserToRole(user, $event)">
+                            <i class="plus icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="ui icon buttons">
+                <div class="ui button" ng-show="user._id != currentUser._id">
+                    <i class="red outline trash icon" title="Delete user" ng-click="admin.deleteUser(user)"></i>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
