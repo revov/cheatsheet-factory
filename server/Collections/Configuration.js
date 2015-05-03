@@ -1,6 +1,5 @@
 Configuration.allow({
     update: function(userId, doc, fieldNames, modifier) {
-        console.log(modifier);
         return CanI.edit.configuration();
     }
 });

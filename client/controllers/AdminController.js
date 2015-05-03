@@ -55,7 +55,7 @@ angular.module('cheatsheet').controller('AdminController', [
             admin.configuration.save( {mail: admin.configuration.mail} )
                 .then(
                     function() {
-                        csfNotification.show('success', 'Success', 'You have successfully set MAIL_URL.');
+                        csfNotification.show('warning', 'You have successfully set MAIL_URL.', 'Please restart Meteor Server to apply changes.');
                     },
                     function(err) {
                         csfNotification.show('error', 'Error setting MAIL_URL:', err.message);
