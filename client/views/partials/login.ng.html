@@ -26,15 +26,30 @@
                     </div>
                 </div>
 
-                <button class="ui labeled icon primary submit button">
-                    <i class="icon user"></i>
-                    Login
-                </button>
+                <div class="ui two column middle aligned relaxed fitted stackable grid">
+                    <div class="column">
+                        <button class="ui labeled icon primary submit button">
+                            <i class="icon user"></i>
+                            Login
+                        </button>
+                    </div>
 
-                <button class="ui labeled icon secondary button" ng-click="login.register()">
-                    <i class="add user icon"></i>
-                    Register
-                </button>
+                    <div class="column">
+                        <div class="ui list">
+                            <a class="item" ui-sref="register">
+                                <i class="add user icon"></i>
+                                Don't have an account?
+                            </a>
+                        </div>
+                        <div class="ui list">
+                            <a class="item" ui-sref="forgotten-password">
+                                <i class="help icon"></i>
+                                Forgot your password?
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

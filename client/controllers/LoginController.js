@@ -22,10 +22,6 @@ angular.module('cheatsheet')
                 );
             };
 
-            this.register = function () {
-                $state.go('register');
-            };
-
             $('#login-form').form({
                     email: {
                         identifier: 'email',

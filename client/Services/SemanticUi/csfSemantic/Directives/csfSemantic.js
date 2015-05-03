@@ -5,23 +5,28 @@
  */
 var module = angular.module('cheatsheet');
 var SUPPORTED_SEMANTIC_MODULES = [
-    'Tab'
+    'Tab',
+    'Form'
     // Add more on demand
 ];
 
 _.forEach(SUPPORTED_SEMANTIC_MODULES, function( item ) {
     var directiveName = 'csfSemantic' + item;
     var semanticComponent = angular.lowercase(item);
-    module.directive(directiveName, function() {
-        return {
-            restrict : 'A',
-            link: function(scope, element, attrs) {
-                element[semanticComponent]();
+    module.directive(directiveName, [
+        '$parse',
+        function($parse) {
+            return {
+                restrict : 'A',
+                link: function(scope, element, attrs) {
+                    var params = $parse(attrs[directiveName])(scope);
+                    element[semanticComponent].apply(element, params);
 
-                element.on('$destroy', function() {
-                    element[semanticComponent]('destroy');
-                });
-            }
-        };
-    });
+                    element.on('$destroy', function() {
+                        element[semanticComponent]('destroy');
+                    });
+                }
+            };
+        }
+    ]);
 });

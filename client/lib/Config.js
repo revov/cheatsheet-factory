@@ -28,6 +28,18 @@ angular.module('cheatsheet')
                     controller: 'RegisterController',
                     controllerAs: 'register'
                 })
+                .state('forgotten-password', {
+                    url: '/forgotten-password',
+                    templateUrl: 'client/views/partials/forgotten-password.ng.html',
+                    controller: 'ForgottenPasswordController',
+                    controllerAs: 'forgottenPassword'
+                })
+                .state('reset-password', {
+                    url: '/reset-password/:id',
+                    templateUrl: 'client/views/partials/reset-password.ng.html',
+                    controller: 'ResetPasswordController',
+                    controllerAs: 'resetPassword'
+                })
                 .state('403', {
                     url: '/403',
                     templateUrl: 'client/views/partials/403.ng.html'
