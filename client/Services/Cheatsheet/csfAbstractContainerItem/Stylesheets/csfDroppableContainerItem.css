@@ -1,6 +1,7 @@
 [csf-droppable-container-item] {
     position: absolute !important;
-    width: 100%;
+    left: 0;
+    right: 0;
     visibility: hidden !important;
 }
 
