@@ -17,6 +17,7 @@ meteor add aldeed:collection2
 
 meteor add alanning:roles
 meteor add email
+meteor add rzymek:randomcolor
 
 Meteor Privacy
 =============================================================
