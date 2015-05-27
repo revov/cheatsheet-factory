@@ -1,5 +1,5 @@
 <div class="csf-container">
-    <div class="ui stackable grid">
+    <div class="ui stackable grid" csf-random-color-border>
         <div>
             <div class="column" ng-repeat="column in component.meta.columnsSize track by $index" ng-init="columnIndex = $index">
                 <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex, 0)">

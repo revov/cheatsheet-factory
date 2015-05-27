@@ -63,8 +63,6 @@ angular.module('cheatsheet')
                         return scope.component.meta.columnsSize[index];
                     };
 
-                    element.find('.csf-container > .ui.stackable.grid:first').css( 'background-color', randomColor({luminosity: 'light'}) );
-
                     /**
                      * Cleanup
                      */
