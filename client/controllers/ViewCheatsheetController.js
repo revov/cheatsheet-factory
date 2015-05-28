@@ -1,11 +1,11 @@
 angular.module('cheatsheet').controller('ViewCheatsheetController', [
-    '$scope', '$stateParams', '$state', 'csfNotification', 'csfMeteor',
-    function($scope, $stateParams, $state, csfNotification, csfMeteor) {
+    '$scope', '$stateParams', '$state', 'csfNotification',
+    function($scope, $stateParams, $state, csfNotification) {
         var viewCheatsheet = this;
         viewCheatsheet.id = $stateParams.id;
 
-        csfMeteor.subscribe( $scope, 'view-cheatsheet', viewCheatsheet.id );
-        viewCheatsheet.cheatsheet = csfMeteor.object( $scope, Cheatsheets, viewCheatsheet.id, false );
+        $scope.$meteorSubscribe( 'view-cheatsheet', viewCheatsheet.id );
+        viewCheatsheet.cheatsheet = $scope.$meteorObject( Cheatsheets, viewCheatsheet.id, false );
 
         /**
          * Save button

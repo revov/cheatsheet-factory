@@ -1,12 +1,12 @@
 angular.module('cheatsheet').controller('AdminController', [
-    '$state', '$scope', 'Session', 'csfNotification', 'csfMeteor',
-    function($state, $scope, Session, csfNotification, csfMeteor) {
+    '$state', '$scope', 'Session', 'csfNotification',
+    function($state, $scope, Session, csfNotification) {
         var admin = this;
-        csfMeteor.subscribe( $scope, 'all-users');
-        csfMeteor.subscribe( $scope, 'user-roles');
+        $scope.$meteorSubscribe( 'all-users');
+        $scope.$meteorSubscribe( 'user-roles');
 
-        admin.users = csfMeteor.collection($scope, Meteor.users, false);
-        admin.roles = csfMeteor.collection($scope, Meteor.roles, false);
+        admin.users = $scope.$meteorCollection(Meteor.users, false);
+        admin.roles = $scope.$meteorCollection(Meteor.roles, false);
 
         admin.addUserToRole = function(user, event) {
             var input = event.currentTarget.previousElementSibling;
@@ -49,8 +49,8 @@ angular.module('cheatsheet').controller('AdminController', [
         /***************
          * Configuration
          ***************/
-        csfMeteor.subscribe( $scope, 'configuration');
-        admin.configuration = csfMeteor.object($scope, Configuration, {}, false);
+        $scope.$meteorSubscribe( 'configuration');
+        admin.configuration = $scope.$meteorObject(Configuration, {}, false);
         admin.setMailUrl = function() {
             admin.configuration.save( {mail: admin.configuration.mail} )
                 .then(

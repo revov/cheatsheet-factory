@@ -1,13 +1,13 @@
 angular.module('cheatsheet').controller('CheatsheetController', [
-    '$scope', 'csfNotification', '$state', 'csfMeteor',
-    function($scope, csfNotification, $state, csfMeteor) {
+    '$scope', 'csfNotification', '$state',
+    function($scope, csfNotification, $state) {
         var cheatsheet = this;
 
-        var cheatsheetsSubscription = csfMeteor.subscribe( $scope, 'cheatsheets' );
+        var cheatsheetsSubscription = $scope.$meteorSubscribe( 'cheatsheets' );
         cheatsheetsSubscription
             .then(function() {
-                cheatsheet.cheatsheets = csfMeteor.collection( $scope, Cheatsheets, false );
-                cheatsheet.userNames = csfMeteor.collection( $scope, Meteor.users, false );
+                cheatsheet.cheatsheets = $scope.$meteorCollection( Cheatsheets, false );
+                cheatsheet.userNames = $scope.$meteorCollection( Meteor.users, false );
             });
 
         cheatsheet.getUserProfile = function(userId) {
