@@ -33,7 +33,6 @@ angular.module('cheatsheet')
                 });
 
                 scope.$on('$destroy', function() {
-                    $timeout.cancel(compilationPromise);
                     dimmerElement.dimmer('destroy');
                 });
             }
