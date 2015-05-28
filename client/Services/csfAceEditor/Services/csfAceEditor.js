@@ -5,7 +5,10 @@ angular.module('cheatsheet')
             var me = this,
                 $aceEditorElement,
                 aceEditor,
-                deregisterRootScopeWatch;
+                deregisterRootScopeWatch,
+                eventHandlers = {
+                    release : null
+                };
 
             function init() {
                 $aceEditorElement = $('<div/>', {id: 'aceEditor'});
@@ -18,6 +21,29 @@ angular.module('cheatsheet')
 
                 aceEditor = ace.edit("aceEditor");
                 aceEditor.$blockScrolling = Infinity;
+                aceEditor.setOptions({
+                    enableBasicAutocompletion: true
+                });
+
+                aceEditor.commands.addCommand({
+                    name: 'releaseEditor',
+                    bindKey: {
+                        win: 'esc',
+                        mac: 'esc'
+                    },
+                    exec: function(env, args, request) {
+                        if( !aceEditor ) {
+                            return;
+                        }
+
+                        if(typeof me.onRelease === 'function') {
+                            me.onRelease();
+                        }
+
+                        $aceEditorElement.prev().css('minHeight', '');
+                        $aceEditorElement.appendTo( $('#aceEditorDock') );
+                    }
+                });
 
                 csfUserSettings.UserSettingsPromise
                     .then(function(userSettings) {
@@ -38,8 +64,11 @@ angular.module('cheatsheet')
                     });
             }
 
-
-
+            /**
+             * 
+             * @param $container a jQuery container to which the editor will be appended
+             * @returns {*} The Ace editor instance
+             */
             this.acquire = function( $container ) {
                 if( !aceEditor ) {
                     init();
@@ -54,16 +83,29 @@ angular.module('cheatsheet')
                 return aceEditor;
             };
 
+            /**
+             * Release the editor from its current position
+             */
             this.release = function() {
                 if( !aceEditor ) {
                     return;
                 }
-
-                $aceEditorElement.prev().css('minHeight', '');
-                $aceEditorElement.appendTo( $('#aceEditorDock') );
+                
+                aceEditor.execCommand('releaseEditor');
             };
 
-            // There shouldn't be a need for this but it's there if you need it. For example can be called on logout.
+            /**
+             * Assign a callback to be executed before the editor is released from its current position.
+             * 
+             * @type {function}
+             */
+            this.onRelease = null;
+
+            /**
+             * Destroys the ace editor instance.
+             * 
+             * There shouldn't be a need for this but it's there if you need it. For example can be called on logout.
+             */
             this.destroy = function() {
                 if(typeof deregisterRootScopeWatch == 'function') {
                     deregisterRootScopeWatch();

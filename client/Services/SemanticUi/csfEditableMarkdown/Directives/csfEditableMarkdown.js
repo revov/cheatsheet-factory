@@ -40,13 +40,13 @@ angular.module('cheatsheet')
                         editor.setValue(scope.text);
                         editor.selection.clearSelection();
 
-                        editor.once('blur', function() {
+                        csfAceEditor.onRelease = function(env, args, request) {
                             scope.text = editor.getValue();
-                            csfAceEditor.release();
                             scope.isEditing = false;
+                            csfAceEditor.onRelease = null; // Unsubscribe - we are already dettached.
                             render();
-                            scope.$apply();
-                        });
+                            scope.$applyAsync();
+                        };
 
                         setTimeout(function() {editor.focus();}, 0);
                     };
