@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfCheatsheet', [
-        'csfUserSettings', '$meteor',
-        function(csfUserSettings, $meteor) {
+        'csfUserSettings', '$meteor', '$compile', '$timeout',
+        function(csfUserSettings, $meteor, $compile, $timeout) {
             function pageDimmerHandler(scope, element, attrs) {
                 var dimmerElement = element.find('.dimmer');
 
@@ -16,7 +16,24 @@ angular.module('cheatsheet')
                 );
                 dimmerElement.dimmer('show');
 
+                //Wait until we have a resolved value for the component and compile after that
+                var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
+                    if(newV) {
+                        unregisterWatch();
+
+                        // We do this in a timeout to make the page feel more responsive
+                        // Try doing it synchronously and see how the routing freezes until the whole tree is compiled and linked
+                        $timeout(function() {
+                            var template = angular.element('<ng-include src="\'client/Services/Cheatsheet/csfCheatsheet/Templates/csfMasterContainer.ng.html\'"></ng-include>');
+                            element.append( template );
+                            $compile(template)(scope);
+                            dimmerElement.dimmer('hide');
+                        }, 0);
+                    }
+                });
+
                 scope.$on('$destroy', function() {
+                    $timeout.cancel(compilationPromise);
                     dimmerElement.dimmer('destroy');
                 });
             }
@@ -108,7 +125,6 @@ angular.module('cheatsheet')
                         if(newV) {
                             unregisterWatch();
                             userNamesSubscriptionHandler(scope, element, attrs);
-                            element.find('.dimmer').dimmer('hide');
                         }
                     });
 

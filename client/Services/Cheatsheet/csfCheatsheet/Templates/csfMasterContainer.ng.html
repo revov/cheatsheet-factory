@@ -1,0 +1,26 @@
+<div class="csf-container">
+    <div class="ui stackable padded grid" csf-random-color-border>
+        <div class="column">
+            <div class="ui vertical segment" csf-droppable-container-item="insert(component, 0)">
+                Drop here...
+            </div>
+
+            <div ng-repeat="item in component.content">
+                <csf-abstract-container-item
+                        component="item"
+                        can-i="canI"
+                        on-removed="remove($index)"
+                        class="ui vertical segment">
+                </csf-abstract-container-item>
+
+                <div class="ui vertical segment" csf-droppable-container-item="insert(component, $index + 1)">
+                    Drop here...
+                </div>
+            </div>
+
+            <div class="ui vertical segment" ng-show="canI.edit">
+                <csf-button-component-picker on-added="insert(chosenComponent, component.content.length)"></csf-button-component-picker>
+            </div>
+        </div>
+    </div>
+</div>
