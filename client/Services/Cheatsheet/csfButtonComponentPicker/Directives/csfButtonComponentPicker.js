@@ -20,8 +20,7 @@ angular.module('cheatsheet')
                     value: {
                         type: 'cheat.markdown',
                         meta: {
-							markdown: '',
-							header: 'New Cheat'
+							markdown: ''
                         }
                     }
                 },
