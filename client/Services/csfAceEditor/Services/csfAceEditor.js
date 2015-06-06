@@ -72,6 +72,8 @@ angular.module('cheatsheet')
             this.acquire = function( $container ) {
                 if( !aceEditor ) {
                     init();
+                } else {
+                    me.release();
                 }
 
                 aceEditor.setValue('', 0);
