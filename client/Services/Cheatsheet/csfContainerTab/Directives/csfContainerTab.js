@@ -9,19 +9,23 @@ angular.module('cheatsheet')
                     canI: '='
                 },
                 link: function(scope, element, attrs) {
-                    var _nextTabIndex = 0;
-                    scope.tabId = Meteor.uuid();
+                    var _nextTabNumber = 0;
+                    scope.activeTabIndex = 0;
+
+                    scope.setActiveTab = function(index) {
+                        scope.activeTabIndex = index;
+                    };
 
                     scope.remove = function(index) {
                         scope.component.content.splice(index, 1);
                         scope.component.meta.tabNames.splice(index, 1);
-                        element.find('.tabular.menu > .item:first').addClass('active');
-                        element.find('.attached.tab.segment:first').addClass('active');
+                        scope.activeTabIndex = scope.component.content.length - 1;
                     };
 
                     scope.insert = function(component, index) {
                         scope.component.content.splice(index, 0, component);
-                        scope.component.meta.tabNames.splice( index, 0, '_tab' + (++_nextTabIndex) );
+                        scope.component.meta.tabNames.splice( index, 0, '_tab' + (++_nextTabNumber) );
+                        scope.activeTabIndex = scope.component.content.length - 1;
                     };
 
                     /**
