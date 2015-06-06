@@ -20,14 +20,12 @@
                 </div>
 
                 <div class="ui vertical segment" ng-show="canI.edit">
-                    <csf-button-component-picker on-added="insert(chosenComponent, columnIndex, component.meta.columnsSize[columnIndex])"></csf-button-component-picker>
-                    <div class="right floated ui small icon buttons">
-                        <div class="ui button" ng-show="$index > 0 || !$last" ng-click="removeColumn($index)" title="Delete column">
-                            <i class="red outline trash icon"></i>
-                        </div>
-                        <div class="ui button" ng-show="$last && $index<3" ng-click="addColumn()" title="Add column">
-                            <i class="green right chevron icon"></i>
-                        </div>
+                    <div class="ui left labeled icon button" ng-show="$index > 0 || !$last" ng-click="removeColumn($index)" title="Delete column">
+                        <i class="red outline trash icon"></i>
+                        Delete Column
+                    </div>
+                    <div class="right floated ui small icon button" ng-show="$last && $index<3" ng-click="addColumn()" title="Add column">
+                        <i class="green plus icon"></i>
                     </div>
                 </div>
             </div>
