@@ -37,6 +37,18 @@ angular.module('cheatsheet')
                         },
                         content: []
                     }
+                },
+                {
+                    name: 'Tab',
+                    icon: 'list',
+                    // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
+                    value: {
+                        type: 'container.tab',
+                        meta: {
+                            tabNames: []
+                        },
+                        content: []
+                    }
                 }
             ];
 

@@ -20,6 +20,9 @@ angular.module('cheatsheet')
                         case 'container.newsletter' :
                             elementForCompilation = buildElementForCompilation('csf-container-newsletter');
                             break;
+                        case 'container.tab' :
+                            elementForCompilation = buildElementForCompilation('csf-container-tab');
+                            break;
                         case 'cheat.codeSnippet' :
                             elementForCompilation = buildElementForCompilation('csf-cheat-code-snippet');
                             break;

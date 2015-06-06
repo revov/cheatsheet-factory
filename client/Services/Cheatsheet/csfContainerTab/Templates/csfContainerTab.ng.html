@@ -1,0 +1,30 @@
+<div class="csf-container">
+    <div class="ui top attached tabular menu">
+        <a ng-class="{active: $first}" class="item" ng-attr-data-tab="{{tabId}}{{$index}}" csf-semantic-tab ng-repeat="tabName in component.meta.tabNames">
+            <csf-editable-text text="tabName" can-edit="canI.edit"></csf-editable-text>
+        </a>
+        <!--Show an empty Tab if we have no other tabs-->
+        <a class="active item" ng-show="component.meta.tabNames.length == 0">
+            Empty Tab Container
+        </a>
+    </div>
+
+
+    <div class="ui vertical segment" csf-droppable-container-item="insert(csfComponent, component.content.length)">
+        Drop here...
+    </div>
+
+    <div ng-class="{active: $first}" class="ui bottom attached tab segment" ng-attr-data-tab="{{tabId}}{{$index}}" ng-repeat="item in component.content">
+        <csf-abstract-container-item
+                component="item"
+                can-i="canI"
+                on-removed="remove($index)">
+        </csf-abstract-container-item>
+    </div>
+    <!--Show an empty Tab if we have no other tabs-->
+    <div class="ui active bottom attached tab segment" ng-show="component.content.length == 0">
+        <div class="ui yellow message">Drag components to this container</div>
+    </div>
+
+
+</div>

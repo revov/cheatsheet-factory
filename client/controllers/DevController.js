@@ -60,6 +60,33 @@ angular.module('cheatsheet').controller('DevController', [
             },
             content: [
                 {
+                    type: 'container.tab',
+                    meta: {
+                        tabNames: [
+                            'tab1',
+                            'tab2'
+                        ]
+                    },
+                    content: [
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.php,
+                                lang: 'php',
+                                header: 'PHP code'
+                            }
+                        },
+                        {
+                            type: 'cheat.codeSnippet',
+                            meta: {
+                                code: dev.data,
+                                lang: 'javascript',
+                                header: 'Sample'
+                            }
+                        }
+                    ]
+                },
+                {
                     type: 'container.newsletter',
                     meta: {
                         columnsSize: [3, 2, 1]

@@ -21,7 +21,7 @@ angular.module('cheatsheet')
                             // Now let's tell the accepting container to insert the component into its new place
                             scope.$apply(function() {
                                 dropHandler = $parse(attrs.csfDroppableContainerItem);
-                                dropHandler(scope, {component: csfComponent});
+                                dropHandler(scope, {csfComponent: csfComponent});
                             });
                         }
                     });

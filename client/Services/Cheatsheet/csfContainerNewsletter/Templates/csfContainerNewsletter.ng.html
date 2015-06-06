@@ -2,7 +2,7 @@
     <div class="ui stackable grid" csf-random-color-border>
         <div>
             <div class="column" ng-repeat="column in component.meta.columnsSize track by $index" ng-init="columnIndex = $index">
-                <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex, 0)">
+                <div class="ui vertical segment" csf-droppable-container-item="insert(csfComponent, columnIndex, 0)">
                     Drop here...
                 </div>
 
@@ -14,7 +14,7 @@
                             class="ui vertical segment">
                     </csf-abstract-container-item>
 
-                    <div class="ui vertical segment" csf-droppable-container-item="insert(component, columnIndex, $index + 1)">
+                    <div class="ui vertical segment" csf-droppable-container-item="insert(csfComponent, columnIndex, $index + 1)">
                         Drop here...
                     </div>
                 </div>
