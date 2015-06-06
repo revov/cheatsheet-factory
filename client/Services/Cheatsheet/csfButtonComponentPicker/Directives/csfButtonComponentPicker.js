@@ -4,6 +4,7 @@ angular.module('cheatsheet')
             var possibleComponents = [
                 {
                     name: 'Code Snippet',
+                    icon: 'file outline',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
                     value: {
                         type: 'cheat.codeSnippet',
@@ -16,6 +17,7 @@ angular.module('cheatsheet')
                 },
                 {
                     name: 'Markdown',
+                    icon: 'file outline',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
                     value: {
                         type: 'cheat.markdown',
@@ -26,6 +28,7 @@ angular.module('cheatsheet')
                 },
                 {
                     name: 'Newsletter',
+                    icon: 'list',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
                     value: {
                         type: 'container.newsletter',

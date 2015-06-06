@@ -1,9 +1,9 @@
-<div class="ui floating dropdown left labeled search small icon button">
+<div class="ui left labeled small search icon floating dropdown button">
     <i class="green plus icon"></i>
     <span class="text">Add component</span>
     <div class="menu">
         <div class="item" data-value="{{::component.value}}" ng-repeat="component in ::possibleComponents">
-            {{::component.name}}
+            <i class="ng-class: ::component.icon; icon"></i>{{::component.name}}
         </div>
     </div>
 </div>
