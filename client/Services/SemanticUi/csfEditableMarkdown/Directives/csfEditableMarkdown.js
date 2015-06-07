@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfEditableMarkdown', [
-        'csfMarkdown', 'csfUserSettings', 'csfAceEditor',
-        function(csfMarkdown, csfUserSettings, csfAceEditor) {
+        'csfMarkdown', '$meteor', 'csfAceEditor',
+        function(csfMarkdown, $meteor, csfAceEditor) {
             return {
                 restrict : 'E',
                 templateUrl: 'client/Services/SemanticUi/csfEditableMarkdown/Templates/csfEditableMarkdown.ng.html',
@@ -21,7 +21,7 @@ angular.module('cheatsheet')
                             return;
                         }
 
-                        var compiled = csfMarkdown.render(scope.text, scope.UserSettings.instance);
+                        var compiled = csfMarkdown.render(scope.text, scope.UserSettings);
                         markdownContainer.html(compiled);
                     }
 
@@ -54,16 +54,21 @@ angular.module('cheatsheet')
                     /**
                      * Watches
                      */
-                    csfUserSettings.UserSettingsPromise.then(function(value) {
-                        scope.UserSettings = value;
-                        scope.$watch('UserSettings.instance.editor', render, true);
-                        scope.$watch('text', function(newV, oldV) {
-                            if(scope.isEditing) {
-                                return;
-                            }
+                    scope.$watch('text', function(newV, oldV) {
+                        if(scope.isEditing) {
+                            return;
+                        }
 
-                            render();
-                        });
+                        render();
+                    });
+
+                    $meteor.autorun(scope, function() {
+                        var currentUser = Meteor.user();
+                        if(!currentUser) {return;}
+                        scope.UserSettings = currentUser.profile.userSettings;
+
+
+                        render();
                     });
 
                     /**

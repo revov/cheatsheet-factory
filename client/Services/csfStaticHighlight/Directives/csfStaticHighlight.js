@@ -1,31 +1,63 @@
 angular.module('cheatsheet')
     .directive('csfStaticHighlight', [
-        'csfUserSettings', 'csfStaticHighlight',
-        function(csfUserSettings, csfStaticHighlight) {
+        'csfStaticHighlight', '$meteor',
+        function(csfStaticHighlight, $meteor) {
             return {
                 restrict : 'E',
                 scope: {
                     textToHighlight: '@',
-                    mode: '@'
+                    mode: '@',
+                    editorSettings: '=' // If not provided the user settings will be used
                 },
                 link: function(scope, element, attrs) {
                     var rendered = false;
 
-                    // Updates the styles and renders the element
+                    /**
+                     * Returns the provided editorSettings or if not provided the ones from the user's preferences
+                     * @returns {UserSettings.editor}
+                     */
+                    function getEditorSettings() {
+                        return scope.editorSettings ? scope.editorSettings : scope.UserSettings.editor;
+                    }
+
+                    /**
+                     * Updates the styles and renders the element
+                     */
                     function render() {
-                        element.html( csfStaticHighlight.render(scope.textToHighlight, scope.mode, scope.UserSettings.instance.editor) );
+                        element.html( csfStaticHighlight.render(scope.textToHighlight, scope.mode, getEditorSettings()) );
                         rendered = true;
                     }
 
-                    // Updates the styles only
+                    /**
+                     * Updates the styles only
+                     */
                     function updateStyles () {
-                        csfStaticHighlight.updateStyles(scope.UserSettings.instance.editor, element);
+                        csfStaticHighlight.updateStyles(getEditorSettings(), element);
                     }
 
-                    csfUserSettings.UserSettingsPromise.then(function(value) {
-                        scope.UserSettings = value;
-                        scope.$watch('UserSettings.instance.editor', rendered ? updateStyles : render, true);
+                    /**
+                     * Watchers
+                     */
+                    $meteor.requireUser().then(function(user) {
                         scope.$watchGroup( ['textToHighlight', 'mode'], render);
+                    });
+
+                    scope.$watch(
+                        'editorSettings',
+                        function(newValue, oldValue) {
+                            if(newValue) {
+                                rendered ? updateStyles() : render();
+                            }
+                        },
+                        true
+                    );
+
+                    $meteor.autorun(scope, function() {
+                        var currentUser = Meteor.user();
+                        if(!currentUser) {return;}
+                        scope.UserSettings = currentUser.profile.userSettings;
+
+                        rendered ? updateStyles() : render();
                     });
 
                     /**

@@ -1,11 +1,11 @@
 angular.module('cheatsheet')
     .service('csfAceEditor', [
-        '$rootScope', 'csfUserSettings',
-        function($rootScope, csfUserSettings) {
+        '$rootScope', '$meteor',
+        function($rootScope, $meteor) {
             var me = this,
                 $aceEditorElement,
                 aceEditor,
-                deregisterRootScopeWatch,
+                stopComputation,
                 eventHandlers = {
                     release : null
                 };
@@ -45,23 +45,19 @@ angular.module('cheatsheet')
                     }
                 });
 
-                csfUserSettings.UserSettingsPromise
-                    .then(function(userSettings) {
-                        deregisterRootScopeWatch = $rootScope.$watch(
-                            function() {
-                                return userSettings.instance.editor;
-                            },
-                            function(newValue, oldValue) {
-                                if( newValue && newValue.theme ) {
-                                    aceEditor.setTheme(newValue.theme);
-                                }
-                                if( newValue && newValue.fontSize ) {
-                                    aceEditor.setFontSize( parseInt(newValue.fontSize, 10) )
-                                }
-                            },
-                            true
-                        );
-                    });
+                Meteor.autorun(function(computation) {
+                    var currentUser = Meteor.user();
+                    if(!currentUser) {
+                        return;
+                    } else {
+                        stopComputation = computation.stop;
+                    }
+
+                    var editorSettings = currentUser.profile.userSettings.editor;
+                    aceEditor.setTheme(editorSettings.theme);
+                    aceEditor.setFontSize( parseInt(editorSettings.fontSize, 10) );
+                    $rootScope.$applyAsync();
+                });
             }
 
             /**
@@ -109,10 +105,10 @@ angular.module('cheatsheet')
              * There shouldn't be a need for this but it's there if you need it. For example can be called on logout.
              */
             this.destroy = function() {
-                if(typeof deregisterRootScopeWatch == 'function') {
-                    deregisterRootScopeWatch();
+                if(typeof stopComputation == 'function') {
+                    stopComputation();
                 }
-                deregisterRootScopeWatch = null;
+                stopComputation = null;
 
                 if( aceEditor && typeof aceEditor.destroy == 'function') {
                     aceEditor.destroy();

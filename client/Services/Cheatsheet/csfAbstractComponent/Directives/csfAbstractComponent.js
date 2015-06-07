@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfAbstractComponent', [
-        'csfUserSettings', '$compile',
-        function(csfUserSettings, $compile) {
+        '$compile',
+        function($compile) {
             return {
                 restrict : 'E',
                 replace: true,

@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfUserSettings', [
-        'csfUserSettings', 'csfNotification',
-        function(csfUserSettings, csfNotification) {
+        '$meteor', 'csfNotification',
+        function($meteor, csfNotification) {
             function init(scope, element) {
                 // Themes
                 scope.themelist = ace.require("ace/ext/themelist").themesByName;
@@ -18,21 +18,26 @@ angular.module('cheatsheet')
                 scope: {},
                 link: function(scope, element, attrs) {
                     scope.$on("openUserSettings", function (event, params) {
+                        scope.UserSettings = angular.copy(Meteor.user().profile.userSettings);
+
                         element
                             .modal(
                                 {
                                     duration: 150,
-                                    onDeny: function() {
-                                        scope.UserSettings.instance.reset();
-                                        scope.$apply();
-                                    },
                                     onApprove: function() {
-                                        scope.UserSettings.instance.save().then(
-                                            function(){
-                                                csfNotification.show('success', 'Success!', 'User Settings were successfully saved.');
+                                        Meteor.users.update(
+                                            {_id: Meteor.userId()},
+                                            {
+                                                $set: {
+                                                    'profile.userSettings': scope.UserSettings
+                                                }
                                             },
-                                            function(error) {
-                                                csfNotification.show('error', 'There was an error saving User Settings:', error);
+                                            function(err){
+                                                if(err) {
+                                                    csfNotification.show('error', 'There was an error saving User Settings:', error);
+                                                } else {
+                                                    csfNotification.show('success', 'Success!', 'User Settings were successfully saved.');
+                                                }
                                             }
                                         );
                                     }
@@ -48,10 +53,6 @@ angular.module('cheatsheet')
                     init(scope, element);
 
                     scope.UserSettings = {};
-                    csfUserSettings.UserSettingsPromise
-                        .then(function(value) {
-                            scope.UserSettings = value;
-                        });
                 }
             };
         }

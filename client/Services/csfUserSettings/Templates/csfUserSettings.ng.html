@@ -25,7 +25,7 @@
             <form class="ui form">
                 <div class="field">
                     <label>Ace Theme:</label>
-                    <div class="ui fluid search selection dropdown" csf-bind-dropdown="UserSettings.instance.editor.theme">
+                    <div class="ui fluid search selection dropdown" csf-bind-dropdown="UserSettings.editor.theme">
                         <i class="dropdown icon"></i>
                         <div class="default text">Select Ace Theme</div>
                         <div class="menu">
@@ -40,12 +40,12 @@
                 <div class="field">
                     <label>Font Size:</label>
                     <div class="ui input">
-                        <input placeholder="Font Size" ng-model="UserSettings.instance.editor.fontSize" type="text">
+                        <input placeholder="Font Size" ng-model="UserSettings.editor.fontSize" type="text">
                     </div>
                 </div>
 
                 <div class="field">
-                    <csf-static-highlight text-to-highlight="{{sample}}" mode="javascript"></csf-static-highlight>
+                    <csf-static-highlight text-to-highlight="{{sample}}" mode="javascript" editor-settings="UserSettings.editor"></csf-static-highlight>
                 </div>
             </form>
         </div>

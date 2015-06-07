@@ -1,6 +1,6 @@
 angular.module('cheatsheet').controller('DevController', [
-    '$scope', 'csfUserSettings',
-    function($scope, csfUserSettings) {
+    '$scope',
+    function($scope) {
         var dev = this,
             editor = null;
         dev.UserSettings = {};

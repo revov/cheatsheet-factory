@@ -1,7 +1,7 @@
 angular.module('cheatsheet')
     .directive('csfCheatsheet', [
-        'csfUserSettings', '$meteor', '$compile', '$timeout',
-        function(csfUserSettings, $meteor, $compile, $timeout) {
+        '$meteor', '$compile', '$timeout',
+        function($meteor, $compile, $timeout) {
             function pageDimmerHandler(scope, element, attrs) {
                 var dimmerElement = element.find('.dimmer');
 
