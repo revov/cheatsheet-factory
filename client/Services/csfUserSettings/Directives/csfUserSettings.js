@@ -18,7 +18,7 @@ angular.module('cheatsheet')
                 scope: {},
                 link: function(scope, element, attrs) {
                     scope.$on("openUserSettings", function (event, params) {
-                        scope.UserSettings = angular.copy(Meteor.user().profile.userSettings);
+                        scope.profile = angular.copy(Meteor.user().profile);
 
                         element
                             .modal(
@@ -29,7 +29,7 @@ angular.module('cheatsheet')
                                             {_id: Meteor.userId()},
                                             {
                                                 $set: {
-                                                    'profile.userSettings': scope.UserSettings
+                                                    'profile': scope.profile
                                                 }
                                             },
                                             function(err){
@@ -38,6 +38,7 @@ angular.module('cheatsheet')
                                                 } else {
                                                     csfNotification.show('success', 'Success!', 'User Settings were successfully saved.');
                                                 }
+                                                scope.$apply();
                                             }
                                         );
                                     }
@@ -51,8 +52,6 @@ angular.module('cheatsheet')
                     });
 
                     init(scope, element);
-
-                    scope.UserSettings = {};
                 }
             };
         }
