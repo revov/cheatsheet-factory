@@ -37,29 +37,37 @@
         <!-- Editor -->
         <div class="ui bottom attached tab segment" data-tab="editor">
             <form class="ui form">
-                <div class="field">
-                    <label>Ace Theme:</label>
-                    <div class="ui fluid search selection dropdown" csf-bind-dropdown="profile.userSettings.editor.theme">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Select Ace Theme</div>
-                        <div class="menu">
-                            <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">
-                                {{value.caption}}
-                                <span class="right floated description" ng-show="value.isDark">dark</span>
+                <div class="ui stacked grid">
+                    <div class="two column row">
+                        <div class="column">
+                            <div class="field">
+                                <label>Ace Theme:</label>
+                                <div class="ui fluid search selection dropdown" csf-bind-dropdown="profile.userSettings.editor.theme">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Select Ace Theme</div>
+                                    <div class="menu">
+                                        <div ng-repeat="(key, value) in themelist" class="item" data-value="{{value.theme}}">
+                                            {{value.caption}}
+                                            <span class="right floated description" ng-show="value.isDark">dark</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>Font Size:</label>
+                                <div class="ui input">
+                                    <input placeholder="Font Size" ng-model="profile.userSettings.editor.fontSize" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <div class="field">
+                                <csf-static-highlight text-to-highlight="{{sample}}" mode="javascript" editor-settings="profile.userSettings.editor"></csf-static-highlight>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="field">
-                    <label>Font Size:</label>
-                    <div class="ui input">
-                        <input placeholder="Font Size" ng-model="profile.userSettings.editor.fontSize" type="text">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <csf-static-highlight text-to-highlight="{{sample}}" mode="javascript" editor-settings="profile.userSettings.editor"></csf-static-highlight>
                 </div>
             </form>
         </div>
