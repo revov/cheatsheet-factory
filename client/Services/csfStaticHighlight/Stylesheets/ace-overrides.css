@@ -19,3 +19,8 @@ div.ace_static_highlight .ace_line {
     background-color: #BDD5FC;
     color: inherit;
 }
+
+/* Let the code breathe */
+.ace_static_highlight {
+	padding: 10px;
+}
