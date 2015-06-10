@@ -10,8 +10,9 @@ angular.module('cheatsheet')
                     canI: '='
                 },
                 link: function(scope, element, attrs) {
-                    var isEditing;
-                    var $staticHighlightElement = element.find('csf-static-highlight');
+                    var isEditing,
+                        editor = false,
+                        $staticHighlightElement = element.find('csf-static-highlight').parent();
 
                     scope.edit = function() {
                         if(!scope.canI.edit) { return; }
@@ -19,7 +20,7 @@ angular.module('cheatsheet')
 
                         isEditing = true;
 
-                        var editor = csfAceEditor.acquire( $staticHighlightElement );
+                        editor = csfAceEditor.acquire( $staticHighlightElement );
                         var session = editor.getSession();
                         session.setMode("ace/mode/" + scope.component.meta.lang);
                         editor.setValue(scope.component.meta.code);
@@ -28,12 +29,25 @@ angular.module('cheatsheet')
                         csfAceEditor.onRelease = function(env, args, request) {
                             scope.component.meta.code = editor.getValue();
                             isEditing = false;
+                            editor = false;
                             csfAceEditor.onRelease = null; // Unsubscribe - we are already dettached.
                             scope.$applyAsync();
                         };
 
                         setTimeout(function() {editor.focus();}, 0);
                     };
+
+                    /**
+                     * Watchers
+                     */
+                    scope.$watch(
+                        'component.meta.lang',
+                        function(newValue, oldValue) {
+                            if(editor && typeof editor.getSession == 'function') {
+                                editor.getSession().setMode("ace/mode/" + newValue);
+                            }
+                        }
+                    );
 
                     /**
                      * Cleanup
