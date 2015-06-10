@@ -1,7 +1,7 @@
 Meteor.startup(function() {
     Accounts.config({
         forbidClientAccountCreation: true,
-        loginExpirationInDays: 3
+        loginExpirationInDays: 5
     });
 
     Accounts.urls.resetPassword = function(token) {
