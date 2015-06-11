@@ -6,11 +6,17 @@ Meteor.methods({
             password: user.password,
             profile: {
                 firstName: user.profile.firstName,
-                lastName: user.profile.lastName
+                lastName: user.profile.lastName,
+                userSettings: {
+                    editor : {
+                        theme: 'ace/theme/tomorrow',
+                        fontSize: 14
+                    }
+                }
+
             }
         });
         Roles.addUsersToRoles(userId, ['member']);
-        UserSettings.insert({ userId: userId });
 
         return userId;
     },
