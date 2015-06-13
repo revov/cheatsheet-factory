@@ -7,7 +7,9 @@ angular.module('cheatsheet')
                 aceEditor,
                 stopComputation,
                 eventHandlers = {
-                    release : null
+                    once: {
+                        release : []
+                    }
                 };
 
             function init() {
@@ -36,8 +38,8 @@ angular.module('cheatsheet')
                             return;
                         }
 
-                        if(typeof me.onRelease === 'function') {
-                            me.onRelease();
+                        while (eventHandlers.once.release.length){
+                            eventHandlers.once.release.shift().call();
                         }
 
                         $aceEditorElement.prev().css('minHeight', '');
@@ -93,11 +95,19 @@ angular.module('cheatsheet')
             };
 
             /**
-             * Assign a callback to be executed before the editor is released from its current position.
+             * Registers an event handler to be executed just once
+             * Events:
+             *     release: called just before the editor is released
              * 
              * @type {function}
              */
-            this.onRelease = null;
+            this.once = function(eventName, callback) {
+                if(!typeof callback === 'function' || !eventHandlers.once.hasOwnProperty(eventName)) {
+                    return;
+                }
+
+                eventHandlers.once[eventName].push(callback);
+            };
 
             /**
              * Destroys the ace editor instance.

@@ -26,13 +26,12 @@ angular.module('cheatsheet')
                         editor.setValue(scope.component.meta.code);
                         editor.selection.clearSelection();
 
-                        csfAceEditor.onRelease = function(env, args, request) {
+                        csfAceEditor.once('release', function() {
                             scope.component.meta.code = editor.getValue();
                             isEditing = false;
                             editor = false;
-                            csfAceEditor.onRelease = null; // Unsubscribe - we are already dettached.
                             scope.$applyAsync();
-                        };
+                        });
 
                         setTimeout(function() {editor.focus();}, 0);
                     };
