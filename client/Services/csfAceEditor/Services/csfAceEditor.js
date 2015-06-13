@@ -115,6 +115,10 @@ angular.module('cheatsheet')
              * There shouldn't be a need for this but it's there if you need it. For example can be called on logout.
              */
             this.destroy = function() {
+                _.forEach(eventHandlers.once, function(item) {
+                    item.length = 0;
+                });
+
                 if(typeof stopComputation == 'function') {
                     stopComputation();
                 }
