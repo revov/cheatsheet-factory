@@ -29,9 +29,6 @@ Meteor.methods({
         // Remove user from all their Roles
         Roles.setUserRoles( [userId], [] );
 
-        // Delete the user's settings
-        UserSettings.remove( {userId: userId} );
-
         // Delete the user
         Meteor.users.remove( {_id: userId} );
     }
