@@ -19,7 +19,7 @@ angular.module('cheatsheet')
                             ui.draggable.removeData('csfComponent');
 
                             // Now let's tell the accepting container to insert the component into its new place
-                            scope.$apply(function() {
+                            scope.$applyAsync(function() {
                                 dropHandler = $parse(attrs.csfDroppableContainerItem);
                                 dropHandler(scope, {csfComponent: csfComponent});
                             });

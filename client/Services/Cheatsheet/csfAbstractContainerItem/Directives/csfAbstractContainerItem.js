@@ -27,7 +27,7 @@ angular.module('cheatsheet')
                             if( element.data('csfComponent') ) {
                                 element.removeData('csfComponent');
                             } else {
-                                scope.$apply(function() {
+                                scope.$applyAsync(function() {
                                     scope.onRemoved();
                                 });
                             }
