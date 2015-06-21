@@ -17,21 +17,36 @@
 
         <!-- Profile -->
         <div class="ui bottom attached active tab segment" data-tab="profile">
-            <form class="ui form">
-                <div class="field">
-                    <label>First Name:</label>
-                    <div class="ui input">
-                        <input placeholder="First Name" ng-model="profile.firstName" type="text">
-                    </div>
-                </div>
+            <div class="ui items">
+                <div class="item">
+                    <csf-avatar class="ui medium image" user-id="{{userId}}"></csf-avatar>
 
-                <div class="field">
-                    <label>Last Name:</label>
-                    <div class="ui input">
-                        <input placeholder="Last Name" ng-model="profile.lastName" type="text">
+                    <div class="content">
+                        <form class="ui form">
+                            <div class="field">
+                                <label>First Name:</label>
+                                <div class="ui input">
+                                    <input placeholder="First Name" ng-model="profile.firstName" type="text">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>Last Name:</label>
+                                <div class="ui input">
+                                    <input placeholder="Last Name" ng-model="profile.lastName" type="text">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>Change Profile Picture (&lt; 1 MB):</label>
+                                <div class="ui input">
+                                    <input type="file" id="profilePic">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
         <!-- Editor -->

@@ -8,43 +8,19 @@ angular.module('cheatsheet')
         function($timeout) {
             return {
                 restrict : 'E',
-                templateUrl : 'client/Services/csfNotification/Templates/csfNotification.ng.html',
                 replace: true,
                 scope: {},
                 link: function(scope, element, attrs) {
-                    var fadeOutPromise;
-
-                    var hideImmediately = function() {
-                            $timeout.cancel(fadeOutPromise);
-                            element.transition('fade down out', 0);
-                        },
-                        show = function() {
-                            element.transition('fade down in', 500);
-                        },
-                        hideAfter = function( miliseconds ) {
-                            fadeOutPromise = $timeout( function() {
-                                element.transition('fade down out', 500);
-                            }, miliseconds);
-                        };
-
-                    // Initially we would like to hide the message
-                    hideImmediately();
+                    toastr.options.showEasing = 'swing';
+                    toastr.options.hideEasing = 'swing';
+                    toastr.options.showMethod = 'slideDown';
+                    toastr.options.hideMethod = 'slideUp';
+                    toastr.options.timeOut = 10000;
+                    toastr.options.showDuration = 150;
+                    toastr.options.hideDuration = 300;
 
                     scope.$on("notificationReceived", function (event, notification) {
-                        hideImmediately();
-
-                        scope.notification = notification;
-
-                        show();
-                        hideAfter(10000);
-                    });
-
-                    element.on('click', function() {
-                        hideImmediately();
-                    });
-
-                    element.on('$destroy', function() {
-                        $timeout.cancel(fadeOutPromise);
+                        toastr[notification.type](notification.message, notification.header);
                     });
                 }
             };

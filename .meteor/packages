@@ -18,3 +18,7 @@ mizzao:jquery-ui
 email
 rzymek:randomcolor
 percolate:migrations
+cfs:standard-packages
+cfs:gridfs
+matb33:collection-hooks
+chrismbeckett:toastr

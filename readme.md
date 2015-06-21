@@ -40,3 +40,10 @@ meteor add alanning:roles
 meteor add email
 meteor add rzymek:randomcolor
 meteor add percolate:migrations
+
+meteor add matb33:collection-hooks
+
+meteor add cfs:standard-packages
+meteor add cfs:gridfs
+
+meteor add chrismbeckett:toastr

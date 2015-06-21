@@ -19,12 +19,26 @@ angular.module('cheatsheet')
                 link: function(scope, element, attrs) {
                     scope.$on("openUserSettings", function (event, params) {
                         scope.profile = angular.copy(Meteor.user().profile);
+                        scope.userId = Meteor.userId();
 
                         element
                             .modal(
                                 {
                                     duration: 150,
                                     onApprove: function() {
+                                        var profilePic = element.find('#profilePic')[0].files[0];
+                                        if(profilePic) {
+                                            var file = new FS.File( profilePic );
+                                            file.userId = scope.userId;
+                                            Avatars.insert(file, function(err) {
+                                                if(err) {
+                                                    csfNotification.show('error', 'There was an error uploading your Profile Picture:', err.reason);
+                                                } else {
+                                                    csfNotification.show('success', 'Profile Picture successfully uploaded.');
+                                                }
+                                            });
+                                        }
+
                                         Meteor.users.update(
                                             {_id: Meteor.userId()},
                                             {
@@ -34,7 +48,7 @@ angular.module('cheatsheet')
                                             },
                                             function(err){
                                                 if(err) {
-                                                    csfNotification.show('error', 'There was an error saving User Settings:', error);
+                                                    csfNotification.show('error', 'There was an error saving User Settings:', err.reason);
                                                 } else {
                                                     csfNotification.show('success', 'Success!', 'User Settings were successfully saved.');
                                                 }
