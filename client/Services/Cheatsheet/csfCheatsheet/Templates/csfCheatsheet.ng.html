@@ -5,7 +5,10 @@
                 <i class="circular paste icon"></i>
                 <div class="content">
                     <csf-editable-text text="component.meta.name" can-edit="canI.edit"></csf-editable-text>
-                    <div class="ui sub header">{{authorName}}</div>
+                    <div class="ui sub header">
+                        <csf-avatar user-id="{{component.meta.userId}}" class="ui avatar image"></csf-avatar>
+                        {{authorName}}
+                    </div>
                     <div class="ui sub header">{{component.meta.createdAt | date: 'd.MMM.yyyy'}}</div>
                 </div>
             </h2>
