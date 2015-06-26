@@ -11,7 +11,6 @@ angular.module('cheatsheet').controller('ViewCheatsheetController', [
          * Save button
          */
         viewCheatsheet.save = function() {
-            csfNotification.show('info', 'Saving cheatsheet.', 'Please wait...');
             viewCheatsheet.cheatsheet.save()
                 .then(
                     function(success) {
