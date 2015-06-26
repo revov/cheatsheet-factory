@@ -24,3 +24,8 @@ div.ace_static_highlight .ace_line {
 .ace_static_highlight {
 	padding: 10px;
 }
+
+/* This solves the problem with the minimum height set to the Ace editor when acquired not getting applied */
+csf-static-highlight {
+    display: block;
+}
