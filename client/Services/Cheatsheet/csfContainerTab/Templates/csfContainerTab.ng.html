@@ -7,6 +7,10 @@
         <a class="active item" ng-show="component.meta.tabNames.length == 0">
             Empty Tab Container
         </a>
+        <!--Place the droppable area here-->
+        <div csf-droppable-container-item="insert(csfComponent, component.content.length)" class="item">
+            Drop here...
+        </div>
     </div>
 
     <div ng-class="{active: activeTabIndex == $index}" class="ui bottom attached tab segment" ng-repeat="item in component.content">
@@ -19,11 +23,6 @@
     <!--Show an empty Tab if we have no other tabs-->
     <div class="ui active bottom attached tab segment" ng-show="component.content.length == 0">
         <div class="ui yellow message">Drag components to this container</div>
-    </div>
-
-    <!--Place the droppable area here-->
-    <div csf-droppable-container-item="insert(csfComponent, component.content.length)">
-        Drop here...
     </div>
 
 </div>
