@@ -3,20 +3,8 @@ angular.module('cheatsheet').controller('CheatsheetController', [
     function($scope, csfNotification, $state) {
         var cheatsheet = this;
 
-        var cheatsheetsSubscription = $scope.$meteorSubscribe( 'cheatsheets' );
-        cheatsheetsSubscription
-            .then(function() {
-                cheatsheet.cheatsheets = $scope.$meteorCollection( Cheatsheets, false );
-                cheatsheet.userNames = $scope.$meteorCollection( Meteor.users, false );
-            });
-
-        cheatsheet.getUserProfile = function(userId) {
-            if(!cheatsheet.userNames) {
-                return null;
-            }
-
-            return _.where(cheatsheet.userNames, {_id: userId})[0].profile;
-        };
+        $scope.$meteorSubscribe( 'cheatsheets' );
+        cheatsheet.cheatsheets = $scope.$meteorCollection( Cheatsheets, false );
 
         cheatsheet.createNew = function() {
             var sampleCheatsheet = {

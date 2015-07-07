@@ -52,22 +52,6 @@ angular.module('cheatsheet')
                 };
             }
 
-            /**
-             * Get the name of the Author. TODO: Make this reactive
-             */
-            function userNamesSubscriptionHandler(scope, element, attrs) {
-                $meteor.subscribe('user-names', [scope.component.meta.userId])
-                    .then(function(value) {
-                        var authorSubscriptionHandle = value;
-
-                        var author = Meteor.users.findOne(scope.component.meta.userId);
-                        if(author) {
-                            scope.authorName = author.profile.firstName + ' ' + author.profile.lastName;
-                        }
-                        authorSubscriptionHandle.stop();
-                    });
-            }
-
             function downloadButtonHandler(scope, element, attrs) {
                 var downloadButton = element.find('.csf-download-button');
                 downloadButton.on('mousedown', function() {
@@ -119,13 +103,6 @@ angular.module('cheatsheet')
                     scope.canI = {
                         edit: false
                     };
-
-                    var unregisterWatch = scope.$watch('component.type', function(newV, oldV) {
-                        if(newV) {
-                            unregisterWatch();
-                            userNamesSubscriptionHandler(scope, element, attrs);
-                        }
-                    });
 
                     permissionsHandler(scope, element, attrs);
 
