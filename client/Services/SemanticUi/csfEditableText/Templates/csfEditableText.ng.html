@@ -3,8 +3,14 @@
     <div class="ui compact yellow message" ng-show="text.trim() == ''">Field is empty</div>
 </div>
 <form ng-show="isEditing">
+    <!--Let's place a hidden input with a relative position that will keep the size of our parent-->
+    <div class="ui hidden input">
+        <input type="text">
+    </div>
+    
+    <!--This will be the actual absolutely positioned input-->
     <div class="ui action input">
-        <input placeholder="Edit field" type="text" ng-model="text">
+        <input placeholder="Edit field" type="text" ng-model="text" ng-blur="disableEditing()" ng-keyup="onKeypress($event)">
         <button class="ui orange button" ng-click="disableEditing()">Edit</button>
     </div>
 </form>

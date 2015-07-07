@@ -1,3 +1,7 @@
-csf-container-tab > .csf-container > .attached.tab.segment {
-    padding-bottom: 2.5em;
+csf-container-tab > .csf-container > .ui.grid > div.fourteen.wide.stretched.column {
+    padding-bottom: 3.5em;
+}
+
+csf-container-tab > .csf-container > .ui.grid > div.two.wide.stretched.column .item {
+	padding-left: 0.5em;
 }

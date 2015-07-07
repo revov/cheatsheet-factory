@@ -1,3 +1,17 @@
 csf-editable-text * {
     display: inline-block;
 }
+
+csf-editable-text form {
+	display: flex;
+}
+
+csf-editable-text .ui.hidden.input {
+	opacity: 0;
+	width: 0;
+}
+
+csf-editable-text .ui.action.input {
+	position: absolute;
+	z-index: 150;
+}

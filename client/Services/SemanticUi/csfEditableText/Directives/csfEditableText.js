@@ -21,10 +21,12 @@ angular.module('cheatsheet')
                     scope.disableEditing = function() {
                         scope.isEditing = false;
                     };
-
-                    element.find('input').on('blur', function() {
-                        scope.$apply(scope.disableEditing);
-                    });
+					
+					scope.onKeypress = function(e) {
+						if (e.keyCode == 27) { // The user pressed Escape
+							scope.disableEditing();
+						}
+					};
 
                     /**
                      * Cleanup

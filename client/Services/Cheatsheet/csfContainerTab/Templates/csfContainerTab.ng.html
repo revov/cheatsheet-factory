@@ -1,28 +1,33 @@
 <div class="csf-container">
-    <div class="ui top attached tabular menu">
-        <a ng-class="{active: activeTabIndex == $index}" class="item" ng-repeat="tabName in component.meta.tabNames track by $index" ng-click="setActiveTab($index)">
-            <csf-editable-text text="component.meta.tabNames[$index]" can-edit="canI.edit"></csf-editable-text>
-        </a>
-        <!--Show an empty Tab if we have no other tabs-->
-        <a class="active item" ng-show="component.meta.tabNames.length == 0">
-            Empty Tab Container
-        </a>
-        <!--Place the droppable area here-->
-        <div csf-droppable-container-item="insert(csfComponent, component.content.length)" class="item">
-            Drop here...
+    <div class="ui grid">
+        <div class="two wide stretched column">
+            <div class="ui vertical fluid tabular menu">
+                <a ng-class="{active: activeTabIndex == $index}" class="item" ng-repeat="tabName in component.meta.tabNames track by $index" ng-click="setActiveTab($index)">
+                    <csf-editable-text text="component.meta.tabNames[$index]" can-edit="canI.edit"></csf-editable-text>
+                </a>
+                <!--Show an empty Tab if we have no other tabs-->
+                <a class="active item" ng-show="component.meta.tabNames.length == 0">
+                    Empty Tab Container
+                </a>
+                <!--Place the droppable area here-->
+                <div csf-droppable-container-item="insert(csfComponent, component.content.length)" class="item">
+                    Drop here...
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div ng-class="{active: activeTabIndex == $index}" class="ui bottom attached tab segment" ng-repeat="item in component.content">
-        <csf-abstract-container-item
+        <div class="fourteen wide stretched column">
+            <csf-abstract-container-item
                 component="item"
                 can-i="canI"
-                on-removed="remove($index)">
-        </csf-abstract-container-item>
-    </div>
-    <!--Show an empty Tab if we have no other tabs-->
-    <div class="ui active bottom attached tab segment" ng-show="component.content.length == 0">
-        <div class="ui yellow message">Drag components to this container</div>
+                on-removed="remove($index)"
+
+                ng-show="activeTabIndex == $index"
+                ng-repeat="item in component.content">
+            </csf-abstract-container-item>
+            <!--Show an empty Tab if we have no other tabs-->
+            <div class="ui yellow message" ng-show="component.content.length == 0">Drag components to this container</div>
+        </div>
     </div>
 
 </div>
