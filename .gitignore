@@ -1,3 +1,6 @@
+/client/lib/semantic-ui/
+!/client/lib/semantic-ui/custom.semantic.json
+
 /nbproject/
 .idea
 *.db

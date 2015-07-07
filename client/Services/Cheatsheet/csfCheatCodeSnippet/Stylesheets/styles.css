@@ -7,3 +7,8 @@ csf-cheat-code-snippet .ui.top.attached.header:after {
     clear: both;
     visibility: hidden;
 }
+
+/* Semantic UI 2.0 introduced padding inside segments that can no longer be removed using the fitted class. So doing this manually. */
+csf-cheat-code-snippet .bottom.attached.segment {
+	padding: 0;
+}

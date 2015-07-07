@@ -5,8 +5,8 @@ angular.module('cheatsheet')
             var forgottenPassword = this;
             forgottenPassword.loading = false;
 
-            forgottenPassword.formSettings = [
-                {
+            forgottenPassword.formSettings = {
+                fields: {
                     email: {
                         identifier: 'email',
                         rules: [
@@ -17,14 +17,12 @@ angular.module('cheatsheet')
                         ]
                     }
                 },
-                {
-                    on: 'submit',
-                    inline: 'true',
-                    onSuccess: function() {
-                        $scope.$apply(forgottenPassword.handle);
-                    }
-                }
-            ];
+				on: 'submit',
+				inline: 'true',
+				onSuccess: function() {
+					$scope.$apply(forgottenPassword.handle);
+				}
+			};
 
             forgottenPassword.handle = function() {
                 forgottenPassword.loading = true;

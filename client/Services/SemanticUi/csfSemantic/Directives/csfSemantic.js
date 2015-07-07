@@ -19,10 +19,10 @@ _.forEach(SUPPORTED_SEMANTIC_MODULES, function( item ) {
             return {
                 restrict : 'A',
                 link: function(scope, element, attrs) {
-                    var params = $parse(attrs[directiveName])(scope);
-                    // This was introduced to fix a problem where a tab was initialized before its attaches segment was created
+                    var param = $parse(attrs[directiveName])(scope);
+                    // This was introduced to fix a problem where a tab was initialized before its attached segment was created
                     setTimeout(function() {
-                        element[semanticComponent].apply(element, params);
+                        element[semanticComponent](param);
                     }, 0);
 
                     element.on('$destroy', function() {

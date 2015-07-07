@@ -18,6 +18,7 @@ angular.module('cheatsheet')
                         refreshPositions: true,
                         revert: true,
                         revertDuration: 100,
+						scroll: false,
                         start: function(event, ui) {
                             element.data('csfComponent', scope.component);
                         },

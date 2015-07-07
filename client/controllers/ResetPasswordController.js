@@ -5,8 +5,8 @@ angular.module('cheatsheet')
             var resetPassword = this;
             resetPassword.token = $stateParams.id;
 
-            resetPassword.formSettings = [
-                {
+            resetPassword.formSettings = {
+                fields: {
                     password: {
                         identifier: 'password',
                         rules: [
@@ -26,14 +26,12 @@ angular.module('cheatsheet')
                         ]
                     }
                 },
-                {
-                    on: 'submit',
-                    inline: 'true',
-                    onSuccess: function() {
-                        $scope.$apply(resetPassword.handle);
-                    }
-                }
-            ];
+				on: 'submit',
+				inline: 'true',
+				onSuccess: function() {
+					$scope.$apply(resetPassword.handle);
+				}
+			};
 
             resetPassword.handle = function() {
                 $meteor.resetPassword(resetPassword.token, resetPassword.password)
