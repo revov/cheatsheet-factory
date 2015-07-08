@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th>User</th>
+        <th>Email</th>
         <th>Roles</th>
         <th>Actions</th>
     </tr>
@@ -9,7 +10,9 @@
     <tbody>
     <tr ng-repeat="user in admin.users track by $index" ng-class="{positive: user._id == currentUser._id}">
         <td>
-            <i class="user icon"></i>
+            <csf-profile user-id="{{user._id}}"></csf-profile>
+        </td>
+        <td>
             {{user.username}}
         </td>
         <td>

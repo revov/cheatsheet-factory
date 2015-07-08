@@ -3,29 +3,21 @@
     Email
 </h4>
 <form class="ui form">
-    smtp://
     <span class="inline field">
-        <div class="ui input">
-            <input placeholder="Username" ng-model="admin.configuration.mail.username" type="text">
-        </div>
+        <label>smtp://</label>
+        <input placeholder="Username" ng-model="admin.configuration.mail.username" type="text">
     </span>
-    :
     <span class="inline field">
-        <div class="ui input">
-            <input placeholder="Password (******)" ng-model="admin.configuration.mail.password" type="password">
-        </div>
+        <label>:</label>
+        <input placeholder="Password (******)" ng-model="admin.configuration.mail.password" type="password">
     </span>
-    @
     <span class="inline field">
-        <div class="ui input">
-            <input placeholder="Host" ng-model="admin.configuration.mail.host" type="text">
-        </div>
+        <label>@</label>
+        <input placeholder="Host" ng-model="admin.configuration.mail.host" type="text">
     </span>
-    :
     <span class="inline field">
-        <div class="ui input">
-            <input placeholder="Port" ng-model="admin.configuration.mail.port" type="text">
-        </div>
+        <label>:</label>
+        <input placeholder="Port" ng-model="admin.configuration.mail.port" type="text">
     </span>
 
     <button class="ui labeled icon right floated primary submit button" ng-click="admin.setMailUrl()">
