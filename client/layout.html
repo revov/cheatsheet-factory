@@ -7,15 +7,13 @@
 <body>
     <div ng-app="cheatsheet">
         <div ng-controller="MainController as main">
-            <div id="notification">
-                <csf-notification></csf-notification>
-            </div>
-
             <div class="ui padded grid">
                 <div class="row">
                     <ng-include src="'client/views/partials/menu.ng.html'"></ng-include>
                     <csf-user-settings></csf-user-settings>
                 </div>
+
+                <div class="row"></div>
 
                 <div class="row">
                     <div id="main-viewport" class="column">
