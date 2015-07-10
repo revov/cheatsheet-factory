@@ -12,7 +12,9 @@ angular.module('cheatsheet')
 
                 if(userSettings && userSettings.editor) {
                     options.highlight = function (code, lang) {
-                        return csfStaticHighlight.render(code, lang, userSettings.editor);
+                        return  '<div class="ui compact segment" style="padding:0;">' +
+                                    csfStaticHighlight.render(code, lang, userSettings.editor) +
+                                '</div>';
                     }
                 }
 
