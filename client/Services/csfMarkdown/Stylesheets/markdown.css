@@ -1,0 +1,7 @@
+.csf-markdown-container pre > code {
+	display: flex;
+}
+
+.csf-markdown-container pre > code .ui.compact.segment {
+	padding:0;
+}
