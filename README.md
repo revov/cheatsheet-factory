@@ -22,6 +22,7 @@ How to install?
   - If you get stuck open the `meteor mongo` tool and execute `db.migrations.update({_id:"control"}, {$set:{"locked":false}});`
 - Open the application in your favourite web browser on http://localhost:3000/
 - Create an initial user. To give this user admin and dev permissions open the `meteor shell` and run `Roles.addUsersToRoles("<userId>", ['admin', 'dev']);` where `<userId>` is the ID of your initial user. You can check it by running `Meteor.userId()` in the browser's dev console. You should immediately see 2 new tabs in the Cheatsheet Factory application ("Administration" and "dev").
+- Go to "Administration" and set up SMTP settings so that Cheatsheet Factory can send mails to users with forgotten passwords. You need to restart the meteor server to apply the settings.
 
 Main Features
 -------------
