@@ -12,14 +12,16 @@ How to install?
 ---------------
 - Install meteor
   - `curl https://install.meteor.com/ | sh`
-- Clone this repo
+- Clone this repo `git clone git@github.com:revov/cheatsheet-factory.git`
+- Enter the directory `cd cheatsheet-factory`
 - Pull the git submodules (There was no working Meteor package for Ace editor so I had to create a local one):
-  - `git submodule init`
-  - `git submodule update --remote`
-  - `git submodule foreach git pull`
-- Run the migration from the `meteor shell`
-  - `Migrations.migrateTo('latest');`. If you get stuck open the `meteor mongo` tool and execute `db.migrations.update({_id:"control"}, {$set:{"locked":false}});`
-- Start the application via `meteor` and create an initial user. To give this user admin and dev permissions open the `meteor shell` and run `Roles.addUsersToRoles("<userId>", ['admin', 'dev']);` where `<userId>` is the ID of your initial user. You can check it by running `Meteor.userId()` in the browser's dev console.
+  - `git submodule update --init --recursive`
+- Start the application by executing `meteor` and wait for all dependencies to be downloaded.
+- In another terminal tab open `meteor shell` while the application is running.
+- Run the migrations by executing `Migrations.migrateTo('latest');` in the meteor shell.
+  - If you get stuck open the `meteor mongo` tool and execute `db.migrations.update({_id:"control"}, {$set:{"locked":false}});`
+- Open the application in your favourite web browser on http://localhost:3000/
+- Create an initial user. To give this user admin and dev permissions open the `meteor shell` and run `Roles.addUsersToRoles("<userId>", ['admin', 'dev']);` where `<userId>` is the ID of your initial user. You can check it by running `Meteor.userId()` in the browser's dev console. You should immediately see 2 new tabs in the Cheatsheet Factory application ("Administration" and "dev").
 
 Main Features
 -------------
