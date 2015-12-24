@@ -1,58 +1,38 @@
+Cheatsheet Factory
+------------------
+Author: Stoyan Revov
 
-Install meteor
-==============
-curl https://install.meteor.com/ | sh
-meteor create cheatsheet-manager
+What is Cheatsheet Factory?
+---------------------------
+Cheatsheet Factory is a realtime reactive web application made with Meteor and Angular for creating and sharing Cheatsheets.
+It can be used by single users as well as hosted and utilised in large organisations.
+It was a four month project created for my bachelor's thesis in the beginning of 2015.
 
-Git submodules
-==============
-cd packages
-git submodule add https://github.com/ajaxorg/ace-builds.git
-#Once someone else pulls our repo they need to do:
-git submodule init
-git submodule update --remote
-git submodule foreach git pull
+How to install?
+---------------
+- Install meteor
+-- `curl https://install.meteor.com/ | sh`
+- Clone this repo
+- Pull the git submodules (There was no working Meteor package for Ace editor so I had to create a local one):
+-- `git submodule init`
+-- `git submodule update --remote`
+-- `git submodule foreach git pull`
+- Run the migration from the `meteor shell`
+-- `Migrations.migrateTo('latest');`. If you get stuck open the `meteor mongo` tool and execute `db.migrations.update({_id:"control"}, {$set:{"locked":false}});`
+- Start the application via `meteor` and create an initial user. To give this user admin and dev permissions open the `meteor shell` and run `Roles.addUsersToRoles("<userId>", ['admin', 'dev']);` where `<userId>` is the ID of your initial user. You can check it by running `Meteor.userId()` in the browser's dev console.
 
-Migrations
-==========
-Migrations.migrateTo('latest');
-#when stuck
-meteor mongo
-db.migrations.update({_id:"control"}, {$set:{"locked":false}});
-exit
+Main Features
+-------------
+- Create and share interactive cheatsheets composed of different components (code snippets, markdown) in various layouts.
+- Export cheatsheets to JSON.
+- User and group management. Choose who can view or edit your cheatsheets.
+- All parts of the application are reactive. Every action takes effect immediately (for example revoking edit permissions on a cheatsheet opened by another user immediately disables the other user's controls)
 
-Meteor Privacy
-==============
-meteor remove insecure
-meteor remove autopublish
-
-Meteor Packages
-===============
-meteor add urigo:angular
-meteor add semantic:ui flemay:less-autoprefixer
-meteor add accounts-password
-
-meteor add mquandalle:bower
-meteor add mandrill:ace
-meteor add aldeed:collection2
-
-meteor add alanning:roles
-meteor add email
-meteor add rzymek:randomcolor
-meteor add percolate:migrations
-
-meteor add matb33:collection-hooks
-
-meteor add cfs:standard-packages
-meteor add cfs:gridfs
-
-meteor add chrismbeckett:toastr
-
-Semantic UI Usage
-=================
-1. create an empty `custom.semantic.json` file somewhere in your project. For example `/client/lib/semantic-ui/custom.semantic.json`.
-2. start meteor
-3. edit the file `custom.semantic.json` to select only the definitions and themes you want
-4. save the file and it will generate Semantic UI
-
-> Note: if you are happy with the default values you will need to remove `.custom.semantic.json` to generate Semantic UI. (see Generating Trigger)
+Technologies
+------------
+Cheatsheet Factory is built with the following technologies:
+- Meteor
+- Angular 1
+- Semantic UI
+- Ace Editor
+- marked
