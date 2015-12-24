@@ -11,14 +11,14 @@ It was a four month project created for my bachelor's thesis in the beginning of
 How to install?
 ---------------
 - Install meteor
--- `curl https://install.meteor.com/ | sh`
+  - `curl https://install.meteor.com/ | sh`
 - Clone this repo
 - Pull the git submodules (There was no working Meteor package for Ace editor so I had to create a local one):
--- `git submodule init`
--- `git submodule update --remote`
--- `git submodule foreach git pull`
+  - `git submodule init`
+  - `git submodule update --remote`
+  - `git submodule foreach git pull`
 - Run the migration from the `meteor shell`
--- `Migrations.migrateTo('latest');`. If you get stuck open the `meteor mongo` tool and execute `db.migrations.update({_id:"control"}, {$set:{"locked":false}});`
+  - `Migrations.migrateTo('latest');`. If you get stuck open the `meteor mongo` tool and execute `db.migrations.update({_id:"control"}, {$set:{"locked":false}});`
 - Start the application via `meteor` and create an initial user. To give this user admin and dev permissions open the `meteor shell` and run `Roles.addUsersToRoles("<userId>", ['admin', 'dev']);` where `<userId>` is the ID of your initial user. You can check it by running `Meteor.userId()` in the browser's dev console.
 
 Main Features
