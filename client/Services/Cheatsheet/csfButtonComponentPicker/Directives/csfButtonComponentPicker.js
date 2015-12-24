@@ -1,8 +1,8 @@
 angular.module('cheatsheet')
     .directive('csfButtonComponentPicker',
         function() {
-            var possibleComponents = [
-                {
+            var possibleComponents = {
+                'cheat.codeSnippet': {
                     name: 'Code Snippet',
                     icon: 'file outline',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
@@ -15,7 +15,7 @@ angular.module('cheatsheet')
                         }
                     }
                 },
-                {
+                'cheat.markdown': {
                     name: 'Markdown',
                     icon: 'file outline',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
@@ -26,7 +26,7 @@ angular.module('cheatsheet')
                         }
                     }
                 },
-                {
+                'container.newsletter': {
                     name: 'Newsletter',
                     icon: 'list',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
@@ -38,7 +38,7 @@ angular.module('cheatsheet')
                         content: []
                     }
                 },
-                {
+                'container.tab': {
                     name: 'Tab',
                     icon: 'list',
                     // TODO: Move the samples out of here because they will tend to become more and bigger and will pollute the scope
@@ -50,7 +50,7 @@ angular.module('cheatsheet')
                         content: []
                     }
                 }
-            ];
+            };
 
             return {
                 restrict : 'E',
@@ -66,7 +66,7 @@ angular.module('cheatsheet')
                     dropdownElement.dropdown({
                         action: function(text, value) {
                             scope.$apply(function() {
-                                scope.onAdded({chosenComponent: angular.copy(value)});
+                                scope.onAdded({chosenComponent: angular.copy(scope.possibleComponents[value].value)});
                             });
                             dropdownElement.dropdown('hide');
                             dropdownElement.dropdown('set text', 'Add component');

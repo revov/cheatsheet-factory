@@ -2,8 +2,8 @@
     <i class="green plus icon"></i>
     <span class="text">Add component</span>
     <div class="menu">
-        <div class="item" data-value="{{::component.value}}" ng-repeat="component in ::possibleComponents">
-            <i class="ng-class: ::component.icon; icon"></i>{{::component.name}}
+        <div class="item" data-value="{{::componentKey}}" ng-repeat="(componentKey, componentValue) in ::possibleComponents">
+            <i class="ng-class: ::componentValue.icon; icon"></i>{{::componentValue.name}}
         </div>
     </div>
 </div>
